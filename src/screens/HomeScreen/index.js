@@ -1,19 +1,27 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import styled from 'styled-components'
-import Cabeca from '../../components/Header'
+import Footer from '../../components/Footer'
+import Topo from '../../components/Header'
+import TokenExiste from '../../components/TokenExiste'
 
 
 
-export default function Home() {
+
+
+export default function Home(props) {
+  
   return (
     <>
-      <Cabeca />
+      <Topo />
+
       <Conteudo>
-        <BoxTexto>
+
+        <Box>
           <Titulo>
             O FUTURO É EASY
           </Titulo>
+          
           <SubTitulo>
             Seja bem vindo!
           </SubTitulo>
@@ -27,10 +35,12 @@ export default function Home() {
           <Text>
             Você está a um passo de conhecer o futuro
           </Text>
-        </BoxTexto>
-
-
-        <BoxSala>
+        </Box>
+     
+        <Box
+          bg="#FFFF"
+          shadow="2px 2px 5px 1px rgb(0 0 0 / 64%);"
+        >
           <Text>
             Olá, para começar coloque o link da
             sala ou crie sua própria
@@ -39,29 +49,30 @@ export default function Home() {
             <strong>Codigo da Sala</strong>
           </Text>
 
-          <Input type="text">
-          </Input>
-          <Link href="#">
-            <a>
-            Entrar em Sala
-            </a>
-          </Link>
+          <TokenExiste/>
+         
           <Link href="/criarSala">
-            <a>
+            <Botao
+            color="#737176"
+            >
             Criar Sala
-            </a>
+            </Botao>
           </Link>
           
-        </BoxSala>
+        </Box>
+
       </Conteudo>
+
+      <Footer/>
     </>
   )
 }
 
 const Titulo = styled.h1`
   text-align: center;
-  font-family: sans-serif;
+  font-family: 'Museo700';
   font-size: 3em;
+  margin: 0px;
 `
 const SubTitulo = styled.h2`
   color: #737176;
@@ -76,41 +87,39 @@ const Conteudo = styled.section`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin-top: 2em;
+  margin: 4.53em 0;
   justify-items: center;
 
   @media only screen and (max-width: 850px) {
     flex-direction: column;
     align-items: center;
-    
+    margin:0px;
   }
 `
-const BoxTexto = styled.aside`
+const Box = styled.aside`
   width: 500px;
-  text-align: center;
-  @media only screen and (max-width: 850px){
-    width: 95%;
-    margin: 5px;
-    
-  }
-`
-
-const BoxSala = styled.aside`
-  width: 400px;
   padding: 30px;
   text-align: center;
-  background-color: #FFFFFF;
-  border-radius: 64px ;
+  background-color: ${props => props.bg};
+  box-shadow:${props=> props.shadow} ;
+  border-radius: 64px;
   display: grid;
+  justify-items: center;
   @media only screen and (max-width: 850px){
     width: 80%;
+    margin: 10px;
   }
 `
-const Input = styled.input`
-    margin-top: 2em;
-    border: none;
-    font-size: 1.2em;
-    border-bottom: 2px solid rgb(0, 0, 0);
-    width: 300px;
-    text-align: center;
+const Botao = styled.a`
+    text-decoration: none;
+    padding: 10px;
+    cursor: pointer;
+    background: ${props => props.bgBotao};
+    color: ${props => props.color};
+    border-radius: 20px;
+    margin: 5px 0;
+    &:hover{
+      color: ${props => props.color};
+      text-decoration: underline;
+    }
 `

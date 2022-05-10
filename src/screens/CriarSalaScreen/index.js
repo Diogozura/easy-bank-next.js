@@ -1,16 +1,14 @@
-// import CriarSala from '../src/screens/CriarSalaScreen'
-import Footer from "../src/components/Footer"
-import Topo from "../src/components/Header/header"
+
 import React from 'react'
 import { useRouter } from "next/router"
-import { Input } from "../src/components/Input"
-import { Titulo } from "../src/components/Titulo"
-import { AvatarCores, Body, Cores, Form } from "./criarJogador"
-import { Botao } from "../src/components/Botao"
+import { Titulo } from '../../components/Titulo'
+import { AvatarCores, Body, Cores, Form } from "../../../pages/criarJogador"
+import { Botao } from "../../components/Botao"
 import Image from "next/image"
-import { cores } from "../src/services/auth/cores"
-import {  criaToken } from "../src/services/auth/criaToken"
-import { authService } from "../src/services/auth/authService"
+// import { cores } from "../../src/services/auth/cores"
+import { cores } from "../../services/auth/cores"
+import {  criaToken } from "../../services/auth/criaToken"
+import { authService } from "../../services/auth/authService"
 
 
 // export default CriarSala

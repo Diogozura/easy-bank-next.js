@@ -9,6 +9,7 @@ const Cabecalho = styled.header`
     #951B81,
     #E6332A);
     padding: 10px;
+    text-align: center;
 `
 export  const Title = styled.h1`
   font-size: 50px;
@@ -17,24 +18,7 @@ export  const Title = styled.h1`
   font-family: 'Museo700', sans-serif;
   
 `
-const NavBar = styled.nav`
-    text-align: center;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-`
-const Navlink = styled.a`
-  color: black;
-  text-decoration: none;
-  padding: 10px;
-  border-radius: 0px 0px 10px 10px;
-  cursor: pointer;  
-  &:hover {
-    background-color: ${props => props.bg };
-    text-decoration: underline;
-    color: white;
-  }
-`
+
 // const PropsBox = styled.div(props => ({
 //     background: props.color,
 //     height: '50px',
@@ -48,9 +32,10 @@ export default function Topo() {
         <>
          
             <Head>
-            <title>Easy imobiliário</title>
+            <title>Criar player - Easy Imobiliário </title>
              <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
+            <Link href="/">
             <Cabecalho >
                 <Image
                 src='/image/logo.svg'
@@ -59,21 +44,7 @@ export default function Topo() {
                 width={250}
                 height={80}/>
             </Cabecalho>
-            <NavBar>
-              
-                
-                <Link href="/" 
-                ><Navlink bg="#A11E74">Home</Navlink></Link>
-                    <Link href="/">
-                        <Navlink bg='#B8255C'>Regras</Navlink>
-                    </Link>
-                    <Link href="#pages">
-                        <Navlink  bg='#CE2C43'>Contato</Navlink>
-                    </Link>
-               
-
-            </NavBar>
-
+            </Link>
         </>
 
 
