@@ -51,7 +51,7 @@ export default function Home(props) {
 
           <TokenExiste/>
          
-          <Link href="/criarSala">
+          <Link href="/criarSala" prefetch={false}>
             <Botao
             color="#737176"
             >

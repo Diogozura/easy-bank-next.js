@@ -10,7 +10,7 @@ const ONE_WEEK = ONE_DAY * 7
 
 
 export const tokenService = {
-    save( keyRoom, idPlayer, ctx = null) {
+    save(keyRoom, idPlayer, ctx = null) {
         
         nookies.set(ctx, 'Player', idPlayer, {
             maxAge: ONE_WEEK,
@@ -28,6 +28,6 @@ export const tokenService = {
         // return localStorage.getItem('Player')
     },
     delete() {
-        localStorage.removeItem( 'Player')
+        localStorage.removeItem('Player')
     }
 }

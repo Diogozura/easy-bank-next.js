@@ -9,7 +9,7 @@ import { AvatarCores, Body, Cores, Form } from "./criarJogador"
 import { Botao } from "../src/components/Botao"
 import Image from "next/image"
 import { cores } from "../src/services/auth/cores"
-import {  criaToken } from "../src/services/auth/criaToken"
+import { criaToken } from "../src/services/auth/criaToken"
 import { authService } from "../src/services/auth/authService"
 
 
@@ -17,10 +17,10 @@ import { authService } from "../src/services/auth/authService"
 // posts will be populated at build time by getStaticProps()
 
 
-function CriarSala({ posts , corDeVerdade, children , ...props }) {
+function CriarSala({ posts, corDeVerdade, children, ...props }) {
   const router = useRouter()
-  
-// console.log(posts.keyRoom)
+
+  // console.log(posts.keyRoom)
 
   const [values, setValues] = React.useState({
     usuario: '',
@@ -35,7 +35,7 @@ function CriarSala({ posts , corDeVerdade, children , ...props }) {
   function handlenChange(event) {
     const fieldValue = event.target.value;
     const fieldName = event.target.name;
-   
+
 
     setValues((currenetValues) => {
       return {
@@ -68,24 +68,24 @@ function CriarSala({ posts , corDeVerdade, children , ...props }) {
       />
     </Cores>
 
-  ) 
+  )
   );
- 
-  
-  
-  
-  
+
+
+
+
+
 
   return (
-    
+
     <Body>
-      
+
       <Topo />
       <Titulo>Hora de Criar Jogador e Sala</Titulo>
 
       <Form onSubmit={(event) => {
         event.preventDefault()
-        console.log(values.cores, values.usuario) 
+        console.log(values.cores, values.usuario)
         // console.log('Fui Clicado' + ' ' + values.usuario + ' ' + values.valor)
         // console.log(JSON.stringify(values, null, 2))
         authService.criarSala({
@@ -99,9 +99,9 @@ function CriarSala({ posts , corDeVerdade, children , ...props }) {
             router.push('/jogo')
           })
           .catch(() => {
-          alert("preencha todos os campos")
-        })
-        
+            alert("preencha todos os campos")
+          })
+
       }}>
 
         <Input
@@ -124,7 +124,7 @@ function CriarSala({ posts , corDeVerdade, children , ...props }) {
         </AvatarCores>
         {/* <pre>{colo}</pre> */}
 
-      
+
         {/* <p>{restosta}</p> */}
         <Input
           type="text"
@@ -151,13 +151,13 @@ export async function getStaticProps() {
   const colors = await cores()
   const corExiste = colors.cores
   const corDeVerdade = corExiste
-  
+
   // Props returned will be passed to the page component
   return {
     props: { posts, corDeVerdade, },
-    revalidate: true 
+    revalidate: true
   }
-   
+
 }
 
 

@@ -26,6 +26,7 @@ const NavBar = styled.nav`
 const Navlink = styled.a`
   color: black;
   text-decoration: none;
+  font-size: 1.3em;
   padding: 10px;
   border-radius: 0px 0px 10px 10px;
   cursor: pointer;  

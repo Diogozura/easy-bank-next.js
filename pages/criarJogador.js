@@ -8,8 +8,10 @@ import { Botao } from "../src/components/Botao";
 import { Titulo } from "../src/components/Titulo";
 import { Input } from "../src/components/Input";
 import { useRouter } from "next/router";
-import { tokenService } from "../src/services/auth/tokenService"
-
+import { tokenService } from "../src/services/auth/tokenService";
+import { authService } from "../src/services/auth/authService";
+import nookies from 'nookies'
+import useCores from "../src/services/auth/coresResta";
 
 
 
@@ -28,11 +30,10 @@ export const Form = styled.form`
 
     justify-items: center;
     display: grid;
-    @media only screen and (max-width: 420px) {
+    @media only screen and (max-width: 520px) {
        width : 90%;
     }
 `
-
 export const AvatarCores = styled.section`
     display: flex;
     flex-wrap: wrap;
@@ -51,9 +52,13 @@ export const Cores = styled.aside`
 margin: 15px;
 `
 
+
 // codigo da pagina 
-export default function CriaPlayer({ resta }, props) {
+export default function CriaPlayer(props) {
     const router = useRouter()
+    const restaCores = useCores()
+
+    const cor = restaCores.data.coresRestante
 
     const [values, setValues] = React.useState({
         usuario: '',
@@ -71,10 +76,9 @@ export default function CriaPlayer({ resta }, props) {
         })
     }
     // const cor = `${post.identificador}`
-
-
-    const content = resta.map((post) =>
-
+    // console.log(cores.coresRestante) 
+    console.log(cor)
+    const content = cor?.map((post) => (
         <Cores key={post.identificador}>
 
             <label
@@ -94,8 +98,10 @@ export default function CriaPlayer({ resta }, props) {
                 onChange={handlenChange}
             />
         </Cores>
+    ))
 
-    );
+
+
 
     return (
         <Body>
@@ -104,16 +110,16 @@ export default function CriaPlayer({ resta }, props) {
             <Form onSubmit={(event) => {
                 event.preventDefault()
                 console.log(values.cores, values.usuario)
-
-                criarPlayer.criar({
+                authService.criarJogador({
                     identificador: values.cores,
-                    namePlayer:values.usuario,
+                    namePlayer: values.usuario,
                 })
-               
+
                     .then(() => {
-                         router.push('/jogo')
+                        router.push('/jogo')
                     })
-                    .catch(() => {
+                    .catch((err) => {
+                        console.log(err)
                         alert("preencha todos os campos")
                     })
             }}>
@@ -138,22 +144,4 @@ export default function CriaPlayer({ resta }, props) {
             <Footer />
         </Body>
     )
-}
-
-
-const keyRoom = tokenService.get()
-export async function getStaticProps() {
-
-    const res = await fetch(`https://ffgames134.herokuapp.com/api/coresRestantes?keyRoom=${keyRoom}`)
-    const posts = await res.json()
-    const resta = posts.coresRestante
-    const cor = resta
-    console.log(cor)
-
-
-    return {
-        props: {
-            resta,
-        },
-    }
 }

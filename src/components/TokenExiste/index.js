@@ -62,9 +62,11 @@ export default function TokenExiste() {
                 })
                 .then(() => {
                     router.push('/criarJogador')
+                    // console.log(values.token)
                     // router.push('/auth-page-static')
                   })
-                  .catch(() => {
+                .catch(() => {
+                     
                     alert("Token invalido")
                   })
                 
