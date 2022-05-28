@@ -49,7 +49,8 @@ export const AvatarCores = styled.section`
 export const Cores = styled.aside`
     display: grid;
     justify-items: center;
-margin: 15px;
+    margin: 15px;
+    width: 70px;
 `
 
 

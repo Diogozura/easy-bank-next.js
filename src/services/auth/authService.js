@@ -69,7 +69,7 @@ export const authService = {
 
     async dadosSala(ctx = null) {
         const cookie = nookies.get(ctx)
-        console.log(cookie.Player)
+        // console.log(cookie.Player)
         return HttpClient(`${process.env.NEXT_PUBLIC_BACKEND_URL}api/dadosSala?keyRoom=${cookie.chave}&idPlayer=${cookie.Player}`, {
             method: 'GET',
         })
@@ -80,5 +80,38 @@ export const authService = {
             })
 
 
+    },
+    async dados(ctx = null) {
+        const cookie = nookies.get(ctx)
+        // console.log(cookie.Player)
+        return HttpClient(`${process.env.NEXT_PUBLIC_BACKEND_URL}api/dadosSala?keyRoom=${cookie.chave}}`, {
+            method: 'GET',
+        })
+            .then((resposta) => {
+                // console.log(cookie)
+                if (!resposta.ok) throw new Error('Token invalido')
+                return resposta
+            })
+
+
+    },
+    async transfereDinheiro({ idPlayerPara,valor}, ctx = null) {
+        const cookie = nookies.get(ctx)
+        const userDe =  `${!cookie.banco? 0 : cookie.Player }`
+        
+        console.log(userDe)
+        return HttpClient(`${process.env.NEXT_PUBLIC_BACKEND_URL}api/transferencia/?keyRoom=${cookie.chave}`, {
+            method: 'POST',  
+            body: {
+                idPlayerDe: userDe,
+                idPlayerPara,
+                valor,
+            }
+        })
+        .then((res) => {
+            console.log(res)
+        })
+       
     }
+
 }

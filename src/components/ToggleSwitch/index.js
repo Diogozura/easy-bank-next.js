@@ -31,7 +31,7 @@ const ToggleSwitchWrapper = styled.label`
         width:2rem;
         height: 2rem;
         border-radius: 2rem;
-        background: blue;
+        background: green;
         left: 0;
         cursor: pointer;
         box-shadow: 2px 2px 4px grey;

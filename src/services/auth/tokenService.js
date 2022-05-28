@@ -10,7 +10,7 @@ const ONE_WEEK = ONE_DAY * 7
 
 
 export const tokenService = {
-    save(keyRoom, idPlayer, ctx = null) {
+    save(keyRoom, idPlayer, bank, ctx = null) {
         
         nookies.set(ctx, 'Player', idPlayer, {
             maxAge: ONE_WEEK,
@@ -20,11 +20,15 @@ export const tokenService = {
             maxAge: ONE_WEEK,
             path:'/',
         })
+        nookies.set(ctx, 'banco', bank, {
+            maxAge: ONE_WEEK,
+            path:'/',
+        })
         
     },
     get(ctx = null) {
         const cookies = nookies.get(ctx)
-        return cookies['chave', 'Player'] 
+        return cookies['chave', 'Player', 'banco'] 
         // return localStorage.getItem('Player')
     },
     delete() {
