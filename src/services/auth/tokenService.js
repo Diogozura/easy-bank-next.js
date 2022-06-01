@@ -31,7 +31,15 @@ export const tokenService = {
         return cookies['chave', 'Player', 'banco'] 
         // return localStorage.getItem('Player')
     },
-    delete() {
-        localStorage.removeItem('Player')
+    delete(ctx = null) {
+        nookies.destroy(ctx, 'Player', {
+            path:'/'
+        })
+        nookies.destroy(ctx, 'chave', {
+            path:'/'
+        })
+        nookies.destroy(ctx, 'banco', {
+            path:'/'
+        })
     }
 }

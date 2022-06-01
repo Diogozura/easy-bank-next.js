@@ -52,6 +52,7 @@ export const authService = {
                 return res.body
             })
     },
+
     async coresRestantes(ctx) {
         const cookie = nookies.get(ctx)
         // console.log(cookie.Player)
@@ -81,6 +82,7 @@ export const authService = {
 
 
     },
+
     async dados(ctx = null) {
         const cookie = nookies.get(ctx)
         // console.log(cookie.Player)
@@ -95,6 +97,7 @@ export const authService = {
 
 
     },
+
     async transfereDinheiro({ idPlayerPara,valor}, ctx = null) {
         const cookie = nookies.get(ctx)
         const userDe =  `${!cookie.banco? 0 : cookie.Player }`
@@ -112,6 +115,18 @@ export const authService = {
             console.log(res)
         })
        
+    },
+    
+    async Sair({ idPlayerPara }, ctx = null) {
+        const cookie = nookies.get(ctx)
+
+        return HttpClient(`${process.env.NEXT_PUBLIC_BACKEND_URL}api/troca_player_banc?keyRoom=${cookie.chave}`,{
+            method: 'POST',
+            body: {
+                idPlayerDe: cookie.Player,
+                idPlayerPara
+            }
+        })
     }
 
 }

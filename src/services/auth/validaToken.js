@@ -7,11 +7,10 @@ export const validaToken= {
             method: 'GET',
         })
             
-        .then(async(resposta) => {
+            .then(async (resposta) => {
+                console.log(resposta)
             if (!resposta.ok) throw new Error('Token invalido')
-            const body =  resposta.body;
-            console.log(body)
-            tokenService.save(props.keyRoom)
+     
         })
     }   
 }

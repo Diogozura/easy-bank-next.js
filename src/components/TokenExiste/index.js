@@ -1,7 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useRouter } from 'next/router'
+import { Router, useRouter } from 'next/router'
 import { validaToken } from '../../services/auth/validaToken'
+import nookies from 'nookies'
+import { route } from 'next/dist/server/router'
+import { tokenService } from '../../services/auth/tokenService'
 
 const Form = styled.form`
 display: grid;
@@ -34,10 +37,13 @@ const Botao = styled.button`
     }
 `
 
-export default function TokenExiste() {
+
+export default function TokenExiste(ctx = null) {
+    const cookie = nookies.get(ctx)
+    console.log(cookie.chave)
     const router = useRouter()
     const [values, setValue] = React.useState({
-        token: '',
+        token: cookie.chave,
     })
 
     function handleChange(event) {
@@ -55,21 +61,24 @@ export default function TokenExiste() {
     return (
         <Form onSubmit={(event) => {
             event.preventDefault();
-            console.log(JSON.stringify(values, null, 2))
-            console.log(values.token)
+            // console.log(JSON.stringify(values, null, 2))
+            // console.log(values.token)
             validaToken.validar({
-                    keyRoom: values.token,
+                keyRoom: values.token,
+            })
+                .then((res) => {
+                    
+                    console.log(res)
+                    { cookie.chave ? router.push('/jogo') : router.push('/criarJogador') }
+                    tokenService.save(cookie.chave || values.token , cookie.Player)
+                    console.log(values.token)
+                    
                 })
-                .then(() => {
-                    router.push('/criarJogador')
-                    // console.log(values.token)
-                    // router.push('/auth-page-static')
-                  })
-                .catch(() => {
-                     
-                    alert("Token invalido")
-                  })
-                
+                .catch((res) => {
+                    
+                    alert(res)
+                })
+
         }}>
 
             <Input

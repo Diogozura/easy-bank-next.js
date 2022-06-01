@@ -38,7 +38,7 @@ export const AvatarCores = styled.section`
     display: flex;
     flex-wrap: wrap;
     padding: 10px;
-    width: 300px;
+    /* width: 300px; */
     justify-content: space-around;
     flex-wrap: wrap;
 

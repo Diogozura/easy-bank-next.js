@@ -158,10 +158,10 @@ export default function TransfereDinheiro(props,ctx = null) {
                         })
                             .then(() => {
                                 alert("tudo certo")
-                               
+                               router.reload()
                         })
                     }}>
-                        {/* {dadosuser.playerBank ? user() : <Banco />} */}
+                       
                        { isChecked? banco()  : user() }
                         {conteudo}
 
@@ -189,6 +189,7 @@ export default function TransfereDinheiro(props,ctx = null) {
                     </Button>
                 </ModalFooter>
             </Modal>
+            <div>
             {dadosuser.playerBank ? <SaldoFlag>
                 <Image src='./icon/Bancoicon.svg' width="48" height="48" />
                 <h3>Banco</h3>
@@ -199,6 +200,8 @@ export default function TransfereDinheiro(props,ctx = null) {
                 </ToggleSwitchBanco>
              
                 </SaldoFlag>: null }
+            </div>
+            
         
         </>
 

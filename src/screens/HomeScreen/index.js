@@ -17,7 +17,7 @@ export default function Home(props) {
 
       <Conteudo>
 
-        <Box>
+        <Box >
           <Titulo>
             O FUTURO É EASY
           </Titulo>
@@ -31,7 +31,6 @@ export default function Home(props) {
             mercado imobiliário, clique em criar sala e aproveite.
 
           </Text>
-
           <Text>
             Você está a um passo de conhecer o futuro
           </Text>
@@ -40,6 +39,7 @@ export default function Home(props) {
         <Box
           bg="#FFFF"
           shadow="2px 2px 5px 1px rgb(0 0 0 / 64%);"
+          padding="40px"
         >
           <Text>
             Olá, para começar coloque o link da
@@ -77,11 +77,19 @@ const Titulo = styled.h1`
 const SubTitulo = styled.h2`
   color: #737176;
   font-size:2em;
+  font-family: 'Museo700';
+  margin: 0.6em 0;
+  @media only screen and (max-width: 850px){
+    margin: 0;
+  }
 `
 const Text = styled.p`
   color: #737176;
   font-size: 1.4em;
- 
+  margin: 0.6em 0;
+  @media only screen and (max-width: 850px){
+    margin: 0;
+  }
 `
 const Conteudo = styled.section`
   display: flex;
@@ -98,7 +106,7 @@ const Conteudo = styled.section`
 `
 const Box = styled.aside`
   width: 500px;
-  padding: 30px;
+  padding: ${props => props.padding};
   text-align: center;
   background-color: ${props => props.bg};
   box-shadow:${props=> props.shadow} ;
@@ -106,7 +114,8 @@ const Box = styled.aside`
   display: grid;
   justify-items: center;
   @media only screen and (max-width: 850px){
-    width: 80%;
+    width: 90%;
+    padding: 10;
     margin: 10px;
   }
 `

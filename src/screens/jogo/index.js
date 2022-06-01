@@ -9,6 +9,7 @@ import { DadosJogador } from "../../components/DadoJogador";
 import useSession from "../../services/auth/jogador";
 import Jogadores from "../../components/DadosJogadores";
 import TransfereDinheiro from "../../components/TrasfereDinheiro";
+import Sair from "../../components/Sair";
 
 const BoxJogadores = styled.section`
     display: flex;
@@ -30,6 +31,7 @@ export default function Jogo({ children, ...props }) {
         <Body>
             <Topo />
             <Titulo>Bem Vindo a sala</Titulo>
+            <Sair/>
             <Codigo value={session.data.keyRoom}/>
             <DadosJogador />
             
