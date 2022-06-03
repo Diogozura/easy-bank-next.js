@@ -3,13 +3,11 @@ import react from 'react'
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import { Cores } from '../../../pages/criarJogador';
 import { authService } from '../../services/auth/authService';
-import useSession from '../../services/auth/jogador';
 import { Botao } from '../Botao';
 import { Input } from '../Input';
 import nookies from 'nookies'
 import { useRouter } from 'next/router';
-
-import { SaldoFlag } from '../BoxJogador';
+import { SaldoFlag, BoxTrasnfere } from '../BoxJogador';
 import ToggleSwitch from '../ToggleSwitch';
 import { tokenService } from '../../services/auth/tokenService';
 import styled from 'styled-components';
@@ -21,17 +19,13 @@ const ToggleSwitchBanco = styled.aside`
     justify-content: space-between;
 `
 
-
-
-export default function TransfereDinheiro(props,ctx = null) {
+export default function TransfereDinheiro({data}, ctx = null) {
     const [isChecked, setChecked] = react.useState(true)
-    const session = useSession()
-    const dadosjogador = session.data.players
-    const dadosuser = session.data
-    const cookie = nookies.get(ctx)
-    tokenService.save(cookie.chave, cookie.Player, isChecked? 0: dadosuser.idPlayer)
-
  
+    const cookie = nookies.get(ctx)
+    tokenService.save(cookie.chave, cookie.Player, isChecked? 0: data.idPlayer)
+
+ console.log(data)
     const [values, setValues] = react.useState({
         user: '',
         cores: '',
@@ -50,7 +44,7 @@ export default function TransfereDinheiro(props,ctx = null) {
         })
     }
 
-    const router = useRouter()
+    
     // base para funcionar as funções do ReactStrap 
     const [modal, setModal] = react.useState(false);
 
@@ -59,18 +53,18 @@ export default function TransfereDinheiro(props,ctx = null) {
     
     const user = () => {
         return (
-            <Cores>
+            <Cores key={data.idPlayer}>
                  <label
                     name="cores"
                     value='banco'
                     htmlFor='banco'>
-                    <Image src={`./avatar/${dadosuser.identificador}.svg`} width="60" height="60" />
+                    <Image src={`./avatar/${data.identificador}.svg`} width="60" height="60" />
                 </label>
                 <input
                     name="user"
                     type="radio"
                     id='banco'
-                    value={dadosuser.idPlayer}
+                    value={data.idPlayer}
                     onChange={handlenChange}
                 />
             </Cores>
@@ -104,7 +98,7 @@ export default function TransfereDinheiro(props,ctx = null) {
 
 
 
-    const conteudo = dadosjogador?.map((post) => (
+    const conteudo = data.players?.map((post) => (
         <>
             <Cores key={post.idPlayer}>
                 <label
@@ -132,7 +126,7 @@ export default function TransfereDinheiro(props,ctx = null) {
         </>
     ))
     return (
-        <>
+        <BoxTrasnfere key={data.idPlayer } >
 
             <Botao
                 color="danger"
@@ -145,7 +139,7 @@ export default function TransfereDinheiro(props,ctx = null) {
                 isOpen={modal}
             >
                 <ModalHeader toggle={toggle}>
-                    {isChecked?dadosuser.namePlayer : "Banco"}
+                    {isChecked?data.namePlayer : "Banco"}
                 </ModalHeader>
                 <ModalBody>
                     <form onSubmit={(event) => {
@@ -158,7 +152,8 @@ export default function TransfereDinheiro(props,ctx = null) {
                         })
                             .then(() => {
                                 alert("tudo certo")
-                               router.reload()
+                                toggle()
+                            //    router.reload()
                         })
                     }}>
                        
@@ -190,7 +185,7 @@ export default function TransfereDinheiro(props,ctx = null) {
                 </ModalFooter>
             </Modal>
             <div>
-            {dadosuser.playerBank ? <SaldoFlag>
+            {data.playerBank ? <SaldoFlag>
                 <Image src='./icon/Bancoicon.svg' width="48" height="48" />
                 <h3>Banco</h3>
                 <ToggleSwitchBanco>
@@ -203,7 +198,7 @@ export default function TransfereDinheiro(props,ctx = null) {
             </div>
             
         
-        </>
+        </BoxTrasnfere>
 
 
     )

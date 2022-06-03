@@ -57,6 +57,9 @@ export default function TermosPrivacidade() {
 export const Bloco = styled.section`
     width: 700px;
     text-align: center;
-    
     margin: 2em auto;
+
+    @media screen and (max-width: 780px){
+        width: 95%;
+    }
 `

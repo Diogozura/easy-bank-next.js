@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Link from "next/link";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
+import { Body } from './criarJogador';
 
 
 const GlobalStyle = createGlobalStyle`
@@ -77,7 +78,7 @@ export default function App({ Component, pageProps }) {
       <GlobalStyle />
       <ThemeProvider theme={theme}>
 
-        <body />
+        <Body />
 
 
         <Component {...pageProps} />

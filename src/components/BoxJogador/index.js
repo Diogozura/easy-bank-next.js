@@ -5,7 +5,8 @@ export const BoxJogador = styled.article`
     margin-left: 5%;
     margin-top: 1em;
     @media screen and (max-width: 480px) {
-        width: 90%;
+        width: 95%;
+        margin-left: 3%;
     }
 `
 
@@ -41,4 +42,14 @@ export const SaldoFlag = styled.aside`
        font-size: 1.3;
        font-weight: 600;
    }
+`
+export const BoxTrasnfere = styled.aside`
+display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 400px;
+    @media screen and (max-width: 480px) {
+        width: 95%;
+    }
 `

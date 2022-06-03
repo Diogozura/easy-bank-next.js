@@ -4,19 +4,16 @@ import { Botao } from "../Botao";
 import { tokenService } from '../../services/auth/tokenService'
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { authService } from "../../services/auth/authService";
-import useSession from "../../services/auth/jogador";
 import { Cores } from "../../../pages/criarJogador";
 import Image from "next/image";
 
-export default function Sair() {
+export default function Sair({data}) {
     function handleClick() {
         tokenService.delete()
         router.push('/')
         console.log('rodou tudo certo')
     }
-    const session = useSession()
-    const dadosuser = session.data
-    const dadosjogador = session.data.players
+  
 
     const [values, setValues] = react.useState({
         user: '',
@@ -37,7 +34,7 @@ export default function Sair() {
     const [modal, setModal] = react.useState(false)
     const toggle = () => setModal(!modal)
 
-    const conteudo = dadosjogador?.map((jogadores) => (
+    const conteudo = data.players?.map((jogadores) => (
         <>
             <Cores key={jogadores.idPlayer}>
                 <label
@@ -56,7 +53,7 @@ export default function Sair() {
                     name="user"
                     type="radio"
                     id={jogadores.identificador}
-                    value={jogadores.idPlayer}
+                    value={jogadores.idPlayer || ''}
                     onChange={handleChange}
                 />
 
@@ -85,7 +82,7 @@ export default function Sair() {
 
             }}>
 
-                selecione a nova pessoa a ser banco
+                Passar Batão para o novo Banco
                 {conteudo}
                 <Botao >
                     Trocar e sair
@@ -97,13 +94,15 @@ export default function Sair() {
     const sair = () => {
         return (
             <Botao
-                onClick={handleClick}>
+                key={data.idPlayer}
+                onClick={handleClick}
+              >
                 Sair
             </Botao>
            
         )
     }
-
+ 
     return (
         <>
 
@@ -125,7 +124,7 @@ export default function Sair() {
                     Sair
                 </ModalHeader> 
                 <ModalBody>
-                    {dadosuser.playerBank && dadosjogador.players ?  troca() : sair()}
+                    {data.playerBank && data.players.length != 0 ?  troca() : sair()}
                 </ModalBody>
                 <ModalFooter>
 

@@ -8,7 +8,7 @@ import { tokenService } from '../../services/auth/tokenService'
 
 const Form = styled.form`
 display: grid;
-
+justify-items: center;
 
 `
 const Input = styled.input`
