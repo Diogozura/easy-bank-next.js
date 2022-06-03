@@ -157,7 +157,6 @@ console.log(data.keyRoom)
 export async function getStaticProps() {
   // Instead of fetching your `/api` route you can call the same
   // function directly in `getStaticProps`
-  const posts = await criaToken()
 
   const colors = await cores()
   const corExiste = colors.cores
@@ -165,7 +164,7 @@ export async function getStaticProps() {
 
   // Props returned will be passed to the page component
   return {
-    props: { posts, corDeVerdade, },
+    props: { corDeVerdade, },
     revalidate: true
   }
 
