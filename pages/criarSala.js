@@ -8,8 +8,6 @@ import { Titulo } from "../src/components/Titulo"
 import { AvatarCores, Body, Cores, Form } from "./criarJogador"
 import { Botao } from "../src/components/Botao"
 import Image from "next/image"
-import { cores } from "../src/services/auth/cores"
-import { criaToken } from "../src/services/auth/criaToken"
 import { authService } from "../src/services/auth/authService"
 
 
@@ -142,26 +140,5 @@ function CriarSala({ posts, corDeVerdade, children, ...props }) {
     </Body>
   )
 }
-
-export async function getStaticProps() {
-  // Instead of fetching your `/api` route you can call the same
-  // function directly in `getStaticProps`
-  const posts = await criaToken()
-
-  const colors = await cores()
-  const corExiste = colors.cores
-  const corDeVerdade = corExiste
-
-  // Props returned will be passed to the page component
-  return {
-    props: { posts, corDeVerdade, },
-    revalidate: true
-  }
-
-}
-
-
-
-
 
 export default CriarSala
