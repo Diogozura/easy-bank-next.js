@@ -61,7 +61,7 @@ export default function TokenExiste(ctx = null) {
     return (
         <Form onSubmit={(event) => {
             event.preventDefault();
-            // console.log(JSON.stringify(values, null, 2))
+            console.log(JSON.stringify(values, null, 2))
             // console.log(values.token)
             validaToken.validar({
                 keyRoom: values.token,
@@ -71,7 +71,7 @@ export default function TokenExiste(ctx = null) {
                     console.log(res)
                     { cookie.chave ? router.push('/jogo') : router.push('/criarJogador') }
                     tokenService.save(cookie.chave || values.token , cookie.Player)
-                    console.log(values.token)
+                    // console.log(values.token)
                     
                 })
                 .catch((res) => {
