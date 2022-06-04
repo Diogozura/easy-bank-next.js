@@ -106,7 +106,6 @@ function CriarSala({ posts, children, ...props }) {
           })
             .catch((err) => {
               console.log(err)
-              console.log( chave.keyRoom , values.valor, values.cores,values.usuario )
             alert("preencha todos os campos")
           })
 
