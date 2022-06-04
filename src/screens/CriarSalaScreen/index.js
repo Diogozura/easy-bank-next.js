@@ -15,8 +15,7 @@ import useSWR, { useSWRConfig } from 'swr'
 import {  useFetch } from "../../services/auth/authGetService"
 
 
-// export default CriarSala
-// posts will be populated at build time by getStaticProps()
+
 
 
 
@@ -25,25 +24,12 @@ function CriarSala({ posts, children, ...props }) {
   const { data: cor } = useFetch('https://ffgames134.herokuapp.com/api/cores', { refreshInterval: 0 })
  
   
-  // console.log(cor)
+ 
   
   const router = useRouter()
-  // https://ffgames134.herokuapp.com/api/cores
 
 
-  // const fetcher = (url) => fetch(url).then((res) => res.json());
 
-  // const api =  `${process.env.NEXT_PUBLIC_BACKEND_URL}createRoom/`
-  // const { data, error } = useSWR(
-  //     api,
-  //      fetcher, {
-  //        refreshInterval : 30000,  
-  //    }
-  // );
-  // if (error) return "An error has occurred.";
-  // if (!data) return "Loading...";
-
-  
   const [values, setValues] = react.useState({
     usuario: '',
     valor: '',
@@ -55,8 +41,7 @@ function CriarSala({ posts, children, ...props }) {
   if (!chave) return "Loading...";
   if (!cor) return "Loading...";
 
-  console.log(chave.keyRoom)
-  console.log(cor.cores)
+  
 
  
 
@@ -109,9 +94,7 @@ function CriarSala({ posts, children, ...props }) {
 
       <Form onSubmit={(event) => {
         event.preventDefault()
-          console.log(values.cores, values.usuario)
-          console.log('Fui Clicado' + ' ' + values.usuario + ' ' + values.valor)
-          console.log(JSON.stringify(values, null, 2))
+         
 
           authService.criarSala({
             keyRoom: chave.keyRoom,
@@ -122,9 +105,9 @@ function CriarSala({ posts, children, ...props }) {
 
           .then(() => {
             router.push('/jogo')
-            console.log('top')
           })
-          .catch(() => {
+            .catch((err) => {
+            console.log(err)
             alert("preencha todos os campos")
           })
 
