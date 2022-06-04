@@ -103,7 +103,7 @@ function CriarSala({ posts, children, ...props }) {
           })
 
           .then((dados) => {
-            // router.push('/jogo')
+            router.push('/jogo')
             console.log(dados)
           })
             .catch((err) => {
