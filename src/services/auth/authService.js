@@ -17,7 +17,7 @@ export const authService = {
                 if (!respostaDoServidor.ok) throw new Error("preencha todos os dados")
                 const body = respostaDoServidor.body;
                 // console.log(respostaDoServidor.statusText)
-                // console.log(body)
+                console.log(body)
                 // console.log(keyRoom)
                 tokenService.save(keyRoom, body.idPlayer)
                 // tokenService.save()
