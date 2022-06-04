@@ -4,7 +4,7 @@ import nookies from 'nookies'
 
 export const authService = {
     async criarSala({ keyRoom, valorInicial, identificador, namePlayer }) {
-        return HttpClient(`NEXT_PUBLIC_${process.env.NEXT_PUBLIC_BACKEND_URL}SaveRoomPlayer/`, {
+        return HttpClient(`${process.env.NEXT_PUBLIC_BACKEND_URL}SaveRoomPlayer/`, {
             method: 'POST',
             body: {
                 keyRoom,
