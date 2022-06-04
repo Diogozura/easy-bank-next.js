@@ -134,7 +134,7 @@ function CriarSala({ posts, children, ...props }) {
           type="number"
           placeholder="Valor de Inicio"
           name="valor"
-          // value={values.valor}
+          value={values.valor}
           onChange={handlenChange}
         />
 
