@@ -83,7 +83,7 @@ function CriarSala({ posts, children, ...props }) {
 
   )
   );  
-
+  console.log(values.token, values.cores, values.valor, values.usuario)
 
   return (
 
@@ -102,8 +102,9 @@ function CriarSala({ posts, children, ...props }) {
             namePlayer: values.usuario,
           })
 
-          .then(() => {
-            router.push('/jogo')
+          .then((dados) => {
+            // router.push('/jogo')
+            console.log(dados)
           })
             .catch((err) => {
               console.log(err)

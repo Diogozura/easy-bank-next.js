@@ -18,9 +18,14 @@ export const authService = {
                 const body = respostaDoServidor.body;
                 console.log(respostaDoServidor.statusText)
                 console.log(respostaDoServidor)
-                // console.log(keyRoom)
+            
                 tokenService.save(keyRoom, body.idPlayer)
-                // tokenService.save()
+    
+                return body
+            })
+            .catch((err) => {
+                console.log(err)
+             
             })
     },
 
