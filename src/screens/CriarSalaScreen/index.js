@@ -94,6 +94,7 @@ function CriarSala({ posts, children, ...props }) {
 
       <Form onSubmit={(event) => {
         event.preventDefault()
+        console.log(values.valor, values.cores, values.usuario)
           authService.criarSala({
             keyRoom: chave.keyRoom,
             valorInicial: values.valor,
