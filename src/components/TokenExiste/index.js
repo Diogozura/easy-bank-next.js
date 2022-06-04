@@ -40,7 +40,7 @@ const Botao = styled.button`
 
 export default function TokenExiste(ctx = null) {
     const cookie = nookies.get(ctx)
-    console.log(cookie.chave)
+    // console.log(cookie.chave)
     const router = useRouter()
     const [values, setValue] = React.useState({
         token: cookie.chave,
@@ -61,7 +61,7 @@ export default function TokenExiste(ctx = null) {
     return (
         <Form onSubmit={(event) => {
             event.preventDefault();
-            console.log(JSON.stringify(values, null, 2))
+            // console.log(JSON.stringify(values, null, 2))
             // console.log(values.token)
             validaToken.validar({
                 keyRoom: values.token,

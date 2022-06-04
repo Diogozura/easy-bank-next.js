@@ -94,8 +94,6 @@ function CriarSala({ posts, children, ...props }) {
 
       <Form onSubmit={(event) => {
         event.preventDefault()
-         
-
           authService.criarSala({
             keyRoom: chave.keyRoom,
             valorInicial: values.valor,
@@ -107,7 +105,8 @@ function CriarSala({ posts, children, ...props }) {
             router.push('/jogo')
           })
             .catch((err) => {
-            console.log(err)
+              console.log(err)
+              console.log( chave.keyRoom , values.valor, values.cores,values.usuario )
             alert("preencha todos os campos")
           })
 
