@@ -3,7 +3,8 @@ import { tokenService } from "./tokenService";
 import nookies from 'nookies'
 
 export const authService = {
-    async criarSala({keyRoom, valorInicial, identificador, namePlayer}) {
+    async criarSala({ keyRoom, valorInicial, identificador, namePlayer }) {
+        console.log(keyRoom, valorInicial, identificador, namePlayer)
         return HttpClient(`${process.env.NEXT_PUBLIC_BACKEND_URL}SaveRoomPlayer/`, {
             method: 'POST',
             body: {
