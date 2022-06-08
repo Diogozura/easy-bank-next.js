@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { Box, BoxJogador, SaldoFlag, NomeeIcon } from '../BoxJogador';
+import { NomePlayer } from '../DadoJogador';
 
 export default function Jogadores({ data }) {
     
@@ -8,7 +9,7 @@ export default function Jogadores({ data }) {
             {/* Nome e ícone dos jogares presentes na sala  */}
             <NomeeIcon>
             {dadosjogador.playerBank ? <Image src={`./avatar/B${dadosjogador.identificador}.svg`} width="80" height="80" /> : <Image src={`./avatar/${dadosjogador.identificador}.svg`} width="60" height="60" />}
-                <h2>{dadosjogador.namePlayer}</h2>
+                <NomePlayer>{dadosjogador.namePlayer}</NomePlayer>
             </NomeeIcon>
             <Box>
                 {/* Saldo do Jogadores  */}

@@ -22,7 +22,6 @@ const BoxJogadores = styled.section`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-
 `
 const Codigo = styled.input`
     background: whitesmoke;
@@ -32,31 +31,27 @@ const Codigo = styled.input`
     margin-left: 2rem;
     width: 300px;
 `
+const SaireToken = styled.section`
+
+display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+`
 export default function Jogo({ children, ...props }, ctx = null) {
     const router = useRouter()
-    // const fetcher = (url) => fetch(url).then((res) => res.json());
+   
     const cookie = nookies.get(ctx)
-    // // {cookie.chave == 'undefined' ? tokenService.delete() + router.push("/") : ''}
-    // // console.log(isChecked ? 1 : 0)
-    // const api =  `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/dadosSala?keyRoom=${cookie.chave}&idPlayer=${cookie.Player}`
-    // const { data, error } = useSWR(
-    //     api,
-    //      fetcher, {
-    //        refreshInterval : 30000,  
-    //    }
-    // );
+
     
-    const { data, error } = useFetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/dadosSala?keyRoom=${cookie.chave}&idPlayer=${cookie.Player}`, { refreshInterval: 1000 })
+    const { data, error } = useFetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/dadosSala?keyRoom=${cookie.chave}&idPlayer=${cookie.Player}`, { refreshInterval: 0 })
 
    
     if (!data) return "Loading..."
        { data.erro == 'chave invalida'  ? router.push('/?error=401'): '' }
-    console.log(error)
-    console.log(data)
+    // console.log(error)
+    // console.log(data)
   
-    
-    
-    //   {cookie.Player ? ' ' : router.push("/")}
 
     return (
         <>
@@ -66,8 +61,12 @@ export default function Jogo({ children, ...props }, ctx = null) {
             </Head>
             <Topo />
             <Titulo>Bem Vindo a sala</Titulo>
-            <Sair data={data}/>
-            <Codigo defaultValue={data.keyRoom}/>
+            <SaireToken>
+                <Codigo defaultValue={data.keyRoom} />
+                <Sair data={data}/>
+            </SaireToken>
+            
+            
             <DadosJogador  data={data} />
             
             <BoxJogadores >
@@ -76,7 +75,7 @@ export default function Jogo({ children, ...props }, ctx = null) {
                 {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
 
             </BoxJogadores>
-            <HistoricoDeTransferencia/>
+            <HistoricoDeTransferencia key={data.idPlayer} data={ data}/>
             <Footer />
         </>)
 }

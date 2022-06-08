@@ -1,8 +1,11 @@
 import useSWR from "swr";
 import nookies from 'nookies'
 import styled from "styled-components";
+import { useFetch } from "../../services/auth/authGetService";
+import { Button } from "reactstrap";
+import react from "react";
 
-const Extrato = styled.td`
+const Extrato = styled.th`
  background: ${props => props.theme};
  padding:10px;
  border-radius: 20px;
@@ -10,23 +13,17 @@ const Extrato = styled.td`
 `
 
 
-export default function HistoricoDeTransferencia(ctx = null) {
+
+export default function HistoricoDeTransferencia({ data},ctx = null) {
     const fetcher = (url) => fetch(url).then((res) => res.json());
     const cookie = nookies.get(ctx)
-    // console.log(isChecked ? 1 : 0)
-    const api = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/extrato/?keyRoom=${cookie.chave}`
-    const { data, error } = useSWR(
-        api,
-        fetcher, {
-        refreshInterval: 30000,
-    }
-    );
-    if (error) return "An error has occurred.";
-    if (!data) return "Loading...";
+    const { data :extrato } = useFetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/extrato/?keyRoom=${cookie.chave}`, { refreshInterval: 1000 })
 
-    // console.log(postivo)
-
-    const conteudo = data.extrato?.map((dadosjogador) => (
+    if (!extrato) return "Loading..."
+    // console.log(extrato.extrato.length)
+    const valores = extrato.extrato
+    console.log(valores.slice(2, -1))
+    const conteudo = extrato.extrato.map((dadosjogador) => (
 
        
             <Extrato theme={dadosjogador.idPlayerPara == cookie.Player ? "rgba(195, 255, 195, 0.75)" : null || dadosjogador.idPlayerDe == cookie.Player ? "rgba(255, 195, 195, 0.75) " : null}
@@ -41,6 +38,13 @@ export default function HistoricoDeTransferencia(ctx = null) {
 
 
     ))
+    const [isChecked, setChecked] = react.useState(true)
+    const handleCheck = () => {
+        setChecked((preventState) => !preventState)
+    }
+    console.log(isChecked)
+
+
     return (<>
          <style jsx>{`
         table{
@@ -55,17 +59,14 @@ export default function HistoricoDeTransferencia(ctx = null) {
     
       `}
       
-      </style>
-        <table>
-            <tr>
-            {conteudo}
+      </style >
+        <table id='Extrato'>
+            <tr key={data.idPlayer}>
+                {isChecked ? conteudo.slice(0, 5) : conteudo}
+                <Button
+                    onClick={handleCheck}
+                >{isChecked? 'carregar tudo' : 'menos'}</Button>
             </tr>
-           
-            {/* <td>{data.extrato.idPlayerPara == cookie.idPlayer ? <Postivo /> : null}</td> */}
-            {/* <td>{data.extrato.idPlayerDe == cookie.idPlayer ? <Negativo /> : null}</td> */}
-
-
-
         </table>
     </>
        
