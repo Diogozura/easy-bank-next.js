@@ -121,10 +121,11 @@ export default function CriaPlayer(props, ctx = null) {
 
                     .then(() => {
                         router.push('/jogo')
+                        console.log('ok')
                     })
                     .catch((err) => {
-                        console.log(err)
-                        // alert(err)
+                        // console.log(err)
+                        alert(err)
                         err
                     })
             }}>

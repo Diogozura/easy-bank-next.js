@@ -11,6 +11,9 @@ import useSWR from "swr";
 import HistoricoDeTransferencia from "../../components/Historico";
 import Head from "next/head";
 import {  useRouter } from "next/router";
+import { tokenService } from "../../services/auth/tokenService";
+import { redirect } from "next/dist/server/api-utils";
+import { useFetch } from "../../services/auth/authGetService";
 
 
 
@@ -31,21 +34,29 @@ const Codigo = styled.input`
 `
 export default function Jogo({ children, ...props }, ctx = null) {
     const router = useRouter()
-    const fetcher = (url) => fetch(url).then((res) => res.json());
+    // const fetcher = (url) => fetch(url).then((res) => res.json());
     const cookie = nookies.get(ctx)
-    // console.log(isChecked ? 1 : 0)
-    const api =  `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/dadosSala?keyRoom=${cookie.chave}&idPlayer=${cookie.Player}`
-    const { data, error } = useSWR(
-        api,
-         fetcher, {
-           refreshInterval : 30000,  
-       }
-       );
-    //    {error ? router.push("/") : null  }
-       if (!data) return "Loading...";
-       
+    // // {cookie.chave == 'undefined' ? tokenService.delete() + router.push("/") : ''}
+    // // console.log(isChecked ? 1 : 0)
+    // const api =  `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/dadosSala?keyRoom=${cookie.chave}&idPlayer=${cookie.Player}`
+    // const { data, error } = useSWR(
+    //     api,
+    //      fetcher, {
+    //        refreshInterval : 30000,  
+    //    }
+    // );
     
-    //   {cookie.chave && cookie.Player ? ' ' : router.push("/")}
+    const { data, error } = useFetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/dadosSala?keyRoom=${cookie.chave}&idPlayer=${cookie.Player}`, { refreshInterval: 1000 })
+
+   
+    if (!data) return "Loading..."
+       { data.erro == 'chave invalida'  ? router.push('/?error=401'): '' }
+    console.log(error)
+    console.log(data)
+  
+    
+    
+    //   {cookie.Player ? ' ' : router.push("/")}
 
     return (
         <>

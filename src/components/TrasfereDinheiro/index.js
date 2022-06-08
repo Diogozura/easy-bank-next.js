@@ -25,7 +25,6 @@ export default function TransfereDinheiro({data}, ctx = null) {
     const cookie = nookies.get(ctx)
     tokenService.save(cookie.chave, cookie.Player, isChecked? 0: data.idPlayer)
 
- console.log(data)
     const [values, setValues] = react.useState({
         user: '',
         cores: '',

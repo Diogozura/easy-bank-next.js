@@ -6,12 +6,12 @@ import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { authService } from "../../services/auth/authService";
 
 import Image from "next/image";
+import { Cores, Form } from "../../screens/CriarJogadorScreen";
 
 export default function Sair({data}) {
     function handleClick() {
         tokenService.delete()
         router.push('/')
-        console.log('rodou tudo certo')
     }
   
 
@@ -63,7 +63,7 @@ export default function Sair({data}) {
 
     const troca = () => {
         return (
-            <form onSubmit={(event) => {
+            <Form onSubmit={(event) => {
                 
                 event.preventDefault();
                 console.log(values)
@@ -87,18 +87,22 @@ export default function Sair({data}) {
                 <Botao >
                     Trocar e sair
                 </Botao>
-            </form>
+            </Form>
         )
     }
 
     const sair = () => {
         return (
-            <Botao
+            <>
+                <h3>Tem certeza que deseja sair?</h3>
+                <Botao
                 key={data.idPlayer}
                 onClick={handleClick}
               >
                 Sair
             </Botao>
+            </>
+            
            
         )
     }

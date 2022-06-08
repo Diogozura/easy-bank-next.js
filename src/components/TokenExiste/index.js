@@ -69,8 +69,8 @@ export default function TokenExiste(ctx = null) {
                 .then((res) => {
                     
                     console.log(res)
-                    { cookie.chave ? router.push('/jogo') : router.push('/Jogador' ) }
-                    tokenService.save(cookie.chave || values.token , cookie.Player)
+                    { cookie.chave && cookie.Player != 'undefined' ? router.push('/jogo') : router.push('/Jogador' ) }
+                    tokenService.save(values.token , cookie.Player)
                     // console.log(values.token)
                     
                 })

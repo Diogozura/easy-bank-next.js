@@ -20,7 +20,7 @@ export const authService = {
                 console.log(respostaDoServidor.statusText)
                 console.log(respostaDoServidor)
             
-                tokenService.save(keyRoom, body.idPlayer, )
+                tokenService.save(keyRoom, body.idPlayer  || null)
     
                 return body
             })
@@ -37,8 +37,9 @@ export const authService = {
             }
         })
             .then((res) => {
-                tokenService.save(cookie.chave, res.body.idPlayer)
-                console.log(res.body.idPlayer)
+                if (!res.ok) throw new Error(res.body.erro)
+                tokenService.save(cookie.chave, res.body.idPlayer )
+                console.log(res.body.erro)
             })
 
     },
