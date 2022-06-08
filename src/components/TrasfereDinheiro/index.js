@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import react from 'react'
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
-import { Cores } from '../../../pages/criarJogador';
 import { authService } from '../../services/auth/authService';
 import { Botao } from '../Botao';
 import { Input } from '../Input';
@@ -11,6 +10,7 @@ import { SaldoFlag, BoxTrasnfere } from '../BoxJogador';
 import ToggleSwitch from '../ToggleSwitch';
 import { tokenService } from '../../services/auth/tokenService';
 import styled from 'styled-components';
+import { Cores, Form } from '../../screens/CriarJogadorScreen';
 
 
 const ToggleSwitchBanco = styled.aside`
@@ -126,7 +126,7 @@ export default function TransfereDinheiro({data}, ctx = null) {
         </>
     ))
     return (
-        <BoxTrasnfere key={data.idPlayer } >
+        <BoxTrasnfere  key={data.idPlayer } >
 
             <Botao
                 color="danger"
@@ -135,14 +135,15 @@ export default function TransfereDinheiro({data}, ctx = null) {
                 Transferir
             </Botao>
             <Modal
+                 size="lg"
                 toggle={toggle}
                 isOpen={modal}
             >
-                <ModalHeader toggle={toggle}>
+                <ModalHeader toggle={toggle} className="bg-info text-white ">
                     {isChecked?data.namePlayer : "Banco"}
                 </ModalHeader>
-                <ModalBody>
-                    <form onSubmit={(event) => {
+                <ModalBody  >
+                    <Form onSubmit={(event) => {
                         event.preventDefault();
                         
                       
@@ -150,8 +151,9 @@ export default function TransfereDinheiro({data}, ctx = null) {
                             idPlayerPara: parseInt(values.user),
                             valor: parseInt(values.valor),
                         })
-                            .then(() => {
-                                alert("tudo certo")
+                            .then((res) => {
+                                <p>tudo certo</p>
+                                
                                 toggle()
                             //    router.reload()
                         })
@@ -169,17 +171,11 @@ export default function TransfereDinheiro({data}, ctx = null) {
                         />
 
                         <Botao >Transferir</Botao>
-                    </form>
+                    </Form>
                 </ModalBody>
-                <ModalFooter>
-                    <Button
-                        color="primary"
-                        onClick={toggle}
-                    >
-                        Do Something
-                    </Button>
-                    {' '}
-                    <Button onClick={toggle}>
+                <ModalFooter className="bg-info text-center">
+                    
+                    <Button onClick={toggle}  color="danger">
                         Cancel
                     </Button>
                 </ModalFooter>

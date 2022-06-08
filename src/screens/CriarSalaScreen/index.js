@@ -5,18 +5,14 @@ import Footer from '../../components/Footer'
 import { useRouter } from "next/router"
 import { Input } from "../../components/Input"
 import { Titulo } from "../../components/Titulo"
-import { AvatarCores, Body, Cores, Form } from "../../../pages/criarJogador"
+// import { AvatarCores, Body, Cores, Form } from "../../../src/screens/CriarJogadorScreen"
 import { Botao } from "../../components/Botao"
 import Image from "next/image"
-import { cores } from "../../services/auth/cores"
-import { criaToken } from "../../services/auth/criaToken"
 import { authService } from "../../services/auth/authService"
-import useSWR, { useSWRConfig } from 'swr'
+
 import {  useFetch } from "../../services/auth/authGetService"
-
-
-
-
+import Head from "next/head"
+import { AvatarCores, Cores, Form } from "../CriarJogadorScreen"
 
 
 function CriarSala({ posts, children, ...props }) {
@@ -87,7 +83,11 @@ function CriarSala({ posts, children, ...props }) {
 
   return (
 
-    <Body>
+    <>
+       <Head>
+            <title>Criar Sala - Easy Imobiliário </title>
+             <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            </Head>
 
       <Topo />
       <Titulo>Hora de Criar Jogador e Sala</Titulo>
@@ -144,7 +144,7 @@ function CriarSala({ posts, children, ...props }) {
       </Form>
 
       <Footer />
-    </Body>
+    </>
   )
 }
 

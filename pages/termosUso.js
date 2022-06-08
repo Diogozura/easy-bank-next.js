@@ -1,12 +1,16 @@
+import Head from "next/head";
 import Link from "next/link";
 import Footer from "../src/components/Footer";
-import Cabeca, { Title } from "../src/components/Header";
+import Cabeca, { Title } from "../src/components/Header/header";
 import { Bloco } from "./termosPrivacidade";
 
 export default function TermosUso() {
     return (
         <>
-            
+             <Head>
+             <title>Termos de Uso - Easy Imobiliário </title>
+             <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            </Head>
             
             <Cabeca/>
 

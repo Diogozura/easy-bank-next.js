@@ -50,7 +50,6 @@ export default function Topo() {
     return (
 
         <>
-
             <Head>
                 <title>Easy imobiliário</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -66,13 +65,16 @@ export default function Topo() {
             <NavBar>
 
 
-                <Link href="/"
-                ><Navlink bg="#A11E74">Home</Navlink></Link>
-                <Link href="#regras">
-                    <Navlink bg='#B8255C'>Regras</Navlink>
+                <Link href="/" scroll={false} passHref
+                ><Navlink bg="#9F1E77">Home</Navlink></Link>
+                <Link href="#regras" passHref>
+                    <Navlink bg='#AF2265'>Regras</Navlink>
                 </Link>
-                <Link href="#pages">
-                    <Navlink bg='#CE2C43'>Contato</Navlink>
+                <Link href="/contato" passHref>
+                    <Navlink bg='#C12852'>Contato</Navlink>
+                </Link>
+                <Link href="/sobre" passHref>
+                    <Navlink bg='#D22D3F'>sobre</Navlink>
                 </Link>
 
 

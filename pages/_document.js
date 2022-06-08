@@ -1,4 +1,5 @@
 import Document, { Html } from 'next/document'
+import Head from 'next/head'
 import { ServerStyleSheet } from 'styled-components'
 
 export default class MyDocument extends Document {
@@ -20,6 +21,18 @@ export default class MyDocument extends Document {
           <Html lang="pt-br">
             {initialProps.styles}
             {sheet.getStyleElement()}
+
+            <Head>
+              <link
+                href="/fonts/Museo700/Museo700-Regular.otf"
+                rel="stylesheet"
+              />
+              <link
+                href="/fonts/Museo300/Museo300-Regular.otf"
+                rel="stylesheet"
+              />
+              
+            </Head>
           </Html>
         ),
       }

@@ -54,7 +54,7 @@ export default function Home(props) {
 
             <TokenExiste />
 
-            <Link href="/criarSala" prefetch={true}>
+            <Link href="/criarSala" passHref prefetch={false}>
               <Botao
                 color="#737176"
               >
@@ -65,7 +65,7 @@ export default function Home(props) {
           </Box>
         </Parte>
 
-        <Regras/>
+        <Regras props="props"/>
 
 
 
@@ -88,7 +88,7 @@ export const SubTitulo = styled.h2`
   color: #737176;
   font-size:2em;
   font-family: 'Museo700';
-  margin: 0.6em 0;
+  margin: 1em 0; 
   @media only screen and (max-width: 850px){
     margin: 0;
   }

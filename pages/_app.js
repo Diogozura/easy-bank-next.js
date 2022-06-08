@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import Link from "next/link";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { createGlobalStyle, ThemeProvider } from 'styled-components'
-import { Body } from './criarJogador';
+import styled, { createGlobalStyle, ThemeProvider } from 'styled-components'
+import { NextSeo, SocialProfileJsonLd  } from 'next-seo';
 
 
 const GlobalStyle = createGlobalStyle`
@@ -38,39 +38,76 @@ const theme = {
 
   },
 }
+export const Body = styled.body`
+    background-image:url('/image/fundo.png') ;
+`
 
 
 export default function App({ Component, pageProps }) {
   return (
     <>
-      
+      <NextSeo nofollow={true}
+        description="Easy Bank, um novo jeito de Jogar Banco imobiliário, confira agora nosso game e compartilhe com seus amigos - desenvolvido por 2eSes"
+        
+        robotsProps={{ 
+          nosnippet : true , 
+          notranslate : true , 
+          noimageindex : true , 
+          noarchive : true , 
+          maxSnippet : - 1 , 
+          maxImagePreview : 'none' , 
+          maxVideoPreview : - 1 , 
+        }} 
+        
+        openGraph={{
+          type: 'website',
+          url: 'https://easyimobiliario.com.br/',
+          title: 'Open Graph Title',
+          description: 'Easy bank, uma nova maneira de jogar banco imobiliário, confira agora o nosso game ',
+          images: [
+            {
+              url: 'https://2esestechnology.com.br/image/logo.svg',
+              width: 800,
+              height: 600,
+              alt: 'logo easy bank',
+            },
+          ],
+        }}
+      />
+       <SocialProfileJsonLd
+      type="Person"
+      name="Easy Bank Imobiliário "
+      url="https://easyimobiliario.com.br/"
+      sameAs={[
+        'https://www.instagram.com/easybankgame/',
+      ]}
+    />
       <Head>
-        <link rel="icon" href="/favicon/favicon.ico" />
-        <link
-       href="/fonts/Museo700/Museo700-Regular.otf"
-       rel="stylesheet"
-        />
-        <link
-       href="/fonts/Museo300/Museo300-Regular.otf"
-       rel="stylesheet"
-        />
-         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" />
-         {/* <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" /> */}
+
+      <link rel="icon" href="/favicon/favicon.ico" />
+       
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" />
+        {/* <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" /> */}
         {/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JHHYSLB83"></script>
         <script
           dangerouslySetInnerHTML={{
-           __html: `
+            __html: `
              window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
           
             gtag('config', 'G-4JHHYSLB83');
             `
+
           }}
         />
-        
 
+        <script id="Adsense-id" data-ad-client="ca-pub-5434892248042693"
+          async strategy="afterInteractive"
+          onError={(e) => { console.error('Script failed to load', e) }}
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+        />
 
       </Head>
 

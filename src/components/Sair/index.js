@@ -4,7 +4,7 @@ import { Botao } from "../Botao";
 import { tokenService } from '../../services/auth/tokenService'
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { authService } from "../../services/auth/authService";
-import { Cores } from "../../../pages/criarJogador";
+
 import Image from "next/image";
 
 export default function Sair({data}) {

@@ -10,7 +10,7 @@ const Rodape = styled.footer`
     padding: 15px;
     width:100%;
     bottom: 0;
-   
+    /* position: fixed; */
     @media only screen and (max-width: 550px) {
         flex-direction: column;
         align-items: center;
@@ -33,22 +33,35 @@ cursor: pointer;
 `
 
 
-export default function Footer() {
+export default function Footer(children, props) {
 
     return (
 
         <Rodape>
 
 
-            <Link href="/termosUso">
+            <Link href="/termosUso" passHref>
                 <A>Termos de Uso</A>    
             </Link>
-            <Link href="/termosPrivacidade">
+            <Link href="/termosPrivacidade" passHref>
                 <A>
                     Política de Privacidade
                 </A>
 
             </Link>
+            <Link href="/sobre" passHref>
+                <A>
+                   Sobre
+                </A>
+
+            </Link>
+            <Link href="/contato" passHref>
+                <A>
+                   Contato
+                </A>
+
+            </Link>
+            
             <A href="https://2esestechnology.com.br/">Desenvolvido por 2eSes</A>
 
         </Rodape>)

@@ -20,14 +20,11 @@ export const authService = {
                 console.log(respostaDoServidor.statusText)
                 console.log(respostaDoServidor)
             
-                tokenService.save(keyRoom, body.idPlayer)
+                tokenService.save(keyRoom, body.idPlayer, )
     
                 return body
             })
-            .catch((err) => {
-                console.log(err)
-             
-            })
+
     },
 
     async criarJogador({ identificador, namePlayer }, ctx = null) {

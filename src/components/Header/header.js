@@ -32,7 +32,7 @@ export default function Topo() {
         <>
          
             <Head>
-            <title>Criar player - Easy Imobiliário </title>
+           
              <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <Link href="/">
