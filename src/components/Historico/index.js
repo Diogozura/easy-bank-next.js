@@ -14,15 +14,12 @@ const Extrato = styled.th`
 
 
 
-export default function HistoricoDeTransferencia({ data},ctx = null) {
-    const fetcher = (url) => fetch(url).then((res) => res.json());
+export default function HistoricoDeTransferencia(ctx = null) {
     const cookie = nookies.get(ctx)
     const { data :extrato } = useFetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/extrato/?keyRoom=${cookie.chave}`, { refreshInterval: 1000 })
-
+    const [isChecked, setChecked] = react.useState(true)
     if (!extrato) return "Loading..."
     // console.log(extrato.extrato.length)
-    const valores = extrato.extrato
-    console.log(valores.slice(2, -1))
     const conteudo = extrato.extrato.map((dadosjogador) => (
 
        
@@ -38,12 +35,12 @@ export default function HistoricoDeTransferencia({ data},ctx = null) {
 
 
     ))
-    const [isChecked, setChecked] = react.useState(true)
+  
     const handleCheck = () => {
         setChecked((preventState) => !preventState)
     }
     console.log(isChecked)
-
+ 
 
     return (<>
          <style jsx>{`
@@ -54,16 +51,19 @@ export default function HistoricoDeTransferencia({ data},ctx = null) {
         }
         tr{
             display: grid;
-
+            background-color: azure;
+            border-radius: 20px; 
         }   
     
       `}
       
       </style >
         <table id='Extrato'>
-            <tr key={data.idPlayer}>
+            <tr>
                 {isChecked ? conteudo.slice(0, 5) : conteudo}
                 <Button
+                    color="danger"
+                    className="text-white"
                     onClick={handleCheck}
                 >{isChecked? 'carregar tudo' : 'menos'}</Button>
             </tr>
