@@ -136,7 +136,9 @@ export default function CriaPlayer(props, ctx = null) {
                 />
                 <AvatarCores
                 >
+                    
                     {content}
+                   
                 </AvatarCores>
 
 

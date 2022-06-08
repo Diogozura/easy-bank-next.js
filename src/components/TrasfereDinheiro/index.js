@@ -11,11 +11,17 @@ import ToggleSwitch from '../ToggleSwitch';
 import { tokenService } from '../../services/auth/tokenService';
 import styled from 'styled-components';
 import { Cores, Form } from '../../screens/CriarJogadorScreen';
+import { SubTitulo } from '../../screens/HomeScreen';
 
 
 const ToggleSwitchBanco = styled.aside`
     text-align: center;
     display: flex;
+    justify-content: space-between;
+`
+const JogadoresTransfere = styled.article`
+    display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
 `
 
@@ -58,6 +64,7 @@ export default function TransfereDinheiro({data}, ctx = null) {
                     value='banco'
                     htmlFor='banco'>
                     <Image src={`./avatar/${data.identificador}.svg`} width="60" height="60" />
+                    <h3>{data.namePlayer}</h3>
                 </label>
                 <input
                     name="user"
@@ -79,6 +86,7 @@ export default function TransfereDinheiro({data}, ctx = null) {
                     htmlFor='banco'>
                     
                     <Image src='./icon/Bancoicon.svg' width="60" height="60" />
+                    <h3>Banco</h3>
                 </label>
                 <input
                     name="user"
@@ -111,6 +119,7 @@ export default function TransfereDinheiro({data}, ctx = null) {
                         src={`./avatar/${post.identificador}.svg`}
 
                     />
+                    <h3>{post.namePlayer}</h3>
                 </label>
                 <input
                     name="user"
@@ -139,7 +148,7 @@ export default function TransfereDinheiro({data}, ctx = null) {
                 isOpen={modal}
             >
                 <ModalHeader toggle={toggle} className="bg-info text-white ">
-                    {isChecked?data.namePlayer : "Banco"}
+                   <h2 >Area de Transferência Bancaria :</h2> {isChecked?data.namePlayer : "Banco"}
                 </ModalHeader>
                 <ModalBody  >
                     <Form onSubmit={(event) => {
@@ -158,8 +167,12 @@ export default function TransfereDinheiro({data}, ctx = null) {
                         })
                     }}>
                        
-                       { isChecked? banco()  : user() }
+                        
+                        <JogadoresTransfere>
+                        {isChecked ? banco() : user()}
                         {conteudo}
+                        </JogadoresTransfere>
+                       
 
                         <Input
                             placeholder="valor a transferir"
