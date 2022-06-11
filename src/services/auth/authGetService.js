@@ -1,6 +1,5 @@
 import useSWR from 'swr'
 
-
 export function useFetch(url) {
   const { data, error } = useSWR(url, async url => {
     const response = await fetch(url);

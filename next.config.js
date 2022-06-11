@@ -24,7 +24,7 @@ const nextConfig = {
       '/': { page: '/' },
       '/sobre': { page: '/sobre'},
       '/contato': { page: '/contato'},
-      '/criarJogador': { page: '/criarJogador'},
+      '/Jogador': { page: '/Jogador'},
       '/criarSala': { page: '/criarSala'},
       '/jogo': { page: '/jogo'},
       '/termosPrivacidade': { page: '/termosPrivacidade'},

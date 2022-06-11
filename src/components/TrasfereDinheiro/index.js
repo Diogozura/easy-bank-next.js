@@ -10,7 +10,7 @@ import { SaldoFlag, BoxTrasnfere } from '../BoxJogador';
 import ToggleSwitch from '../ToggleSwitch';
 import { tokenService } from '../../services/auth/tokenService';
 import styled from 'styled-components';
-import { Cores, Form } from '../../screens/CriarJogadorScreen';
+import { Cores, Form } from '../../../pages/Jogador';
 import { SubTitulo } from '../../screens/HomeScreen';
 
 
@@ -29,7 +29,7 @@ export default function TransfereDinheiro({data}, ctx = null) {
     const [isChecked, setChecked] = react.useState(true)
  
     const cookie = nookies.get(ctx)
-    tokenService.save(cookie.chave, cookie.Player, isChecked? 0: data.idPlayer)
+    tokenService.save(cookie.chave, cookie.Player, isChecked? data.idPlayer: 0)
 
     const [values, setValues] = react.useState({
         user: '',
@@ -161,10 +161,11 @@ export default function TransfereDinheiro({data}, ctx = null) {
                         })
                             .then((res) => {
                                 <p>tudo certo</p>
-                                
+                                alert("transação Concluída ")
                                 toggle()
-                            //    router.reload()
-                        })
+                                //    router.reload()
+                            })
+                            
                     }}>
                        
                         

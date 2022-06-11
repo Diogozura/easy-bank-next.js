@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import Footer from "../src/components/Footer";
+import Topo from "../src/components/Header";
 import Cabeca, { Title } from "../src/components/Header/header";
 import { Bloco } from "./termosPrivacidade";
 
@@ -12,7 +13,7 @@ export default function TermosUso() {
              <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             
-            <Cabeca/>
+            <Topo/>
 
             
         <Title>Termos de Uso</Title>

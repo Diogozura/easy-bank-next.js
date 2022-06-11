@@ -1,18 +1,19 @@
-// import CriarSala from '../src/screens/CriarSalaScreen'
+
 import Topo from "../../components/Header/header"
 import react from "react"
 import Footer from '../../components/Footer'
 import { useRouter } from "next/router"
 import { Input } from "../../components/Input"
 import { Titulo } from "../../components/Titulo"
-// import { AvatarCores, Body, Cores, Form } from "../../../src/screens/CriarJogadorScreen"
+
 import { Botao } from "../../components/Botao"
 import Image from "next/image"
 import { authService } from "../../services/auth/authService"
 
 import {  useFetch } from "../../services/auth/authGetService"
 import Head from "next/head"
-import { AvatarCores, Cores, Form } from "../CriarJogadorScreen"
+import { AvatarCores, Cores, ExplicaTela, Form } from "../../../pages/Jogador"
+import { Text } from "../HomeScreen"
 
 
 function CriarSala({ posts, children, ...props }) {
@@ -36,7 +37,7 @@ function CriarSala({ posts, children, ...props }) {
 
   if (!chave) return "Loading...";
   if (!cor) return "Loading...";
-
+  { chave.erro == 'chave invalida' ? router.push('/?error=401'): null }
   
 
  
@@ -79,7 +80,7 @@ function CriarSala({ posts, children, ...props }) {
 
   )
   );  
-  console.log(values.token, values.cores, values.valor, values.usuario)
+  // console.log(values.token, values.cores, values.valor, values.usuario)
 
   return (
 
@@ -91,10 +92,20 @@ function CriarSala({ posts, children, ...props }) {
 
       <Topo />
       <Titulo>Hora de Criar Jogador e Sala</Titulo>
-
+      <ExplicaTela>
+      <Text>
+          Clique em criar sala e selecione o valor inicial para cada jogador.
+          Em alguns jogos recomenda-se a quantia inicial de 2.558.000.
+          Em seguida selecione seu nome e sua cor.
+          Abaixo estará o código da sala para você compartilhar com seus amigos.
+          Clique novamente em Começar Partida para ir para a sala do jogo
+          (ao criar a sala você se tornará automaticamente o banco no jogo).
+    </Text>
+      </ExplicaTela>
+     
       <Form onSubmit={(event) => {
         event.preventDefault()
-        console.log(values.valor, values.cores, values.usuario)
+        // console.log(values.valor, values.cores, values.usuario)
           authService.criarSala({
             keyRoom: chave.keyRoom,
             valorInicial: values.valor,

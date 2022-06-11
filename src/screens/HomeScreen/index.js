@@ -10,7 +10,7 @@ import TokenExiste from '../../components/TokenExiste'
 
 
 
-export default function Home(props) {
+export default function Home() {
 
   return (
     <>
@@ -49,13 +49,14 @@ export default function Home(props) {
               sala ou crie sua própria
             </Text>
             <Text>
-              <strong>Codigo da Sala</strong>
+              <strong>Código da Sala</strong>
             </Text>
 
             <TokenExiste />
 
             <Link href="/criarSala" passHref prefetch={false}>
               <Botao
+                
                 color="#737176"
               >
                 Criar Sala
@@ -64,15 +65,8 @@ export default function Home(props) {
 
           </Box>
         </Parte>
-
         <Regras props="props"/>
-
-
-
       </Conteudo>
-
-
-
       <Footer />
     </>
   )

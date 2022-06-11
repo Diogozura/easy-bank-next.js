@@ -40,7 +40,7 @@ const Botao = styled.button`
 
 export default function TokenExiste(ctx = null) {
     const cookie = nookies.get(ctx)
-    // console.log(cookie.chave)
+
     const router = useRouter()
     const [values, setValue] = React.useState({
         token: cookie.chave,
@@ -61,14 +61,10 @@ export default function TokenExiste(ctx = null) {
     return (
         <Form onSubmit={(event) => {
             event.preventDefault();
-            // console.log(JSON.stringify(values, null, 2))
-            // console.log(values.token)
             validaToken.validar({
                 keyRoom: values.token,
             })
                 .then((res) => {
-                    
-                    console.log(res)
                     { cookie.chave && cookie.Player != 'undefined' ? router.push('/jogo') : router.push('/Jogador' ) }
                     tokenService.save(values.token , cookie.Player)
                     // console.log(values.token)
@@ -88,9 +84,7 @@ export default function TokenExiste(ctx = null) {
                 value={values.token}
                 onChange={handleChange}
             />
-            {/* <pre>
-                {JSON.stringify(values, null, 2)}
-            </pre> */}
+         
             <Botao
                 bgBotao="#22192c"
                 color="white"

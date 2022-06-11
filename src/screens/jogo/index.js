@@ -1,19 +1,17 @@
 import Footer from "../../components/Footer";
-import Topo from "../../components/Header/header";
+import Topo from "../../components/Header";
 import { Titulo } from "../../components/Titulo";
-import React from 'react'
+import React from "react";
 import nookies from 'nookies'
 import styled from 'styled-components'
 import { DadosJogador } from "../../components/DadoJogador";
 import Jogadores from "../../components/DadosJogadores";
 import Sair from "../../components/Sair";
-import useSWR from "swr";
+import useSWR from 'swr'
 import HistoricoDeTransferencia from "../../components/Historico";
 import Head from "next/head";
-import {  useRouter } from "next/router";
-import { tokenService } from "../../services/auth/tokenService";
-import { redirect } from "next/dist/server/api-utils";
-import { useFetch } from "../../services/auth/authGetService";
+import { useRouter } from "next/router";
+
 
 
 
@@ -40,22 +38,24 @@ display: flex;
 `
 export default function Jogo({ children, ...props }, ctx = null) {
     const router = useRouter()
-   
     const cookie = nookies.get(ctx)
-
+    const fetcher = (url) => fetch(url).then((res) => res.json());
+    // const { data, error } = useSWR('https://ffgames134.herokuapp.com/api/dadosSala?keyRoom=JHY2ZQBL&idPlayer=902', fetcher)
+    const { data, error } = useSWR(
+        `https://ffgames134.herokuapp.com/api/dadosSala?keyRoom=${cookie.chave}&idPlayer=${cookie.Player}`,
+        fetcher,{ refreshInterval: 5000 }
+      );
     
-    const { data, error } = useFetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/dadosSala?keyRoom=${cookie.chave}&idPlayer=${cookie.Player}`, { refreshInterval: 0 })
+      if (error) return "An error has occurred.";
+      if (!data) return "Loading...";
+      console.log(data)
+    //    { data.erro == 'chave invalida' ? router.push('/?error=401'): null }
 
-   
-    if (!data) return "Loading..."
-       { data.erro == 'chave invalida'  ? router.push('/?error=401'): '' }
-    // console.log(error)
-    // console.log(data)
-  
+
 
     return (
         <>
-             <Head>
+            <Head>
              <title>Sala game - Easy Imobiliário </title>
              <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
@@ -71,8 +71,7 @@ export default function Jogo({ children, ...props }, ctx = null) {
             
             <BoxJogadores >
                 <Jogadores data={data}/>
-        
-                {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
+
 
             </BoxJogadores>
             <HistoricoDeTransferencia key={data.idPlayer} data={ data}/>

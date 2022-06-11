@@ -6,7 +6,7 @@ import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { authService } from "../../services/auth/authService";
 
 import Image from "next/image";
-import { Cores, Form } from "../../screens/CriarJogadorScreen";
+import { Cores, Form } from '../../../pages/Jogador';
 
 export default function Sair({data}) {
     function handleClick() {

@@ -1,17 +1,17 @@
 import Link from "next/link"
 import Footer from "../src/components/Footer"
 import styled from 'styled-components'
-import Cabeca, { Title } from "../src/components/Header/header"
+import  { Title } from "../src/components/Header/header"
 import Head from "next/head"
+import Topo from "../src/components/Header"
 
 export default function TermosPrivacidade() {
     return (
         <>
              <Head>
              <title>Política de Privacidade - Easy Imobiliário </title>
-             <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            <Cabeca/>
+            <Topo/>
             <Title>Política de Privacidade</Title> 
             <Bloco>
            

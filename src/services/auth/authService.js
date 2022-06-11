@@ -104,19 +104,22 @@ export const authService = {
 
     async transfereDinheiro({ idPlayerPara,valor}, ctx = null) {
         const cookie = nookies.get(ctx)
-        const userDe =  `${!cookie.banco? 0 : cookie.Player }`
+        const userDe =  `${cookie.banco == 0 ? 0 : cookie.Player }`
         
-        console.log(userDe)
+        
         return HttpClient(`${process.env.NEXT_PUBLIC_BACKEND_URL}api/transferencia/?keyRoom=${cookie.chave}`, {
             method: 'POST',  
             body: {
-                idPlayerDe: userDe,
+                idPlayerDe: JSON.parse(userDe),
                 idPlayerPara,
                 valor,
             }
         })
         .then((res) => {
             console.log(res)
+            console.log( JSON.parse(userDe) ,
+                idPlayerPara,
+                valor,)
         })
        
     },

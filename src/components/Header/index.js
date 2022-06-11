@@ -1,6 +1,10 @@
+import { faBaby, faBars } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
+import react from 'react'
+import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap'
 import styled from 'styled-components'
 
 const Cabecalho = styled.header`
@@ -47,6 +51,10 @@ const Navlink = styled.a`
 
 
 export default function Topo() {
+
+
+    // Toggle for Modal
+    const [isOpen, setIsOpen] = react.useState(false);
     return (
 
         <>
@@ -54,15 +62,15 @@ export default function Topo() {
                 <title>Easy imobiliário</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            <Cabecalho >
+            {/* <Cabecalho >
                 <Image
                     src='/image/logo.svg'
                     alt="Logo easy imobiliário"
                     // layout="responsive"
                     width={250}
                     height={80} />
-            </Cabecalho>
-            <NavBar>
+            </Cabecalho> */}
+            {/* <NavBar>
 
 
                 <Link href="/" scroll={false} passHref
@@ -78,7 +86,55 @@ export default function Topo() {
                 </Link>
 
 
-            </NavBar>
+            </NavBar> */}
+            <Navbar style={{background: "linear-gradient(to right , #951B81, #E6332A)" }}
+                // color="light"
+
+                 className="sticky-top"
+                fixed="top"
+                expand="lg"
+            >
+                <Link href="/" scroll={true} passHref
+                ><Navlink > <Image
+                    src='/image/logo.svg'
+                    alt="Logo easy imobiliário"
+                    // layout="responsive"
+                    width={250}
+                    height={80} /></Navlink></Link>
+                {/* <NavbarBrand href="/" scroll={false}>
+   
+    </NavbarBrand> */}
+                <NavbarToggler onClick={() => { setIsOpen(!isOpen) }} >
+                    <FontAwesomeIcon icon={faBars} className="fa-2x"/>
+                </NavbarToggler>
+                <Collapse isOpen={isOpen} navbar>
+                    <Nav
+                        className="me-auto text-center"
+                        navbar
+                    >
+                         <NavItem>
+                            <Link href="#regras" onClick={() => { setIsOpen(!isOpen) }}>
+                            <Navlink>Regras</Navlink>
+                            </Link>
+                        </NavItem>
+
+                        <NavItem className="text-center">
+                            <Link href="/contato" isOpen={isOpen}>
+                                <Navlink>Contato</Navlink>
+                            </Link>
+                        </NavItem>
+
+                       
+                        <NavItem>
+                            <Link href="/sobre" onClick={() => { setIsOpen(!isOpen) }}>
+                            <Navlink>Sobre</Navlink>
+                            </Link>
+                        </NavItem>
+
+                    </Nav>
+
+                </Collapse>
+            </Navbar>
 
         </>
 

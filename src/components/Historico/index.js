@@ -39,7 +39,7 @@ export default function HistoricoDeTransferencia(ctx = null) {
     const handleCheck = () => {
         setChecked((preventState) => !preventState)
     }
-    console.log(isChecked)
+    // console.log(isChecked)
  
 
     return (<>

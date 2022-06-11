@@ -1,4 +1,6 @@
 
+import { faInstagram } from '@fortawesome/free-brands-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 import styled from 'styled-components'
 
@@ -61,6 +63,9 @@ export default function Footer(children, props) {
                 </A>
 
             </Link>
+            <Link href="https://www.instagram.com/easybankgame/" passHref>
+                    <A><FontAwesomeIcon icon={faInstagram} className="fa-2x fa-inverse" /> </A>
+                </Link>
             
             <A href="https://2esestechnology.com.br/">Desenvolvido por 2eSes</A>
 
