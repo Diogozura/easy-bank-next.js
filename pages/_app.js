@@ -67,9 +67,7 @@ export default function App({ Component, pageProps }) {
           description: 'Easy bank, uma nova maneira de jogar banco imobiliário, confira agora o nosso game ',
           images: [
             {
-              url: '/image/logo.svg',
-              width: 300,
-              height: 100,
+              url: 'https://easyimobiliario.com.br/image/logo.svg',
               alt: 'logo easy bank',
             },
           ],

@@ -2,6 +2,7 @@
 
 
 const nextConfig = {
+  optimizeFonts: true,
   compress:true,
   reactStrictMode: true,
   compiler: {

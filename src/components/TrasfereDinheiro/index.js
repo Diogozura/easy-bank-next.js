@@ -12,7 +12,8 @@ import { tokenService } from '../../services/auth/tokenService';
 import styled from 'styled-components';
 import { Cores, Form } from '../../../pages/Jogador';
 import { SubTitulo } from '../../screens/HomeScreen';
-
+import { currencyConfig } from '../Real';
+import IntlCurrencyInput from "react-intl-currency-input"
 
 const ToggleSwitchBanco = styled.aside`
     text-align: center;
@@ -25,22 +26,25 @@ const JogadoresTransfere = styled.article`
     justify-content: space-between;
 `
 
-export default function TransfereDinheiro({data}, ctx = null) {
+export default function TransfereDinheiro({ data }, ctx = null) {
     const [isChecked, setChecked] = react.useState(true)
- 
+
     const cookie = nookies.get(ctx)
-    tokenService.save(cookie.chave, cookie.Player, isChecked? data.idPlayer: 0)
+    tokenService.save(cookie.chave, cookie.Player, isChecked ? data.idPlayer : 0)
+
+
+    const [maskedValue, setMaskedValue] = react.useState('');
 
     const [values, setValues] = react.useState({
         user: '',
         cores: '',
         valor:'',
     })
-    
-    function handlenChange(event) {
+    function handlenChange(event, maskedValue) {
         const fieldValue = event.target.value;
         const fieldName = event.target.name;
 
+        setMaskedValue(maskedValue);
         setValues((currenetValues) => {
             return {
                 ...currenetValues,
@@ -49,21 +53,21 @@ export default function TransfereDinheiro({data}, ctx = null) {
         })
     }
 
-    
+
     // base para funcionar as funções do ReactStrap 
     const [modal, setModal] = react.useState(false);
 
     // Toggle for Modal
     const toggle = () => setModal(!modal);
-    
+
     const user = () => {
         return (
             <Cores key={data.idPlayer}>
-                 <label
+                <label
                     name="cores"
                     value='banco'
                     htmlFor='banco'>
-                    <Image src={`./avatar/${data.identificador}.svg`} width="60" height="60" />
+                    <Image src={`./avatar/${data.identificador}.svg`} alt={data.namePlayer} width="60" height="60" />
                     <h3>{data.namePlayer}</h3>
                 </label>
                 <input
@@ -74,18 +78,18 @@ export default function TransfereDinheiro({data}, ctx = null) {
                     onChange={handlenChange}
                 />
             </Cores>
-           
+
         )
     }
     const banco = () => {
         return (
             <Cores>
-                 <label
+                <label
                     name="cores"
                     value='banco'
                     htmlFor='banco'>
-                    
-                    <Image src='./icon/Bancoicon.svg' width="60" height="60" />
+
+                    <Image src='./icon/Bancoicon.svg' alt="icon do Banco" width="60" height="60" />
                     <h3>Banco</h3>
                 </label>
                 <input
@@ -96,13 +100,15 @@ export default function TransfereDinheiro({data}, ctx = null) {
                     onChange={handlenChange}
                 />
             </Cores>
-           
+
         )
     }
     const handleCheck = () => {
         setChecked((preventState) => !preventState)
     }
+    const handleClear = () => {
 
+    }
 
 
     const conteudo = data.players?.map((post) => (
@@ -112,7 +118,7 @@ export default function TransfereDinheiro({data}, ctx = null) {
                     name="cores"
                     value={post.identificador}
                     htmlFor={post.identificador}>
-                    
+
                     <Image
                         width={60}
                         height={60}
@@ -128,13 +134,13 @@ export default function TransfereDinheiro({data}, ctx = null) {
                     value={post.idPlayer}
                     onChange={handlenChange}
                 />
-               
+
             </Cores>
 
         </>
     ))
     return (
-        <BoxTrasnfere  key={data.idPlayer } >
+        <BoxTrasnfere key={data.idPlayer} >
 
             <Botao
                 color="danger"
@@ -143,21 +149,21 @@ export default function TransfereDinheiro({data}, ctx = null) {
                 Transferir
             </Botao>
             <Modal
-                 size="lg"
+                size="lg"
                 toggle={toggle}
                 isOpen={modal}
             >
                 <ModalHeader toggle={toggle} className="bg-info text-white ">
-                   <h2 >Area de Transferência Bancaria :</h2> {isChecked?data.namePlayer : "Banco"}
+                    <h2 >Area de Transferência Bancaria :</h2> {isChecked ? data.namePlayer : "Banco"}
                 </ModalHeader>
                 <ModalBody  >
                     <Form onSubmit={(event) => {
                         event.preventDefault();
-                        
-                      
+                        // console.log(parseInt(values.user), String(values.valor))
+
                         authService.transfereDinheiro({
                             idPlayerPara: parseInt(values.user),
-                            valor: parseInt(values.valor),
+                            valor:parseInt(values.valor),
                         })
                             .then((res) => {
                                 <p>tudo certo</p>
@@ -165,48 +171,62 @@ export default function TransfereDinheiro({data}, ctx = null) {
                                 toggle()
                                 //    router.reload()
                             })
-                            
+                            .catch((err) => {
+                                alert(err)
+                            })
+
                     }}>
-                       
-                        
+
+
                         <JogadoresTransfere>
-                        {isChecked ? banco() : user()}
-                        {conteudo}
+                            {isChecked ? banco() : user()}
+                            {conteudo}
                         </JogadoresTransfere>
-                       
+
 
                         <Input
-                            placeholder="valor a transferir"
-                            type='number'
-                            name='valor'
+                            type="number"
+                            placeholder="Valor de Inicio"
+                            name="valor"
+                            required="required"
                             value={values.valor}
                             onChange={handlenChange}
                         />
-
-                        <Botao >Transferir</Botao>
+                        {/* <IntlCurrencyInput type="text" required name="valor" placeholder="valor a transferir" value={values.valor} currency="BRL" config={currencyConfig}
+                            onChange={handlenChange}
+                            style={{
+                                borderRadius: "10px",
+                                textAlign: "center",
+                                padding: "5px",
+                                margin: "10px",
+                            }}
+                        /> */}
+                        {/* <pre>{JSON.stringify(maskedValue, null, 2)}</pre> */}
+                        {/* <pre>{JSON.stringify(maskedValue, null, 2) }</pre> */}
+                        <Botao type="submit">Transferir</Botao>
                     </Form>
                 </ModalBody>
                 <ModalFooter className="bg-info text-center">
-                    
-                    <Button onClick={toggle}  color="danger">
+
+                    <Button onClick={toggle} color="danger">
                         Cancel
                     </Button>
                 </ModalFooter>
             </Modal>
             <div>
-            {data.playerBank ? <SaldoFlag>
-                <Image src='./icon/Bancoicon.svg' width="48" height="48" />
-                <h3>Banco</h3>
-                <ToggleSwitchBanco>
-                <p>on</p>
-                    <ToggleSwitch isChecked={isChecked} onClick={handleCheck}/> 
-                    <p>off</p>
-                </ToggleSwitchBanco>
-             
-                </SaldoFlag>: null }
+                {data.playerBank ? <SaldoFlag>
+                    <Image src='./icon/Bancoicon.svg' width="48" height="48" />
+                    <h3>Banco</h3>
+                    <ToggleSwitchBanco>
+                        <p>on</p>
+                        <ToggleSwitch isChecked={isChecked} onClick={handleCheck} />
+                        <p>off</p>
+                    </ToggleSwitchBanco>
+
+                </SaldoFlag> : null}
             </div>
-            
-        
+
+
         </BoxTrasnfere>
 
 

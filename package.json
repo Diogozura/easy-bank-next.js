@@ -24,5 +24,8 @@
     "reactstrap": "^9.0.2",
     "styled-components": "^5.2.3",
     "swr": "^1.3.0"
+  },
+  "devDependencies": {
+    "react-intl-currency-input": "^0.2.6"
   }
 }

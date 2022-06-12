@@ -49,7 +49,7 @@ export default function Jogo({ children, ...props }, ctx = null) {
       if (error) return "An error has occurred.";
       if (!data) return "Loading...";
       console.log(data)
-    //    { data.erro == 'chave invalida' ? router.push('/?error=401'): null }
+       { data.erro == 'chave invalida' ? router.push('/?error=401'): null }
 
 
 
@@ -57,7 +57,6 @@ export default function Jogo({ children, ...props }, ctx = null) {
         <>
             <Head>
              <title>Sala game - Easy Imobiliário </title>
-             <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <Topo />
             <Titulo>Bem Vindo a sala</Titulo>

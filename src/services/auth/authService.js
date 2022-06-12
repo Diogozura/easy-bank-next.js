@@ -44,64 +44,6 @@ export const authService = {
 
     },
 
-    async Resta(ctx = null) {
-        const cookie = nookies.get(ctx)
-        console.log(cookie.chave)
-        return HttpClient(`${process.env.NEXT_PUBLIC_BACKEND_URL}api/coresRestantes?keyRoom=${cookie.chave}`, {
-            method: 'GET',
-        })
-            .then((res) => {
-                console.log(cookie.chave)
-                // console.log(JSON.stringify(res))
-                return res.body
-            })
-    },
-
-    async coresRestantes(ctx) {
-        const cookie = nookies.get(ctx)
-        // console.log(cookie.Player)
-        return HttpClient(`${process.env.NEXT_PUBLIC_BACKEND_URL}api/coresRestantes?keyRoom=${cookie.chave}`, {
-            method: 'GET',
-        })
-            .then((resposta) => {
-                // console.log(cookie)
-
-                return resposta.body
-            })
-
-
-    },
-
-    async dadosSala(ctx = null) {
-        const cookie = nookies.get(ctx)
-        // console.log(cookie.Player)
-        return HttpClient(`${process.env.NEXT_PUBLIC_BACKEND_URL}api/dadosSala?keyRoom=${cookie.chave}&idPlayer=${cookie.Player}`, {
-            method: 'GET',
-        })
-            .then((resposta) => {
-                // console.log(cookie)
-                if (!resposta.ok) throw new Error('Token invalido')
-                return resposta
-            })
-
-
-    },
-
-    async dados(ctx = null) {
-        const cookie = nookies.get(ctx)
-        // console.log(cookie.Player)
-        return HttpClient(`${process.env.NEXT_PUBLIC_BACKEND_URL}api/dadosSala?keyRoom=${cookie.chave}}`, {
-            method: 'GET',
-        })
-            .then((resposta) => {
-                // console.log(cookie)
-                if (!resposta.ok) throw new Error('Token invalido')
-                return resposta
-            })
-
-
-    },
-
     async transfereDinheiro({ idPlayerPara,valor}, ctx = null) {
         const cookie = nookies.get(ctx)
         const userDe =  `${cookie.banco == 0 ? 0 : cookie.Player }`
@@ -116,10 +58,7 @@ export const authService = {
             }
         })
         .then((res) => {
-            console.log(res)
-            console.log( JSON.parse(userDe) ,
-                idPlayerPara,
-                valor,)
+            if (!res.ok) throw new Error(res.body)
         })
        
     },

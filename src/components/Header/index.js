@@ -60,7 +60,6 @@ export default function Topo() {
         <>
             <Head>
                 <title>Easy imobiliário</title>
-                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             {/* <Cabecalho >
                 <Image
@@ -112,11 +111,11 @@ export default function Topo() {
                         className="me-auto text-center"
                         navbar
                     >
-                         <NavItem>
+                         {/* <NavItem>
                             <Link href="#regras" onClick={() => { setIsOpen(!isOpen) }}>
                             <Navlink>Regras</Navlink>
                             </Link>
-                        </NavItem>
+                        </NavItem> */}
 
                         <NavItem className="text-center">
                             <Link href="/contato" isOpen={isOpen}>
