@@ -5,17 +5,14 @@ import Footer from '../../components/Footer'
 import { useRouter } from "next/router"
 import { Input } from "../../components/Input"
 import { Titulo } from "../../components/Titulo"
-
 import { Botao } from "../../components/Botao"
 import Image from "next/image"
 import { authService } from "../../services/auth/authService"
-
 import { useFetch } from "../../services/auth/authGetService"
 import Head from "next/head"
 import { AvatarCores, Cores, ExplicaTela, Form } from "../../../pages/Jogador"
 import { Text } from "../HomeScreen"
-import { currencyConfig } from "../../components/Real"
-import IntlCurrencyInput from "react-intl-currency-input"
+
 
 function CriarSala({ posts, children, ...props }) {
   const { data: chave } = useFetch('https://ffgames134.herokuapp.com/createRoom/', { refreshInterval: 0 })

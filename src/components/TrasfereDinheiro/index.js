@@ -11,9 +11,7 @@ import ToggleSwitch from '../ToggleSwitch';
 import { tokenService } from '../../services/auth/tokenService';
 import styled from 'styled-components';
 import { Cores, Form } from '../../../pages/Jogador';
-import { SubTitulo } from '../../screens/HomeScreen';
-import { currencyConfig } from '../Real';
-import IntlCurrencyInput from "react-intl-currency-input"
+
 
 const ToggleSwitchBanco = styled.aside`
     text-align: center;
@@ -118,14 +116,14 @@ export default function TransfereDinheiro({ data }, ctx = null) {
                     name="cores"
                     value={post.identificador}
                     htmlFor={post.identificador}>
-
+                   
                     <Image
                         width={60}
                         height={60}
                         src={`./avatar/${post.identificador}.svg`}
 
                     />
-                    <h3>{post.namePlayer}</h3>
+                    <h3>{post.namePlayer}  {post.idPlayer}</h3>
                 </label>
                 <input
                     name="user"
@@ -159,7 +157,7 @@ export default function TransfereDinheiro({ data }, ctx = null) {
                 <ModalBody  >
                     <Form onSubmit={(event) => {
                         event.preventDefault();
-                        // console.log(parseInt(values.user), String(values.valor))
+                        console.log(parseInt(values.user), parseInt(values.valor))
 
                         authService.transfereDinheiro({
                             idPlayerPara: parseInt(values.user),
@@ -169,10 +167,12 @@ export default function TransfereDinheiro({ data }, ctx = null) {
                                 <p>tudo certo</p>
                                 alert("transação Concluída ")
                                 toggle()
+                                console.log(res)
                                 //    router.reload()
                             })
                             .catch((err) => {
                                 alert(err)
+                                console.log((err))
                             })
 
                     }}>
