@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { Badge } from 'reactstrap';
 import styled from 'styled-components';
 import { Box, BoxJogador, SaldoFlag, NomeeIcon } from '../BoxJogador';
 import TransfereDinheiro from '../TrasfereDinheiro';
@@ -13,6 +12,7 @@ export const NomePlayer = styled.h2`
 `
 
 export function DadosJogador({ data }) {
+    console.log("sou dada" + JSON.stringify(data, null, 2) )
     return (
         <BoxJogador>
             {/* parte onde fica o nome e ícone do usuário  */}
@@ -27,13 +27,9 @@ export function DadosJogador({ data }) {
                     <h3>{data.saldo}</h3>
                     <TransfereDinheiro data={data} />
                     <Link href="#Extrato">
-                        <Badge
-                            color="info"
-                            pill
-                            className="p-2 h3"
-                        >
+                        <button>
                             Extrato
-                        </Badge>
+                        </button>
                     </Link>
                 </SaldoFlag>
             </Box>

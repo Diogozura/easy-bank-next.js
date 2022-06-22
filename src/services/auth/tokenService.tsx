@@ -28,7 +28,7 @@ export const tokenService = {
     },
     get(ctx = null) {
         const cookies = nookies.get(ctx)
-        return cookies['chave', 'Player', 'banco'] 
+        return cookies['chave' + 'Player' + 'banco'] 
         // return localStorage.getItem('Player')
     },
     delete(ctx = null) {

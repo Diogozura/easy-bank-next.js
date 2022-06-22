@@ -2,8 +2,8 @@ import useSWR from "swr";
 import nookies from 'nookies'
 import styled from "styled-components";
 import { useFetch } from "../../services/auth/authGetService";
-import { Button } from "reactstrap";
 import react from "react";
+import { Button } from "@mui/material";
 
 const Extrato = styled.th`
  background: ${props => props.theme};
@@ -16,7 +16,7 @@ const Extrato = styled.th`
 
 export default function HistoricoDeTransferencia(ctx = null) {
     const cookie = nookies.get(ctx)
-    const { data :extrato } = useFetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/extrato/?keyRoom=${cookie.chave}`, { refreshInterval: 1000 })
+    const { data :extrato } = useFetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/extrato/?keyRoom=${cookie.chave}`)
     const [isChecked, setChecked] = react.useState(true)
     if (!extrato) return "Loading..."
     // console.log(extrato.extrato.length)
@@ -62,8 +62,6 @@ export default function HistoricoDeTransferencia(ctx = null) {
             <tr>
                 {isChecked ? conteudo.slice(0, 5) : conteudo}
                 <Button
-                    color="danger"
-                    className="text-white"
                     onClick={handleCheck}
                 >{isChecked? 'carregar tudo' : 'menos'}</Button>
             </tr>

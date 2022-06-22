@@ -6,7 +6,7 @@ padding: 10px;
     text-align: center;
 `
 
-export default function Regras({ children, props }) {
+export default function Regras(props) {
     return (
         <>
             <CaixaRegras>

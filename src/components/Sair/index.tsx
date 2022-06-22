@@ -2,7 +2,6 @@ import router from "next/router";
 import react from "react";
 import { Botao } from "../Botao";
 import { tokenService } from '../../services/auth/tokenService'
-import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { authService } from "../../services/auth/authService";
 
 import Image from "next/image";
@@ -116,7 +115,7 @@ export default function Sair({data}) {
             >
                 Sair
             </Botao>
-            <Modal
+            {/* <Modal
                 toggle={toggle}
                 isOpen={modal}>
 
@@ -137,7 +136,7 @@ export default function Sair({data}) {
                     </Button>
 
                 </ModalFooter>
-            </Modal>
+            </Modal> */}
         </>
 
     )

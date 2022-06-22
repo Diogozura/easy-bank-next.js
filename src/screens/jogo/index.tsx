@@ -36,14 +36,14 @@ display: flex;
     align-items: center;
 
 `
+
+const fetcher = (url) => fetch(url).then((res) => res.json());
 export default function Jogo({ children, ...props }, ctx = null) {
     const router = useRouter()
     const cookie = nookies.get(ctx)
-    const fetcher = (url) => fetch(url).then((res) => res.json());
-    // const { data, error } = useSWR('https://ffgames134.herokuapp.com/api/dadosSala?keyRoom=JHY2ZQBL&idPlayer=902', fetcher)
     const { data, error } = useSWR(
         `https://ffgames134.herokuapp.com/api/dadosSala?keyRoom=${cookie.chave}&idPlayer=${cookie.Player}`,
-        fetcher,{ refreshInterval: 5000 }
+        fetcher
       );
     
       if (error) return "An error has occurred.";
@@ -73,7 +73,7 @@ export default function Jogo({ children, ...props }, ctx = null) {
 
 
             </BoxJogadores>
-            <HistoricoDeTransferencia key={data.idPlayer} data={ data}/>
+            <HistoricoDeTransferencia/>
             <Footer />
         </>)
 }

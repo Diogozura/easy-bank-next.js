@@ -4,7 +4,6 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import react from 'react'
-import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap'
 import styled from 'styled-components'
 
 const Cabecalho = styled.header`
@@ -70,7 +69,7 @@ export default function Topo() {
                     height={80} />
             </Cabecalho> */}
             {/* <NavBar>
-
+style={{background: "linear-gradient(to right , #951B81, #E6332A)" }}
 
                 <Link href="/" scroll={false} passHref
                 ><Navlink bg="#9F1E77">Home</Navlink></Link>
@@ -86,54 +85,7 @@ export default function Topo() {
 
 
             </NavBar> */}
-            <Navbar style={{background: "linear-gradient(to right , #951B81, #E6332A)" }}
-                // color="light"
-
-                 className="sticky-top"
-                fixed="top"
-                expand="lg"
-            >
-                <Link href="/" scroll={true} passHref
-                ><Navlink > <Image
-                    src='/image/logo.svg'
-                    alt="Logo easy imobiliário"
-                    // layout="responsive"
-                    width={250}
-                    height={80} /></Navlink></Link>
-                {/* <NavbarBrand href="/" scroll={false}>
-   
-    </NavbarBrand> */}
-                <NavbarToggler onClick={() => { setIsOpen(!isOpen) }} >
-                    <FontAwesomeIcon icon={faBars} className="fa-2x"/>
-                </NavbarToggler>
-                <Collapse isOpen={isOpen} navbar>
-                    <Nav
-                        className="me-auto text-center"
-                        navbar
-                    >
-                         {/* <NavItem>
-                            <Link href="#regras" onClick={() => { setIsOpen(!isOpen) }}>
-                            <Navlink>Regras</Navlink>
-                            </Link>
-                        </NavItem> */}
-
-                        <NavItem className="text-center">
-                            <Link href="/contato" isOpen={isOpen}>
-                                <Navlink>Contato</Navlink>
-                            </Link>
-                        </NavItem>
-
-                       
-                        <NavItem>
-                            <Link href="/sobre" onClick={() => { setIsOpen(!isOpen) }}>
-                            <Navlink>Sobre</Navlink>
-                            </Link>
-                        </NavItem>
-
-                    </Nav>
-
-                </Collapse>
-            </Navbar>
+            
 
         </>
 

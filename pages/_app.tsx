@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import Link from "next/link";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { NextSeo, SocialProfileJsonLd } from 'next-seo';
 import { config } from '@fortawesome/fontawesome-svg-core'
@@ -102,11 +101,11 @@ export default function App({ Component, pageProps }) {
           }}
         />
 
-        <script id="Adsense-id" data-ad-client="ca-pub-5434892248042693"
+        {/* <script id="Adsense-id" data-ad-client="ca-pub-5434892248042693"
           async strategy="afterInteractive"
           onError={(e) => { console.error('Script failed to load', e) }}
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-        />
+        /> */}
 
       </Head>
 

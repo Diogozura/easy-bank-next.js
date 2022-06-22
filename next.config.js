@@ -8,6 +8,9 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  experimental: {
+    forceSwcTransforms: true,
+  },
   images: {
     loader: 'akamai',
     path: 'https://easyimobiliario.com.br/',
