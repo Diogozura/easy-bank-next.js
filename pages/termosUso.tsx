@@ -2,7 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import Footer from "../src/components/Footer";
 import Topo from "../src/components/Header";
-import Cabeca, { Title } from "../src/components/Header/header";
+import { Titulo } from "../src/components/Titulo";
 import { Bloco } from "./termosPrivacidade";
 
 export default function TermosUso() {
@@ -13,10 +13,10 @@ export default function TermosUso() {
              <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             
-            <Topo/>
+            <Topo children={undefined}/>
 
             
-        <Title>Termos de Uso</Title>
+        <Titulo>Termos de Uso</Titulo>
         <Bloco>
         <h2>1. Termos</h2>
             <p>Ao acessar ao site <a href='https://easyimobiliario.com.br'>easy bank</a>, concorda em cumprir estes

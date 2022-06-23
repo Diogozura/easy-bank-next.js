@@ -77,14 +77,17 @@ export default function TransfereDinheiro({ data }, ctx = null) {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     
+  
+  
     const style = {
         position: 'absolute' as 'absolute',
         top: '50%',
         left: '50%',
+        textAlign:'center',
         transform: 'translate(-50%, -50%)',
-        width: 600,
+        minWidth: 300,
         bgcolor: 'background.paper',
-        border: '2px solid #000',
+        borderRadius: '20px',
         boxShadow: 24,
         p: 4,
       };
@@ -157,9 +160,7 @@ export default function TransfereDinheiro({ data }, ctx = null) {
         )
     }
 
-    data.players.map((cor) => {
-        console.log(cor.idPlayer)
-    } )
+ 
     const handleCheck = () => {
         setChecked((preventState) => !preventState)
     }
@@ -168,7 +169,7 @@ export default function TransfereDinheiro({ data }, ctx = null) {
         
         <BoxTrasnfere key={data.idPlayer} >
 
-            <Button onClick={handleOpen}>Open modal</Button>
+            <Button onClick={handleOpen} variant="contained">Transferir</Button>
 
             <Modal
             
@@ -187,15 +188,15 @@ export default function TransfereDinheiro({ data }, ctx = null) {
       event.preventDefault();
       console.log( "para " + values.user, "valor" + parseInt(values.valor) ,"enviado por: " + cookie.banco)
 
-      authService.transfereDinheiro({
-          idPlayerPara: parseInt(values.user),
-          valor:parseInt(values.valor),
-      })
-          .then((res) => {
-              <p>tudo certo</p>
-              alert("transação Concluída ")
-              
-          })
+                authService.transfereDinheiro({
+                  idPlayerPara: parseInt(values.user),
+                  valor: parseInt(values.valor),
+                })
+                  .then((res) => {
+                    <p>tudo certo</p>
+                    alert("transação Concluída ")
+                    handleClose()
+                  })
           .catch((err) => {
               alert(err)
               console.log(err)
@@ -265,7 +266,7 @@ export default function TransfereDinheiro({ data }, ctx = null) {
                             checked={isChecked}
                             onClick={handleCheck}
 
-                            />} label={''}                            />
+                            />} label={''}/>
      
  
 

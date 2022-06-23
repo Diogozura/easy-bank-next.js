@@ -1,3 +1,4 @@
+import { Button } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -27,9 +28,9 @@ export function DadosJogador({ data }) {
                     <h3>{data.saldo}</h3>
                     <TransfereDinheiro data={data} />
                     <Link href="#Extrato">
-                        <button>
+                        <Button variant="outlined">
                             Extrato
-                        </button>
+                        </Button>
                     </Link>
                 </SaldoFlag>
             </Box>

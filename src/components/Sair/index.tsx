@@ -5,7 +5,20 @@ import { tokenService } from '../../services/auth/tokenService'
 import { authService } from "../../services/auth/authService";
 
 import Image from "next/image";
-import { Cores, Form } from '../../../pages/Jogador';
+import { AvatarCores, Form } from '../../../pages/Jogador';
+import { Box, Button, Modal, Typography } from "@mui/material";
+
+const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
 
 export default function Sair({data}) {
     function handleClick() {
@@ -35,12 +48,9 @@ export default function Sair({data}) {
 
     const conteudo = data.players?.map((jogadores) => (
         <>
-            <Cores key={jogadores.idPlayer}>
+            <AvatarCores key={jogadores.idPlayer}>
                 <label
-                    name="cores"
-                    value={jogadores.identificador}
                     htmlFor={jogadores.identificador}>
-
                     <Image
                         width={60}
                         height={60}
@@ -56,7 +66,7 @@ export default function Sair({data}) {
                     onChange={handleChange}
                 />
 
-            </Cores>
+            </AvatarCores>
         </>
     ))
 
@@ -105,16 +115,34 @@ export default function Sair({data}) {
            
         )
     }
+    const [open, setOpen] = react.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
  
     return (
         <>
 
-            <Botao
-                color="danger"
-                onClick={toggle}
-            >
-                Sair
-            </Botao>
+            <Button onClick={handleOpen} variant="outlined" color="error">Sair</Button>
+      <Modal
+        keepMounted
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="keep-mounted-modal-title"
+        aria-describedby="keep-mounted-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="keep-mounted-modal-title" variant="h6" component="h2">
+            Text in a modal
+          </Typography>
+          <Typography id="keep-mounted-modal-description" sx={{ mt: 2 }}>
+                        {data.playerBank && data.players.length != 0 ? troca() : sair()}
+                        <Button onClick={handleClose}>
+                        Cancelar
+                    </Button>
+
+          </Typography>
+        </Box>
+      </Modal>
             {/* <Modal
                 toggle={toggle}
                 isOpen={modal}>

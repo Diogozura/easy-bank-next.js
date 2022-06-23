@@ -58,7 +58,7 @@ export default function Jogo({ children, ...props }, ctx = null) {
             <Head>
              <title>Sala game - Easy Imobiliário </title>
             </Head>
-            <Topo />
+            <Topo children={undefined} />
             <Titulo>Bem Vindo a sala</Titulo>
             <SaireToken>
                 <Codigo defaultValue={data.keyRoom} />
@@ -73,7 +73,7 @@ export default function Jogo({ children, ...props }, ctx = null) {
 
 
             </BoxJogadores>
-            <HistoricoDeTransferencia/>
+            {/* <HistoricoDeTransferencia /> */}
             <Footer />
         </>)
 }

@@ -94,7 +94,7 @@ interface CustomProps {
   
   
   export default function FormattedInputs({ items }: InferGetStaticPropsType<typeof getStaticProps>) {
-   
+   console.log(items)
       const [values, setValues] = React.useState({
         nome: '',
         cor: '',
@@ -187,10 +187,11 @@ interface CustomProps {
   
   
 export const getStaticProps = async (ctx = null) => {
-    const cookie = nookies.get(ctx)
-    const res = await fetch(`https://ffgames134.herokuapp.com/api/coresRestantes?keyRoom=3IRHSBNP`);
-    const items: CoresRestantes = await res.json();
+  const cookie = nookies.get(ctx)
   
+    const res = await fetch(`https://ffgames134.herokuapp.com/api/coresRestantes?keyRoom=MU6VH8IZ`);
+    const items: CoresRestantes = await res.json();
+    console.log(cookie.chave)
     return {
       props: {
         items,

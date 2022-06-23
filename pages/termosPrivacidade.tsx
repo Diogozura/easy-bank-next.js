@@ -1,9 +1,10 @@
 import Link from "next/link"
 import Footer from "../src/components/Footer"
 import styled from 'styled-components'
-import  { Title } from "../src/components/Header/header"
+
 import Head from "next/head"
 import Topo from "../src/components/Header"
+import { Titulo } from "../src/components/Titulo"
 
 export default function TermosPrivacidade() {
     return (
@@ -11,8 +12,8 @@ export default function TermosPrivacidade() {
              <Head>
              <title>Política de Privacidade - Easy Imobiliário </title>
             </Head>
-            <Topo/>
-            <Title>Política de Privacidade</Title> 
+            <Topo children={undefined}/>
+            <Titulo>Política de Privacidade</Titulo> 
             <Bloco>
            
             <p>A sua privacidade é importante para nós. É política do easy bank respeitar a sua privacidade em relação a

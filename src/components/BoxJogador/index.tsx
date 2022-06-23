@@ -38,6 +38,9 @@ export const Box = styled.aside`
 `
 export const SaldoFlag = styled.aside`
     text-align:center;
+    display: grid;
+    justify-items: center;
+    margin-top
    h3{
        font-size: 1.3;
        font-weight: 600;

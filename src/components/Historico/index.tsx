@@ -1,11 +1,12 @@
 import useSWR from "swr";
 import nookies from 'nookies'
 import styled from "styled-components";
-import { useFetch } from "../../services/auth/authGetService";
 import react from "react";
 import { Button } from "@mui/material";
+import { Extrato } from "../../../interface/Extrato";
+import { InferGetStaticPropsType } from "next";
 
-const Extrato = styled.th`
+const Extrator = styled.th`
  background: ${props => props.theme};
  padding:10px;
  border-radius: 20px;
@@ -14,23 +15,22 @@ const Extrato = styled.th`
 
 
 
-export default function HistoricoDeTransferencia(ctx = null) {
+export default function HistoricoDeTransferencia(ctx= null,{extra}: InferGetStaticPropsType<typeof getStaticProps>) {
     const cookie = nookies.get(ctx)
-    const { data :extrato } = useFetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/extrato/?keyRoom=${cookie.chave}`)
     const [isChecked, setChecked] = react.useState(true)
-    if (!extrato) return "Loading..."
+   
     // console.log(extrato.extrato.length)
-    const conteudo = extrato.extrato.map((dadosjogador) => (
+    const conteudo = extra.extrato.map((dadosjogador) => (
 
        
-            <Extrato theme={dadosjogador.idPlayerPara == cookie.Player ? "rgba(195, 255, 195, 0.75)" : null || dadosjogador.idPlayerDe == cookie.Player ? "rgba(255, 195, 195, 0.75) " : null}
+            <Extrator theme={dadosjogador.idPlayerPara == cookie.Player ? "rgba(195, 255, 195, 0.75)" : null || dadosjogador.idPlayerDe == cookie.Player ? "rgba(255, 195, 195, 0.75) " : null}
                 // theme={dadosjogador.idPlayerDe == cookie.Player ? "red " : null}
             >
                 {/* {dadosjogador.idPlayerPara == cookie.Player ? <Postivo /> : null} */}
                 {/* {dadosjogador.idPlayerDe == cookie.Player ? <Negativo /> : null} */}
                 {dadosjogador.descricao}
 
-            </Extrato>
+            </Extrator>
 
 
 
@@ -71,3 +71,15 @@ export default function HistoricoDeTransferencia(ctx = null) {
     )
 }
 
+export const getStaticProps = async (ctx = null) => {
+    const cookie = nookies.get(ctx)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/extrato/?keyRoom=${cookie.chave}`);
+    const extra : Extrato = await res.json();
+  
+    return {
+      props: {
+        extra,
+      },
+     
+    };
+  };
