@@ -96,7 +96,6 @@ export default function TransfereDinheiro({ data }, ctx = null) {
 
     const [values, setValues] = react.useState({
         user: '',
-        cores: '',
         valor:'',
     })
     function handlenChange(event) {
@@ -118,7 +117,7 @@ export default function TransfereDinheiro({ data }, ctx = null) {
         return (
             <AvatarCores key={data.idPlayer}>
                 <label
-                    name="cores"
+                    name="user"
                     value='banco'
                     htmlFor='banco'>
                     <Image src={`./avatar/${data.identificador}.svg`} alt={data.namePlayer} width="60" height="60" />
@@ -139,29 +138,34 @@ export default function TransfereDinheiro({ data }, ctx = null) {
         return (
             <AvatarCores>
                 <FormControlLabel
-                        value='banco'
-                        name="cores"
-                    control={<Radio value='0'/>}
-                    onChange={handlenChange}
-                        label={<Image
-                        width={70}
-                        height={70}
-                        src={`./icon/Bancoicon.svg`}
-                        
-                        />}
-                        labelPlacement="top"
+                    name="user"
+                    value="0"
+                    control={
+                        <Radio/>}
+
+                    label={
+                        <Image
+                     width={80}
+                    height={80}
+                    src={`./icon/Bancoicon.svg`}
+                />}
+                    labelPlacement="top"
                     />
             </AvatarCores>
 
         )
     }
+
+    data.players.map((cor) => {
+        console.log(cor.idPlayer)
+    } )
     const handleCheck = () => {
         setChecked((preventState) => !preventState)
     }
     const handleClear = () => {
 
     }
-    console.log(data)
+    
 
 
     
@@ -186,7 +190,7 @@ export default function TransfereDinheiro({ data }, ctx = null) {
                         
           <Form  onSubmit={(event) => {
       event.preventDefault();
-      console.log(parseInt(values.user), parseInt(values.valor))
+      console.log( "para " + values.user, "valor" + parseInt(values.valor) ,"enviado por: " + cookie.banco)
 
       authService.transfereDinheiro({
           idPlayerPara: parseInt(values.user),
@@ -195,12 +199,12 @@ export default function TransfereDinheiro({ data }, ctx = null) {
           .then((res) => {
               <p>tudo certo</p>
               alert("transação Concluída ")
-              console.log(res)
-              //    router.reload()
+              
+             
           })
           .catch((err) => {
               alert(err)
-              console.log((err))
+              console.log(err)
           })
 
 
@@ -223,7 +227,7 @@ export default function TransfereDinheiro({ data }, ctx = null) {
       <RadioGroup
         aria-labelledby="demo-controlled-radio-buttons-group"
         name="controlled-radio-buttons-group"
-        value={values.cores}
+        value={values.user}
         onChange={handlenChange}
                 >
                     <AvatarCores>
@@ -232,9 +236,9 @@ export default function TransfereDinheiro({ data }, ctx = null) {
               <CorJogadores>
                    
                     <FormControlLabel
+                        name="user"
                         value={cor.idPlayer}
-                        name="cores"
-                        control={<Radio />}
+                        control={<Radio/>}
                         label={<Image
                         width={150}
                         height={150}
@@ -282,7 +286,7 @@ export default function TransfereDinheiro({ data }, ctx = null) {
                                 alert("transação Concluída ")
                                 toggle()
                                 console.log(res)
-                                //    router.reload()
+                               
                             })
                             .catch((err) => {
                                 alert(err)

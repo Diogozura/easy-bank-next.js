@@ -20,7 +20,7 @@ export const authService = {
                 console.log(respostaDoServidor.statusText)
                 console.log(respostaDoServidor)
             
-                tokenService.save(keyRoom, body.idPlayer  || null)
+                tokenService.save(keyRoom, body.idPlayer, ''  || null)
     
                 return body
             })
@@ -38,7 +38,7 @@ export const authService = {
         })
             .then((res) => {
                 if (!res.ok) throw new Error(res.body.erro)
-                tokenService.save(cookie.chave, res.body.idPlayer )
+                tokenService.save(cookie.chave, res.body.idPlayer, '' )
                 console.log(res.body.erro)
             })
 
@@ -46,9 +46,9 @@ export const authService = {
 
     async transfereDinheiro({ idPlayerPara,valor}, ctx = null) {
         const cookie = nookies.get(ctx)
-        const userDe =  `${cookie.banco == 0 ? 0 : cookie.Player }`
+        const userDe =  `${cookie.banco === '0' ? 0 : cookie.Player }`
         
-        
+        console.log(userDe)
         return HttpClient(`${process.env.NEXT_PUBLIC_BACKEND_URL}api/transferencia/?keyRoom=${cookie.chave}`, {
             method: 'POST',  
             body: {
@@ -59,7 +59,7 @@ export const authService = {
         })
         .then((res) => {
             if (!res.ok) throw new Error(res.body)
-            console.log(res)
+            console.log(userDe)
         })
        
     },
