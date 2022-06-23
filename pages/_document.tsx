@@ -1,50 +1,45 @@
-import React from 'react'
-import Document, {
-  DocumentInitialProps,
-  DocumentContext,
-  Html,
-  Head,
-  Main,
-  NextScript
-} from 'next/document'
-import { ServerStyleSheet } from 'styled-components'
+import React, { ReactElement } from "react";
+import Document, { Html, Head, Main, NextScript, DocumentInitialProps, DocumentContext } from 'next/document';
+import { ServerStyleSheet } from "styled-components";
+
+// NEXT.JS CUSTOM DOCUMENT
+// https://nextjs.org/docs/advanced-features/custom-document
 
 export default class MyDocument extends Document {
-  static async getInitialProps(
-    ctx: DocumentContext
-  ): Promise<DocumentInitialProps> {
-    const sheet = new ServerStyleSheet()
-    const originalRenderPage = ctx.renderPage
+  
+  static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {
+    const sheet = new ServerStyleSheet();
+    const originalRenderPage = ctx.renderPage;
 
     try {
       ctx.renderPage = () =>
-        originalRenderPage({
-          enhanceApp: App => props => sheet.collectStyles(<App {...props} />)
-        })
+      originalRenderPage({
+        enhanceApp: (App) => (props) =>
+          sheet.collectStyles(<App {...props} />),
+      });
 
-      const initialProps = await Document.getInitialProps(ctx)
+      const initialProps = await Document.getInitialProps(ctx);
       return {
         ...initialProps,
-        
-        styles: (
+        styles: [
           <>
             {initialProps.styles}
             {sheet.getStyleElement()}
           </>
-        )
-      }
+        ],
+      };
     } finally {
-      sheet.seal()
+      sheet.seal();
     }
   }
 
-  render(): JSX.Element {
-    return (
-      <Html lang="pt">
+  render(): ReactElement {
+    return(
+      <Html lang="pt-br">
         <Head>
-          <meta charSet="utf-8" />
+        <meta charSet="utf-8" />
 
-          <link rel="icon" href="/favicon/favicon.ico" />
+<link rel="icon" href="/favicon/favicon.ico" />
 
 <link
 rel="stylesheet"
@@ -55,13 +50,15 @@ rel="stylesheet"
 href="https://fonts.googleapis.com/icon?family=Material+Icons"
 />
 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-
         </Head>
         <body>
           <Main />
           <NextScript />
         </body>
       </Html>
-    )
+    );
   }
 }
+
+
+

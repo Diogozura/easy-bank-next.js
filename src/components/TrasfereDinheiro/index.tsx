@@ -116,20 +116,21 @@ export default function TransfereDinheiro({ data }, ctx = null) {
 
         return (
             <AvatarCores key={data.idPlayer}>
-                <label
+                <FormControlLabel
                     name="user"
-                    value='banco'
-                    htmlFor='banco'>
-                    <Image src={`./avatar/${data.identificador}.svg`} alt={data.namePlayer} width="60" height="60" />
-                    <h3>{data.namePlayer}</h3>
-                </label>
-                <input
-                    name="user"
-                    type="radio"
-                    id='banco'
                     value={data.idPlayer}
-                    onChange={handlenChange}
-                />
+                    control={
+                        <Radio/>}
+
+                    label={
+                        <Image
+                     width={80}
+                    height={80}
+                    src={`./avatar/${data.identificador}.svg`}
+                />}
+                    labelPlacement="top"
+                    />
+                
             </AvatarCores>
 
         )
@@ -162,13 +163,7 @@ export default function TransfereDinheiro({ data }, ctx = null) {
     const handleCheck = () => {
         setChecked((preventState) => !preventState)
     }
-    const handleClear = () => {
-
-    }
-    
-
-
-    
+   
     return (
         
         <BoxTrasnfere key={data.idPlayer} >
@@ -200,7 +195,6 @@ export default function TransfereDinheiro({ data }, ctx = null) {
               <p>tudo certo</p>
               alert("transação Concluída ")
               
-             
           })
           .catch((err) => {
               alert(err)
@@ -239,12 +233,12 @@ export default function TransfereDinheiro({ data }, ctx = null) {
                         name="user"
                         value={cor.idPlayer}
                         control={<Radio/>}
-                        label={<Image
-                        width={150}
-                        height={150}
+                        label={ <Image
+                        width={80}
+                        height={80}
                         src={`./avatar/${cor.identificador}.svg`}
                         
-                        />}
+                        /> }
                         labelPlacement="top"
                     />
               </CorJogadores>
@@ -261,86 +255,17 @@ export default function TransfereDinheiro({ data }, ctx = null) {
           </Typography>
         </Box>
       </Modal>
-
-
-
-            {/* <Modal
-                size="lg"
-                toggle={toggle}
-                isOpen={modal}
-            >
-                <ModalHeader toggle={toggle} className="bg-info text-white ">
-                    <h2 >Area de Transferência Bancaria :</h2> {isChecked ? data.namePlayer : "Banco"}
-                </ModalHeader>
-                <ModalBody  >
-                    <Form onSubmit={(event) => {
-                        event.preventDefault();
-                        console.log(parseInt(values.user), parseInt(values.valor))
-
-                        authService.transfereDinheiro({
-                            idPlayerPara: parseInt(values.user),
-                            valor:parseInt(values.valor),
-                        })
-                            .then((res) => {
-                                <p>tudo certo</p>
-                                alert("transação Concluída ")
-                                toggle()
-                                console.log(res)
-                               
-                            })
-                            .catch((err) => {
-                                alert(err)
-                                console.log((err))
-                            })
-
-                    }}>
-
-
-                        <JogadoresTransfere>
-                            {isChecked ? banco() : user()}
-                            {conteudo}
-                        </JogadoresTransfere>
-
-
-                        <Input
-                            type="number"
-                            placeholder="Valor de Inicio"
-                            name="valor"
-                            required="required"
-                            value={values.valor}
-                            onChange={handlenChange}
-                        />
-                        {/* <IntlCurrencyInput type="text" required name="valor" placeholder="valor a transferir" value={values.valor} currency="BRL" config={currencyConfig}
-                            onChange={handlenChange}
-                            style={{
-                                borderRadius: "10px",
-                                textAlign: "center",
-                                padding: "5px",
-                                margin: "10px",
-                            }}
-                        />  <Botao type="submit">Transferir</Botao>
-                    </Form>
-                </ModalBody>
-                <ModalFooter className="bg-info text-center">
-
-                    <Button onClick={toggle} color="danger">
-                        Cancel
-                    </Button>
-                </ModalFooter>
-            </Modal>  */}
             <div>
                 {data.playerBank ? <SaldoFlag>
                     <Image src='./icon/Bancoicon.svg' width="48" height="48" />
                    
                             <FormControlLabel
 
-                            control={<Android12Switch 
-                            isChecked={isChecked}
+                        control={<Android12Switch
+                            checked={isChecked}
                             onClick={handleCheck}
-                            
-                            label=""
-                                />}
-                            />
+
+                            />} label={''}                            />
      
  
 

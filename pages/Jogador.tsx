@@ -9,7 +9,7 @@ import { InferGetStaticPropsType } from 'next';
 import Image from "next/image";
 import styled from "styled-components"
 import nookies from 'nookies'
-import Topo from '../src/components/Header/header';
+import Topo from '../src/components/Header';
 import Footer from '../src/components/Footer';
 import { Titulo } from '../src/components/Titulo';
 import { Text } from '../src/screens/HomeScreen';
@@ -100,7 +100,7 @@ interface CustomProps {
         cor: '',
     });
     const router = useRouter()
-  
+   
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       setValues({
         ...values,
@@ -110,7 +110,7 @@ interface CustomProps {
   
     return (
         <>
-            <Topo />
+            <Topo children={undefined} />
             <Titulo>Hora de Criar Jogador</Titulo>
 
             <ExplicaTela >
@@ -119,7 +119,8 @@ interface CustomProps {
             </Text>
             </ExplicaTela>
             <Form onSubmit={(event) => {
-                event.preventDefault()
+          event.preventDefault()
+          
                 authService.criarJogador({
                     identificador: values.cor,
                     namePlayer: values.nome,
@@ -138,7 +139,9 @@ interface CustomProps {
          
           <TextField
             id="standard-basic"
+            required
             value={values.nome}
+            margin="normal"
             onChange={handleChange}
             name="nome"
             label="Nome"
@@ -175,7 +178,7 @@ interface CustomProps {
         </RadioGroup>
           <Button type="submit" onClick={() => {
             console.log("fui")
-            }} variant="outlined">enviar</Button>
+            }} variant="outlined">Entrar</Button>
             </Form>
             <Footer/>
       </>

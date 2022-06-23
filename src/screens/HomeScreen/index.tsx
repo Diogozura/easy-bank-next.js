@@ -14,7 +14,7 @@ export default function Home() {
 
   return (
     <>
-      <Topo />
+      <Topo children={undefined} />
 
       <Conteudo>
 
@@ -96,8 +96,11 @@ export const Text = styled.p`
   }
 `
 const Conteudo = styled.main`
-margin: 3em 0;
+margin: 8em 0;
 padding: 0;
+@media only screen and (max-width: 850px){
+  margin: 4em 0;
+}
 `
 export const Box = styled.aside`
   width: 500px;
@@ -135,7 +138,7 @@ export const Parte = styled.section`
   align-items: ${props => props.alinhamento};
   justify-items: center;
   margin-bottom: ${props => props.margiBaixo};
-  @media only screen and (max-width: 850px) {
+  @media only screen and (max-width: 1050px) {
     flex-direction: column;
     align-items: center;
     margin:0px;

@@ -5,8 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
 import Footer from "../src/components/Footer";
-import  { Title } from "../src/components/Header/header";
 import Topo from "../src/components/Header";
+import { Titulo } from "../src/components/Titulo";
 import { Box, Text } from "../src/screens/HomeScreen";
 
 export default function Error404() {
@@ -16,9 +16,11 @@ export default function Error404() {
                 <title>Quem Somos - Easy Imobiliário </title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            <Topo />
+            <Topo children={undefined} />
 
-            <Title>Quem Somos?</Title>
+            <Titulo style={{
+                marginTop: '3em',
+            }}>Quem Somos?</Titulo>
             
             <Text style={{
                 maxWidth: '600px',
@@ -34,21 +36,21 @@ export default function Error404() {
                 nome={"Diogo"}
                 cor={'#22192C'}
                 funcao={"Front-End "}
-                link={"https://www.linkedin.com/in/diogo-silva-santos-251bb5192/"} />
+                link={"https://www.linkedin.com/in/diogo-silva-santos-251bb5192/"} children={undefined} color={undefined} rede={undefined} rede2={undefined} link2={undefined} />
 
             <Devs
                 nome={"Danilo"}
                 cor={'#E6332A'}
                 funcao={"Back-End "}
                 rede={'Github'}
-                link={"https://www.linkedin.com/in/danilo-silva-santos-555b5396/"} />
+                link={"https://www.linkedin.com/in/danilo-silva-santos-555b5396/"} children={undefined} color={undefined} rede2={undefined} link2={undefined} />
 
             <Devs
                 nome={"Iago"}
                 cor={'#951B81'}
                 funcao={"Design"}
                 rede={'Be'}
-                link={"https://www.linkedin.com/in/iago-de-sousa-santos-4502a2164/"} />
+                link={"https://www.linkedin.com/in/iago-de-sousa-santos-4502a2164/"} children={undefined} color={undefined} rede2={undefined} link2={undefined} />
 
             <Footer />
         </>

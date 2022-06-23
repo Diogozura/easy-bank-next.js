@@ -7,7 +7,7 @@ import { Button, FormControlLabel, FormLabel, Input, Radio, RadioGroup } from '@
 import styled from 'styled-components';
 import { Cores } from '../interface/Cores';
 import { InferGetStaticPropsType } from 'next';
-import Topo from '../src/components/Header/header';
+import Topo from '../src/components/Header';
 import { Titulo } from '../src/components/Titulo';
 import { AvatarCores, CorJogadores, ExplicaTela, Form } from "./Jogador"
 import { Text } from '../src/screens/HomeScreen';
@@ -49,6 +49,7 @@ export const NumberFormatCustom = React.forwardRef<
       thousandSeparator
       isNumericString
       prefix="R$"
+   
     />
   );
 });
@@ -57,7 +58,7 @@ export const NumberFormatCustom = React.forwardRef<
 
 export default function FormattedInputs({ items, ChaveValor }: InferGetStaticPropsType<typeof getStaticProps>) {
   const [values, setValues] = React.useState({
-    valor: '',
+    valor: ' 2558000',
     nome: '',
     cor: '',
     chave:ChaveValor.keyRoom
@@ -73,7 +74,7 @@ export default function FormattedInputs({ items, ChaveValor }: InferGetStaticPro
   const router = useRouter()
     return (
       <>
-         <Topo />
+         <Topo children={undefined}  />
          <Titulo>Hora de Criar Jogador e Sala</Titulo>
       <ExplicaTela>
         <Text>
@@ -88,7 +89,7 @@ export default function FormattedInputs({ items, ChaveValor }: InferGetStaticPro
             
       <Form onSubmit={(event) => {
         event.preventDefault()
-        console.log(values.cor, values.nome)
+        console.log(values.cor, values.nome, values.valor)
         authService.criarSala({
           keyRoom: values.chave,
           valorInicial: values.valor,
@@ -96,9 +97,9 @@ export default function FormattedInputs({ items, ChaveValor }: InferGetStaticPro
           namePlayer: values.nome,
         })
 
-          .then((dados) => {
+          .then(() => {
             router.push('/jogo')
-            console.log(dados)
+          
           })
           .catch((err) => {
             console.log(err)
@@ -111,9 +112,11 @@ export default function FormattedInputs({ items, ChaveValor }: InferGetStaticPro
         </FormControl>
         <TextField
           label="Valor inicial"
-          value={values.valor}
+            value={values.valor} 
+            required
           onChange={handleChange}
-          name="valor"
+            name="valor"
+            margin="normal"
           id="formatted-numberformat-input"
           InputProps={{
             inputComponent: NumberFormatCustom as any,
@@ -122,13 +125,16 @@ export default function FormattedInputs({ items, ChaveValor }: InferGetStaticPro
         />
         <TextField
           id="standard-basic"
-          value={values.nome}
+            value={values.nome}
+            required
           onChange={handleChange}
           name="nome"
-          label="Nome"
+            label="Nome"
+            margin="normal"
           variant="standard" />
          <FormLabel id="demo-controlled-radio-buttons-group">Escolha seu icone</FormLabel>
-      <RadioGroup
+          <RadioGroup
+            
         aria-labelledby="demo-controlled-radio-buttons-group"
         name="controlled-radio-buttons-group"
         value={values.cor}
@@ -158,10 +164,10 @@ export default function FormattedInputs({ items, ChaveValor }: InferGetStaticPro
                      </AvatarCores>
            
       </RadioGroup>
-        <Input value={ChaveValor.keyRoom} name="chave"/>
+        <p>Código da Sala: {ChaveValor.keyRoom}</p>
         <Button type="submit" onClick={() => {
           console.log("fui")
-          }} variant="outlined">enviar</Button>
+          }} variant="outlined">Criar Sala</Button>
             </Form>
             
       <Footer/>
