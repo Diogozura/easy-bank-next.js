@@ -32,8 +32,6 @@ const JogadoresTransfere = styleds.article`
     flex-wrap: wrap;
     justify-content: space-between;
 `
-
-    
 function success() {
   toast.success('🦄 transação Concluída!', {
     position: "bottom-left",
