@@ -15,6 +15,7 @@ import { Titulo } from '../src/components/Titulo';
 import { Text } from '../src/screens/HomeScreen';
 import { authService } from '../src/services/auth/authService';
 import { useRouter } from 'next/router';
+import { tokenService } from '../src/services/auth/tokenService';
 
 
 export const Form = styled.form`
@@ -93,9 +94,9 @@ interface CustomProps {
   
   
   
-  export default function FormattedInputs({ items,chave }: InferGetStaticPropsType<typeof getStaticProps>) {
+  export default function FormattedInputs({ items}: InferGetStaticPropsType<typeof getStaticProps>) {
     
-console.log(chave)
+
     
       const [values, setValues] = React.useState({
         nome: '',
@@ -157,7 +158,7 @@ console.log(chave)
           >
              <AvatarCores>
                     
-                    {items.coresRestante.map((cor) => (
+                    {/* {items.coresRestante.map((cor) => (
                       <CorJogadores>
                            
                             <FormControlLabel
@@ -174,7 +175,7 @@ console.log(chave)
                             />
                       </CorJogadores>
                       
-                 ))}
+                 ))} */}
                   
                              </AvatarCores>
         </RadioGroup>
@@ -187,16 +188,17 @@ console.log(chave)
     );
   }
   
+
+export const getStaticProps = async (ctx) => {
   
-export const getStaticProps = async (ctx = null) => {
-  const cookie = nookies.get(ctx)
- 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}api/coresRestantes?keyRoom=${cookie.chave}`);
-    const items: CoresRestantes = await res.json();
-   const chave =  cookie
+  const cookie = nookies.get()
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}api/coresRestantes?keyRoom=MU6VH8IZ`);
+  
+  const items: CoresRestantes = await res.json();
+
     return {
       props: {
-        items,chave
+        items
       },
      
     };

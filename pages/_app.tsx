@@ -4,6 +4,9 @@ import styled, { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { NextSeo, SocialProfileJsonLd } from 'next-seo';
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css'; 
+
 config.autoAddCss = false
 
 const GlobalStyle = createGlobalStyle`
@@ -109,7 +112,7 @@ export default function App({ Component, pageProps }) {
 
       </Head>
 
-
+      <ToastContainer />
       <GlobalStyle />
       <ThemeProvider theme={theme}>
 

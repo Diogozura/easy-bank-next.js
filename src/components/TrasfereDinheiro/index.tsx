@@ -6,7 +6,6 @@ import { Input } from '../Input';
 import nookies from 'nookies'
 import { useRouter } from 'next/router';
 import { SaldoFlag, BoxTrasnfere } from '../BoxJogador';
-import ToggleSwitch from '../ToggleSwitch';
 import { tokenService } from '../../services/auth/tokenService';
 import styleds from 'styled-components';
 import { AvatarCores, CorJogadores, Form } from '../../../pages/Jogador';
@@ -22,7 +21,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import NumberFormat, { InputAttributes } from 'react-number-format';
 import { FormControl, FormLabel, Radio, RadioGroup, TextField } from '@mui/material';
 import { NumberFormatCustom } from '../../../pages/criarSala';
-
+import { toast } from 'react-toastify';
 const ToggleSwitchBanco = styleds.aside`
     text-align: center;
     display: flex;
@@ -34,7 +33,29 @@ const JogadoresTransfere = styleds.article`
     justify-content: space-between;
 `
 
-
+    
+function success() {
+  toast.success('🦄 transação Concluída!', {
+    position: "bottom-left",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    });
+}
+function error() {
+  toast.error('🦄 Error na Transação!', {
+    position: "bottom-center",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
+}
 
 const Android12Switch = styled(Switch)(({ theme }) => ({
     padding: 8,
@@ -194,11 +215,12 @@ export default function TransfereDinheiro({ data }, ctx = null) {
                 })
                   .then((res) => {
                     <p>tudo certo</p>
-                    alert("transação Concluída ")
+                    success()
                     handleClose()
                   })
           .catch((err) => {
-              alert(err)
+            
+            error()
               console.log(err)
           })
 
