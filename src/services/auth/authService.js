@@ -59,7 +59,6 @@ export const authService = {
         })
         .then((res) => {
             if (!res.ok) throw new Error(res.body)
-            console.log(res)
         })
        
     },
