@@ -58,7 +58,7 @@ export const NumberFormatCustom = React.forwardRef<
 
 export default function FormattedInputs({ items, ChaveValor }: InferGetStaticPropsType<typeof getStaticProps>) {
   const [values, setValues] = React.useState({
-    valor: ' 2558000',
+    valor: '2558000',
     nome: '',
     cor: '',
     chave:ChaveValor.keyRoom

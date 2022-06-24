@@ -1,5 +1,5 @@
 export type CoresRestantes = {
-    coresRestante: [
+  coresRestante: [
       {
         identificador: string;
         identificadorHexadecimal: string;
