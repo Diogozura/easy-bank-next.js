@@ -74,6 +74,20 @@ export const authService = {
                 idPlayerPara
             }
         })
-    }
+    },
+    async coresRestantes(ctx) {
+        const cookie = nookies.get(ctx)
+        // console.log(cookie.Player)
+        return HttpClient(`${process.env.NEXT_PUBLIC_BACKEND_URL}api/coresRestantes?keyRoom=${cookie.chave}`, {
+            method: 'GET',
+        })
+            .then((resposta) => {
+                // console.log(cookie)
+
+                return resposta.body
+            })
+
+
+    },
 
 }

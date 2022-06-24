@@ -1,22 +1,23 @@
-import * as React from 'react';
-import NumberFormat, { InputAttributes } from 'react-number-format';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import FormControl from '@mui/material/FormControl';
-import { Button, FormControlLabel, FormLabel, Input, Radio, RadioGroup } from '@mui/material';
-import { CoresRestantes } from '../interface/CoresRestantes';
-import { InferGetStaticPropsType } from 'next';
-import Image from "next/image";
 import styled from "styled-components"
+import Topo from '../src/components/Header'
+import React from "react";
+import Image from "next/image";
+import Footer from "../src/components/Footer";
+import { Botao } from "../src/components/Botao";
+import { Titulo } from "../src/components/Titulo";
+import { Input } from "../src/components/Input";
+import { useRouter } from "next/router";
+import { tokenService } from "../src/services/auth/tokenService";
+import { authService } from "../src/services/auth/authService";
 import nookies from 'nookies'
-import Topo from '../src/components/Header';
-import Footer from '../src/components/Footer';
-import { Titulo } from '../src/components/Titulo';
-import { Text } from '../src/screens/HomeScreen';
-import { authService } from '../src/services/auth/authService';
-import { useRouter } from 'next/router';
-import { tokenService } from '../src/services/auth/tokenService';
+import useCores from "../src/services/auth/coresResta";
 
+
+
+// estilo da pagina 
+export const Body = styled.body`
+    background-image:url('/image/fundo.png') ;
+`
 
 export const Form = styled.form`
     width: 500px;
@@ -44,162 +45,103 @@ export const AvatarCores = styled.section`
        width : 80%;
     }
 `
-export const CorJogadores = styled.aside`
+export const Cores = styled.aside`
     display: grid;
     justify-items: center;
-    margin: 1em;
-    width: 90px;
-    @media only screen and (max-width: 850px){
-        width:70px;
-    }
-`
-export const ExplicaTela = styled.article`
-    margin: auto;
-    width: 800px;
-    text-align: center;
-    @media only screen and (max-width: 850px){
-        width: 90%;
-    }
+    margin: 15px;
+    width: 70px;
 `
 
-interface CustomProps {
-    onChange: (event: { target: { name: string; value: string } }) => void;
-    name: string;
-  }
-  
-  const NumberFormatCustom = React.forwardRef<
-    NumberFormat<InputAttributes>,
-    CustomProps
-  >(function NumberFormatCustom(props, ref) {
-    const { onChange, ...other } = props;
-  
-    return (
-      <NumberFormat
-        {...other}
-        getInputRef={ref}
-        onValueChange={(values) => {
-          onChange({
-            target: {
-              name: props.name,
-              value: values.value,
-            },
-          });
-        }}
-        thousandSeparator
-        isNumericString
-        prefix="R$"
-      />
-    );
-  });
-  
-  
-  
-  export default function FormattedInputs({ items}: InferGetStaticPropsType<typeof getStaticProps>) {
-    
 
-    
-      const [values, setValues] = React.useState({
-        nome: '',
-        cor: '',
-    });
+// codigo da pagina 
+export default function CriaPlayer(props) {
     const router = useRouter()
-   
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setValues({
-        ...values,
-        [event.target.name]: event.target.value,
-      });
-    };
-  
+    const restaCores = useCores()
+
+    const cor = restaCores.data.coresRestante
+
+    const [values, setValues] = React.useState({
+        usuario: '',
+        cores: '',
+    })
+    function handlenChange(event) {
+        const fieldValue = event.target.value;
+        const fieldName = event.target.name;
+
+        setValues((currenetValues) => {
+            return {
+                ...currenetValues,
+                [fieldName]: fieldValue,
+            }
+        })
+    }
+    // const cor = `${post.identificador}`
+    // console.log(cores.coresRestante) 
+    console.log(cor)
+    const content = cor?.map((post) => (
+        <Cores key={post.identificador}>
+
+            <label
+                htmlFor={post.identificador}>
+                <Image
+                    width={60}
+                    height={60}
+                    src={`./avatar/${post.identificador}.svg`}
+
+                />
+            </label>
+            <input
+                name="cores"
+                type="radio"
+                id={post.identificador}
+                value={post.identificador}
+                onChange={handlenChange}
+            />
+        </Cores>
+    ))
+
+
+
+
     return (
-        <>
+        <Body>
             <Topo children={undefined} />
             <Titulo>Hora de Criar Jogador</Titulo>
-
-            <ExplicaTela >
-            <Text>
-            selecione sua cor e seu nome e avance em iniciar game.
-            </Text>
-            </ExplicaTela>
             <Form onSubmit={(event) => {
-          event.preventDefault()
-          
+                event.preventDefault()
+                console.log(values.cores, values.usuario)
                 authService.criarJogador({
-                    identificador: values.cor,
-                    namePlayer: values.nome,
+                    identificador: values.cores,
+                    namePlayer: values.usuario,
                 })
 
                     .then(() => {
                         router.push('/jogo')
                     })
                     .catch((err) => {
-                        alert(err)
+                        console.log(err)
+                        alert("preencha todos os campos")
                     })
             }}>
-           <FormControl variant="standard" >
-          
-          </FormControl>
-         
-          <TextField
-            id="standard-basic"
-            required
-            value={values.nome}
-            margin="normal"
-            onChange={handleChange}
-            name="nome"
-            label="Nome"
-            variant="standard" />
-           <FormLabel id="demo-controlled-radio-buttons-group">Escolha seu icone</FormLabel>
-        <RadioGroup
-          aria-labelledby="demo-controlled-radio-buttons-group"
-          name="controlled-radio-buttons-group"
-          value={values.cor}
-          onChange={handleChange}
-          >
-             <AvatarCores>
-                    
-                    {/* {items.coresRestante.map((cor) => (
-                      <CorJogadores>
-                           
-                            <FormControlLabel
-                                value={cor.identificador}
-                                name="cor"
-                                control={<Radio />}
-                                label={<Image
-                                 width={150}
-                                height={150}
-                                src={`./avatar/${cor.identificador}.svg`}
-                                
-                                />}
-                                labelPlacement="top"
-                            />
-                      </CorJogadores>
-                      
-                 ))} */}
-                  
-                             </AvatarCores>
-        </RadioGroup>
-          <Button type="submit" onClick={() => {
-            console.log("fui")
-            }} variant="outlined">Entrar</Button>
+                <Input
+                    placeholder="Usuário" name="usuario"
+                    value={values.usuario}
+                    onChange={handlenChange}
+                />
+                <AvatarCores >
+                    {content}
+                </AvatarCores>
+
+
+                <Botao>Confirmar</Botao>
+
             </Form>
-            <Footer/>
-      </>
-    );
-  }
-  
 
-export const getStaticProps = async (ctx) => {
-  
-  const cookie = nookies.get()
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}api/coresRestantes?keyRoom=MU6VH8IZ`);
-  
-  const items: CoresRestantes = await res.json();
 
-    return {
-      props: {
-        items
-      },
-     
-    };
-  };
+            <pre>
+                {JSON.stringify(values, null, 2)}
+         </pre>
+            <Footer />
+        </Body>
+    )
+}
