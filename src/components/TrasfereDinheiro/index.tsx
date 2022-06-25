@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import { SaldoFlag, BoxTrasnfere } from '../BoxJogador';
 import { tokenService } from '../../services/auth/tokenService';
 import styleds from 'styled-components';
-import { AvatarCores, CorJogadores, Form } from '../../../pages/Jogador';
+import { AvatarCores, Coress, Form } from '../../../pages/Jogador';
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -104,11 +104,14 @@ export default function TransfereDinheiro({ data }, ctx = null) {
         left: '50%',
         textAlign:'center',
         transform: 'translate(-50%, -50%)',
-        minWidth: 300,
+        width: 600,
         bgcolor: 'background.paper',
         borderRadius: '20px',
         boxShadow: 24,
-        p: 4,
+      p: 4,
+      ['@media (max-width:600px)']: { // eslint-disable-line no-useless-computed-key
+        width: '80%'
+      }
       };
 
     const cookie = nookies.get(ctx)
@@ -134,8 +137,6 @@ export default function TransfereDinheiro({ data }, ctx = null) {
 
   
     const user = () => {
-
-
         return (
             <AvatarCores key={data.idPlayer}>
                 <FormControlLabel
@@ -168,8 +169,8 @@ export default function TransfereDinheiro({ data }, ctx = null) {
 
                     label={
                         <Image
-                     width={80}
-                    height={80}
+                     width={60}
+                    height={60}
                     src={`./icon/Bancoicon.svg`}
                 />}
                     labelPlacement="top"
@@ -214,6 +215,10 @@ export default function TransfereDinheiro({ data }, ctx = null) {
                   .then((res) => {
                     <p>tudo certo</p>
                     success()
+                    setValues({
+                      user: '',
+                      valor:'',
+                    })
                     handleClose()
                   })
           .catch((err) => {
@@ -248,21 +253,21 @@ export default function TransfereDinheiro({ data }, ctx = null) {
                     <AvatarCores>
                     {isChecked ? banco() : user()}
             {data.players.map((cor) => (
-              <CorJogadores>
+              <Coress>
                    
                     <FormControlLabel
                         name="user"
                         value={cor.idPlayer}
                         control={<Radio/>}
                         label={ <Image
-                        width={80}
-                        height={80}
+                        width={150}
+                        height={150}
                         src={`./avatar/${cor.identificador}.svg`}
                         
                         /> }
                         labelPlacement="top"
                     />
-              </CorJogadores>
+              </Coress>
               
          ))}
           

@@ -29,7 +29,7 @@ export const Form = styled.form`
 
     justify-items: center;
     display: grid;
-    @media only screen and (max-width: 520px) {
+    @media only screen and (max-width: 600px) {
        width : 90%;
     }
 `
@@ -38,18 +38,19 @@ export const AvatarCores = styled.section`
     flex-wrap: wrap;
     padding: 10px;
     /* width: 300px; */
-    justify-content: space-around;
+    justify-content: center;
     flex-wrap: wrap;
 
-    @media only screen and (max-width: 420px) {
-       width : 80%;
+    @media only screen and (max-width: 600px) {
+       /* width : 80%; */
+       padding: 0px;
     }
 `
-export const Cores = styled.aside`
+export const Coress = styled.aside`
     display: grid;
     justify-items: center;
-    margin: 15px;
-    width: 70px;
+    /* margin: 15px; */
+    width: 100px;
 `
 
 
@@ -58,7 +59,7 @@ export default function CriaPlayer(props) {
     const router = useRouter()
     const restaCores = useCores()
 
-    const cor = restaCores.data.coresRestante
+    const cor = restaCores.data?.coresRestante
 
     const [values, setValues] = React.useState({
         usuario: '',
@@ -78,27 +79,27 @@ export default function CriaPlayer(props) {
     // const cor = `${post.identificador}`
     // console.log(cores.coresRestante) 
     console.log(cor)
-    const content = cor?.map((post) => (
-        <Cores key={post.identificador}>
+    // const content = cor?.map((post) => (
+    //     <Coress key={post.identificador}>
 
-            <label
-                htmlFor={post.identificador}>
-                <Image
-                    width={60}
-                    height={60}
-                    src={`./avatar/${post.identificador}.svg`}
+    //         <label
+    //             htmlFor={post.identificador}>
+    //             <Image
+    //                 width={60}
+    //                 height={60}
+    //                 src={`./avatar/${post.identificador}.svg`}
 
-                />
-            </label>
-            <input
-                name="cores"
-                type="radio"
-                id={post.identificador}
-                value={post.identificador}
-                onChange={handlenChange}
-            />
-        </Cores>
-    ))
+    //             />
+    //         </label>
+    //         <input
+    //             name="cores"
+    //             type="radio"
+    //             id={post.identificador}
+    //             value={post.identificador}
+    //             onChange={handlenChange}
+    //         />
+    //     </Coress>
+    // ))
 
 
 
@@ -129,7 +130,28 @@ export default function CriaPlayer(props) {
                     onChange={handlenChange}
                 />
                 <AvatarCores >
-                    {content}
+                    {/* {content} */}
+                    {cor?.map((post) => (
+                        <Coress key={post.identificador}>
+
+                                 <label
+                                    htmlFor={post.identificador}>
+                                    <Image
+                                        width={80}
+                                        height={80}
+                                        src={`./avatar/${post.identificador}.svg`}
+                    
+                                    />
+                                </label>
+                                <input
+                                    name="cores"
+                                    type="radio"
+                                    id={post.identificador}
+                                    value={post.identificador}
+                                    onChange={handlenChange}
+                                />
+                            </Coress>
+                    ))}
                 </AvatarCores>
 
 

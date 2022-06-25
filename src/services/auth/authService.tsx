@@ -75,7 +75,7 @@ export const authService = {
             }
         })
     },
-    async coresRestantes(ctx) {
+    async coresRestantes(ctx = null) {
         const cookie = nookies.get(ctx)
         // console.log(cookie.Player)
         return HttpClient(`${process.env.NEXT_PUBLIC_BACKEND_URL}api/coresRestantes?keyRoom=${cookie.chave}`, {

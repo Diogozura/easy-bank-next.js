@@ -9,7 +9,7 @@ import { Cores } from '../interface/Cores';
 import { InferGetStaticPropsType } from 'next';
 import Topo from '../src/components/Header';
 import { Titulo } from '../src/components/Titulo';
-import { AvatarCores, CorJogadores, ExplicaTela, Form } from "./Jogador"
+import { AvatarCores, Coress, Form } from "./Jogador"
 import { Text } from '../src/screens/HomeScreen';
 import { authService } from '../src/services/auth/authService';
 import Image from 'next/image';
@@ -76,7 +76,7 @@ export default function FormattedInputs({ items, ChaveValor }: InferGetStaticPro
       <>
          <Topo children={undefined}  />
          <Titulo>Hora de Criar Jogador e Sala</Titulo>
-      <ExplicaTela>
+      <div>
         <Text>
           Clique em criar sala e selecione o valor inicial para cada jogador.
           Em alguns jogos recomenda-se a quantia inicial de 2.558.000.
@@ -85,7 +85,7 @@ export default function FormattedInputs({ items, ChaveValor }: InferGetStaticPro
           Clique novamente em Começar Partida para ir para a sala do jogo
           (ao criar a sala você se tornará automaticamente o banco no jogo).
         </Text>
-            </ExplicaTela>
+            </div>
             
       <Form onSubmit={(event) => {
         event.preventDefault()
@@ -143,7 +143,7 @@ export default function FormattedInputs({ items, ChaveValor }: InferGetStaticPro
                     <AvatarCores>
                     
             {items.cores.map((cor) => (
-              <CorJogadores>
+              <Coress>
                    
                     <FormControlLabel
                         value={cor.identificador}
@@ -157,7 +157,7 @@ export default function FormattedInputs({ items, ChaveValor }: InferGetStaticPro
                         />}
                         labelPlacement="top"
                     />
-              </CorJogadores>
+              </Coress>
               
          ))}
           

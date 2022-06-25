@@ -3,7 +3,7 @@ import react from "react";
 import { Botao } from "../Botao";
 import { tokenService } from '../../services/auth/tokenService'
 import { authService } from "../../services/auth/authService";
-
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import Image from "next/image";
 import { AvatarCores, Form } from '../../../pages/Jogador';
 import { Box, Button, Modal, Typography } from "@mui/material";
@@ -122,7 +122,7 @@ export default function Sair({data}) {
     return (
         <>
 
-            <Button onClick={handleOpen} variant="outlined" color="error">Sair</Button>
+            <Button onClick={handleOpen} variant="outlined" color="error"><ExitToAppIcon/>Sair</Button>
       <Modal
         keepMounted
         open={open}

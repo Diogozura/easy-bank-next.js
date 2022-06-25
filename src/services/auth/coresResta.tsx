@@ -1,8 +1,9 @@
 import { authService } from "./authService";
 import React from 'react';
+import { CoresRestantes } from "../../../interface/CoresRestantes";
 
 export default function useCores() {
-    const [session, setSession] = React.useState([]);
+    const [session, setSession] = React.useState<CoresRestantes>();
     const [loading, setLoading] = React.useState(true);
     const [error, setError] = React.useState(null);
 
