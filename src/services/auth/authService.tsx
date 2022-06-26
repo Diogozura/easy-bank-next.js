@@ -89,5 +89,25 @@ export const authService = {
 
 
     },
+    async extrato(ctx = null) {
+        const cookie = nookies.get(ctx)
+        return HttpClient(`https://ffgames134.herokuapp.com//api/extrato/?keyRoom=${cookie.chave}`, {
+            headers : { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+               }
+        })
+            .then((resposta) => {
+                console.log(resposta)
+            })
+            .then((data) => {
+                console.log(data)
+            })
+            .catch((error) => {
+            console.log(error)
+        })
+
+
+    },
 
 }

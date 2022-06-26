@@ -1,7 +1,7 @@
 export type Extrato = {
     extrato: [
         {
-        descricao: string;
+      descricao: string;
       idPlayerPara: string;
       idPlayerDe: string;
       }

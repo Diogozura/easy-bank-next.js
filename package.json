@@ -21,6 +21,7 @@
     "next": "latest",
     "next-fonts": "^1.5.1",
     "next-seo": "^5.4.0",
+    "next-share": "^0.14.0",
     "nookies": "^2.5.2",
     "notistack": "^2.0.5",
     "react": "^17.0.2",
