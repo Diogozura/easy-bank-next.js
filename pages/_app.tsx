@@ -85,7 +85,7 @@ export default function App({ Component, pageProps }) {
       />
       <Head>
 
-        <link rel="icon" href="/favicon/favicon.ico" />
+       
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />

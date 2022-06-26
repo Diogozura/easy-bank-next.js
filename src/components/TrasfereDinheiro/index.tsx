@@ -110,7 +110,7 @@ export default function TransfereDinheiro({ data }, ctx = null) {
         boxShadow: 24,
       p: 4,
       ['@media (max-width:600px)']: { // eslint-disable-line no-useless-computed-key
-        width: '80%'
+        width: '80%',
       }
       };
 
@@ -147,8 +147,8 @@ export default function TransfereDinheiro({ data }, ctx = null) {
 
                     label={
                         <Image
-                     width={80}
-                    height={80}
+                     width={60}
+                    height={60}
                     src={`./avatar/${data.identificador}.svg`}
                 />}
                     labelPlacement="top"
@@ -160,7 +160,7 @@ export default function TransfereDinheiro({ data }, ctx = null) {
     }
     const banco = () => {
         return (
-            <AvatarCores>
+            <>
                 <FormControlLabel
                     name="user"
                     value="0"
@@ -175,7 +175,7 @@ export default function TransfereDinheiro({ data }, ctx = null) {
                 />}
                     labelPlacement="top"
                     />
-            </AvatarCores>
+            </>
 
         )
     }
@@ -189,7 +189,7 @@ export default function TransfereDinheiro({ data }, ctx = null) {
         
         <BoxTrasnfere key={data.idPlayer} >
 
-            <Button onClick={handleOpen} variant="contained">Transferir</Button>
+            <Botao onClick={handleOpen} variant="contained">Transferir</Botao>
 
             <Modal
             
@@ -206,14 +206,11 @@ export default function TransfereDinheiro({ data }, ctx = null) {
                         
           <Form  onSubmit={(event) => {
       event.preventDefault();
-      console.log( "para " + values.user, "valor" + parseInt(values.valor) ,"enviado por: " + cookie.banco)
-
                 authService.transfereDinheiro({
                   idPlayerPara: parseInt(values.user),
                   valor: parseInt(values.valor),
                 })
                   .then((res) => {
-                    <p>tudo certo</p>
                     success()
                     setValues({
                       user: '',
@@ -222,9 +219,7 @@ export default function TransfereDinheiro({ data }, ctx = null) {
                     handleClose()
                   })
           .catch((err) => {
-            
             error()
-              console.log(err)
           })
 
 
@@ -243,7 +238,7 @@ export default function TransfereDinheiro({ data }, ctx = null) {
           }}
           variant="standard"
         />
-         <FormLabel id="demo-controlled-radio-buttons-group">Escolha seu icone</FormLabel>
+         <FormLabel id="demo-controlled-radio-buttons-group">Escolha para quem será transferido </FormLabel>
       <RadioGroup
         aria-labelledby="demo-controlled-radio-buttons-group"
         name="controlled-radio-buttons-group"
@@ -260,8 +255,8 @@ export default function TransfereDinheiro({ data }, ctx = null) {
                         value={cor.idPlayer}
                         control={<Radio/>}
                         label={ <Image
-                        width={150}
-                        height={150}
+                        width={80}
+                        height={80}
                         src={`./avatar/${cor.identificador}.svg`}
                         
                         /> }
@@ -274,9 +269,7 @@ export default function TransfereDinheiro({ data }, ctx = null) {
                      </AvatarCores>
            
       </RadioGroup>
-        <Button type="submit" onClick={() => {
-          console.log("fui")
-          }} variant="outlined">enviar</Button>
+        <Button type="submit" variant="outlined">enviar</Button>
             </Form>
           </Typography>
         </Box>

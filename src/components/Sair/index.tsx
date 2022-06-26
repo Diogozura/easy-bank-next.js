@@ -122,7 +122,7 @@ export default function Sair({data}) {
     return (
         <>
 
-            <Button onClick={handleOpen} variant="outlined" color="error"><ExitToAppIcon/>Sair</Button>
+        <Botao onClick={handleOpen} variant="outlined" color="error"><ExitToAppIcon/>Sair</Botao>
       <Modal
         keepMounted
         open={open}
@@ -132,7 +132,7 @@ export default function Sair({data}) {
       >
         <Box sx={style}>
           <Typography id="keep-mounted-modal-title" variant="h6" component="h2">
-            Text in a modal
+           SAIR
           </Typography>
           <Typography id="keep-mounted-modal-description" sx={{ mt: 2 }}>
                         {data.playerBank && data.players.length != 0 ? troca() : sair()}
@@ -143,28 +143,6 @@ export default function Sair({data}) {
           </Typography>
         </Box>
       </Modal>
-            {/* <Modal
-                toggle={toggle}
-                isOpen={modal}>
-
-                <ModalHeader
-
-                    toggle={toggle}
-
-                >
-                    Sair
-                </ModalHeader> 
-                <ModalBody>
-                    {data.playerBank && data.players.length != 0 ?  troca() : sair()}
-                </ModalBody>
-                <ModalFooter>
-
-                    <Button onClick={toggle}>
-                        Cancelar
-                    </Button>
-
-                </ModalFooter>
-            </Modal> */}
         </>
 
     )

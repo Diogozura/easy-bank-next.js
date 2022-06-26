@@ -4,13 +4,17 @@ import { Button } from "@mui/material";
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import nookies from 'nookies'
 import useSWR from "swr";
+import ListIcon from '@mui/icons-material/List';
+import FilterListOffIcon from '@mui/icons-material/FilterListOff';
 
 const Extrator = styled.th`
  background: ${props => props.theme};
  padding:10px;
  border-radius: 20px;
  margin: 0.2em 0;
+ text-align: center;
 `
+
 
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -18,7 +22,7 @@ export default function History(ctx = null){
     const cookie = nookies.get(ctx)
     const { data, error } = useSWR(
         `https://ffgames134.herokuapp.com//api/extrato/?keyRoom=${cookie.chave}`,
-        fetcher, { revalidateOnFocus: true },
+        fetcher, { refreshInterval: 15000 },
       );
       const [isChecked, setChecked] = react.useState(true)
      
@@ -43,8 +47,12 @@ export default function History(ctx = null){
          <style jsx>{`
         table{
                 text-align: : center;
-               
                 margin: 2em auto;
+        }
+        tbody{
+            display: block; 
+            overflow-y: auto;
+            height: 290px;
         }
         tr{
             display: grid;
@@ -56,13 +64,15 @@ export default function History(ctx = null){
       
       </style >
         <table id='Extrato'>
+            <tbody>
             <tr>
-                {isChecked ? conteudo?.slice(0, 3) : conteudo}   
-                <Button
+            <Button
                     onClick={handleCheck}
-                >{isChecked ? 'carregar tudo +' : 'menos -'}</Button>
-                <th>alo</th>
+                >{isChecked ? <ListIcon/> : <FilterListOffIcon/>}</Button>
+                {isChecked ? conteudo?.slice(0, 5) : conteudo}   
             </tr>
+            </tbody>
+         
         </table>
     </>
        

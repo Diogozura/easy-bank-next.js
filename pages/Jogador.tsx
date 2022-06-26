@@ -49,12 +49,12 @@ export const AvatarCores = styled.section`
 export const Coress = styled.aside`
     display: grid;
     justify-items: center;
-    /* margin: 15px; */
-    width: 100px;
+    margin: 0px 10px;
+
+    width: 95px;
 `
 
 
-// codigo da pagina 
 export default function CriaPlayer(props) {
     const router = useRouter()
     const restaCores = useCores()
@@ -76,31 +76,7 @@ export default function CriaPlayer(props) {
             }
         })
     }
-    // const cor = `${post.identificador}`
-    // console.log(cores.coresRestante) 
-    console.log(cor)
-    // const content = cor?.map((post) => (
-    //     <Coress key={post.identificador}>
-
-    //         <label
-    //             htmlFor={post.identificador}>
-    //             <Image
-    //                 width={60}
-    //                 height={60}
-    //                 src={`./avatar/${post.identificador}.svg`}
-
-    //             />
-    //         </label>
-    //         <input
-    //             name="cores"
-    //             type="radio"
-    //             id={post.identificador}
-    //             value={post.identificador}
-    //             onChange={handlenChange}
-    //         />
-    //     </Coress>
-    // ))
-
+  
 
 
 

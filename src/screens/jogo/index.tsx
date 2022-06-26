@@ -14,7 +14,10 @@ import History from '../../components/Extrato'
 import {
     WhatsappShareButton,
     WhatsappIcon,
+    TelegramShareButton,
+  TelegramIcon,
   } from 'next-share'
+import { tokenService } from "../../services/auth/tokenService";
 
 
 const BoxJogadores = styled.section`
@@ -36,24 +39,28 @@ justify-content: space-around;
 align-items: center;
 flex-wrap: wrap;
 `
+const Contatos = styled.aside`
+    display: grid;
+    justify-items: center;
+    margin: 1em;
+`
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Jogo({ children, ...props }, ctx = null) {
     const router = useRouter()
     const cookie = nookies.get(ctx)
+    React.useEffect(() => {
+        {cookie.Player? cookie.Player : router.push('/')}
+    })
+
     const { data, error } = useSWR(
         `https://ffgames134.herokuapp.com/api/dadosSala?keyRoom=${cookie.chave}&idPlayer=${cookie.Player}`,
-        fetcher,{ refreshInterval: 10000 }
+        fetcher,{ refreshInterval: 3000 }
     )
-
-   
     
-    if (error) return "An error has occurred.";
     if (!data) return "Loading...";
-    
-
-       { data.erro == 'chave invalida' ? router.push('/?error=401'): null }
+    if (error) return router.push('/');
 
 
 
@@ -62,21 +69,38 @@ export default function Jogo({ children, ...props }, ctx = null) {
             <Head>
              <title>Sala game - Easy Imobiliário </title>
             </Head>
-            <Topo children={undefined} />
+            <Topo  >
+                <Sair data={data}/>
+            </Topo>
             <Titulo>Bem Vindo a sala</Titulo>
+
             <SaireToken>
-            <WhatsappShareButton
-  url={`https://easyimobiliario.com.br/`}
-  title={'next-share is a social share buttons for your next React apps.'}
+                <Contatos>
+                    Compartilhar Link da Sala
+                    <div>
+                    <WhatsappShareButton
+                        
+                        url={`https://easyimobiliario.com.br//Jogador?keyRoom=${cookie.chave}`}
+                        
+  title={'Entre agora na Sala do Easy imobiliário game'}
   separator=":: "
 >
   <WhatsappIcon size={32} round />
-</WhatsappShareButton>
+                </WhatsappShareButton>
+                <TelegramShareButton
+  url={`https://easyimobiliario.com.br//Jogador?keyRoom=${cookie.chave}`}
+  title={'Entre agora na Sala do Easy imobiliário game'}
+>
+  <TelegramIcon size={32} round />
+</TelegramShareButton>
+                    </div>
+
+                   
+                </Contatos>
+          
                 <Codigo defaultValue={data.keyRoom} />
-                <Sair data={data}/>
+               
             </SaireToken>
-            
-            
             <DadosJogador  data={data} />
             
             <BoxJogadores >

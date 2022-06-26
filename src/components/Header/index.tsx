@@ -69,7 +69,7 @@ function HideOnScroll(props: Props) {
     );
   }
 
-export default function Topo( props: Props) {
+export default function Topo( {children} ,props: Props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -146,7 +146,8 @@ export default function Topo( props: Props) {
               </Button>
                 </Link>
               
-            ))}
+                      ))}
+                 {children}
           </Box>
         </Toolbar>
       </AppBar>
@@ -166,7 +167,8 @@ export default function Topo( props: Props) {
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
           }}
         >
-          {drawer}
+            {drawer}
+            {children}
         </Drawer>
       </Box>
     </Box>
