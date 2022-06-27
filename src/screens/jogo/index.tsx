@@ -17,7 +17,7 @@ import {
     TelegramShareButton,
   TelegramIcon,
   } from 'next-share'
-import { tokenService } from "../../services/auth/tokenService";
+
 
 
 const BoxJogadores = styled.section`
@@ -50,18 +50,15 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 export default function Jogo({ children, ...props }, ctx = null) {
     const router = useRouter()
     const cookie = nookies.get(ctx)
-    React.useEffect(() => {
-        {cookie.Player? cookie.Player : router.push('/')}
-    })
-
+   
     const { data, error } = useSWR(
         `https://ffgames134.herokuapp.com/api/dadosSala?keyRoom=${cookie.chave}&idPlayer=${cookie.Player}`,
         fetcher,{ refreshInterval: 3000 }
     )
     
-    if (!data) return "Loading...";
-    if (error) return router.push('/');
-
+        if (!data) return "Loading...";
+        if (error) return router.push('/');
+        console.log(data)
 
 
     return (
