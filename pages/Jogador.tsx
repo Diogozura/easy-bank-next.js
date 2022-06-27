@@ -135,10 +135,6 @@ export default function CriaPlayer(props) {
 
             </Form>
 
-
-            <pre>
-                {JSON.stringify(values, null, 2)}
-         </pre>
             <Footer />
         </Body>
     )
