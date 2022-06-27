@@ -1,28 +1,18 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Router, useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import { validaToken } from '../../services/auth/validaToken'
 import nookies from 'nookies'
-import { route } from 'next/dist/server/router'
 import { tokenService } from '../../services/auth/tokenService'
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+import { TextField } from '@mui/material'
 
 const Form = styled.form`
 display: grid;
 justify-items: center;
+`
 
-`
-const Input = styled.input`
-margin-top: 2em;
-border: none;
-font-size: 1.2em;
-border-bottom: 2px solid rgb(0, 0, 0);
-width: 300px;
-text-align: center;
-@media only screen and (max-width: 850px){
-    width: 80%;
-    
-}
-`
 const Botao = styled.button`
     text-decoration: none;
     padding: 10px;
@@ -40,16 +30,22 @@ const Botao = styled.button`
 
 export default function TokenExiste(ctx = null) {
     const cookie = nookies.get(ctx)
-
     const router = useRouter()
     const [values, setValue] = React.useState({
         token: cookie.chave,
     })
+    const [open, setOpen] = React.useState(false);
+    const handleClose = () => {
+      setOpen(false);
+    };
+    const handleToggle = () => {
+      setOpen(!open);
+    };
 
     function handleChange(event) {
-        const fieldValue = event.target.value;
+        const fieldValue = event.target.value.toUpperCase();
         const fieldName = event.target.name;
-
+       
         setValue((currentValues) => {
             return {
                 ...currentValues,
@@ -61,37 +57,51 @@ export default function TokenExiste(ctx = null) {
     return (
         <Form onSubmit={(event) => {
             event.preventDefault();
+
             validaToken.validar({
                 keyRoom: values.token,
             })
                 .then((res) => {
-                    { cookie.chave && cookie.Player != 'undefined' ? router.push('/jogo') : router.push('/Jogador' ) }
-                    tokenService.save(values.token , cookie.Player, '' )
-                    // console.log(values.token)
-                    
+                    {
+                        cookie.chave && cookie.Player !=
+                            'undefined' ? router.push('/jogo')
+                            : router.push('/Jogador')
+                            && tokenService.save(values.token, '', '')
+                    }   
                 })
                 .catch((res) => {
-                    
                     alert(res)
+                    handleClose()
                 })
 
         }}>
 
-            <Input
-                placeholder="Código da sala"
-                type="text"
+          
+            <TextField 
+                id="standard-basic"
                 name="token"
+                multiline
                 value={values.token}
                 onChange={handleChange}
-            />
+                label="Código da sala"
+                variant="standard" />
+        
          
-            <Botao
+            <Botao  onClick={handleToggle}
                 bgBotao="#22192c"
                 color="white"
             >
                 Entrar
             </Botao>
-
+            <Backdrop
+                
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={open}
+        onClick={handleClose}
+      >
+        <CircularProgress   />
+            </Backdrop>
         </Form>
+
     )
 }

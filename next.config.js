@@ -26,14 +26,14 @@ const nextConfig = {
   ) {
     return {
       '/': { page: '/' },
-      '/sobre': { page: '/sobre'},
+      '/sobre': { page: '/sobre', query: { title: 'Sobre' }},
       '/contato': { page: '/contato'},
       '/Jogador': { page: '/Jogador'},
       '/criarSala': { page: '/criarSala'},
       '/jogo': { page: '/jogo'},
       '/termosPrivacidade': { page: '/termosPrivacidade'},
       '/termosUso': { page: '/termosUso'},
-      // '/p/learn-nextjs': { page: '/post', query: { title: 'learn-nextjs' } },
+      
       // '/p/deploy-nextjs': { page: '/post', query: { title: 'deploy-nextjs' } },
     }
   },

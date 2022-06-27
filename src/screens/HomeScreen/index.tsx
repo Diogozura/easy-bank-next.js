@@ -5,15 +5,29 @@ import Footer from '../../components/Footer'
 import Topo from '../../components/Header'
 import Regras from '../../components/Regras'
 import TokenExiste from '../../components/TokenExiste'
+import React from 'react'
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 
 
 
 export default function Home() {
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleToggle = () => {
+    setOpen(!open);
+  };
+
 
   return (
     <>
+      <head>
+        <title>Home - Easy Imobiliário game</title>
+      </head>
       <Topo children={undefined} />
 
       <Conteudo>
@@ -45,23 +59,30 @@ export default function Home() {
             padding="40px"
           >
             <Text>
-              Olá, para começar coloque o link da
+               Para começar coloque o Código da
               sala ou crie sua própria
             </Text>
-            <Text>
+            {/* <Text>
               <strong>Código da Sala</strong>
-            </Text>
+            </Text> */}
 
             <TokenExiste />
 
             <Link href="/criarSala" passHref prefetch={false}>
               <Botao
-                
+                 onClick={handleToggle}
                 color="#737176"
               >
                 Criar Sala
               </Botao>
             </Link>
+            <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={open}
+        onClick={handleClose}
+      >
+        <CircularProgress   />
+      </Backdrop>
 
           </Box>
         </Parte>
