@@ -4,7 +4,7 @@ import { Texto, Titulo } from "../../components/Textos"
 import styled from 'styled-components'
 import Link from "next/link"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faInstagram } from "@fortawesome/free-brands-svg-icons"
+import { faGithub, faInstagram } from "@fortawesome/free-brands-svg-icons"
 import { faEnvelope, faGlobe } from "@fortawesome/free-solid-svg-icons"
 import Footer from "../../components/Footer"
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material"
@@ -37,7 +37,7 @@ export default function Contato() {
 
             <RedesContato>
 
-                <Card sx={{ maxWidth: 345, margin:'1m' }}>
+                <Card sx={{ maxWidth: 300, margin:'1m' }}>
       <CardMedia
         component="img"
         alt="green iguana"
@@ -63,6 +63,31 @@ export default function Contato() {
                         <Link href="mailto:easybankgame@gmail.com" passHref>
                     <A><FontAwesomeIcon icon={faEnvelope} className="fa-2x fa-wrench fa-gradient" aria-hidden="true" color="black" /> </A>
                 </Link>
+      
+      </CardActions>
+                </Card>
+                
+                 <Card sx={{ maxWidth: 300, margin:'1m' }}>
+      <CardMedia
+        component="img"
+        alt="green iguana"
+        height="300"
+        image="/image/github.png"
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h4" sx={{ fontFamily:'Museo700' }} component="div">
+         Docs
+          </Typography>
+       
+                        
+                        <Typography><Texto> Repositório do projeto do Easy imobiliário game </Texto></Typography>
+       
+      </CardContent>
+                    <CardActions >
+                    <Link href="https://2esestechnology.com.br/" passHref>
+                    <A><FontAwesomeIcon icon={faGithub} className="fa-2x"  color="black"/> </A>
+                        </Link>
+                      
       
       </CardActions>
     </Card>
