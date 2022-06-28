@@ -20,23 +20,7 @@ const nextConfig = {
   'fontawesome-svg-core': {
     'license': 'free'
   },
-  exportPathMap: async function (
-    defaultPathMap,
-    { dev, dir, outDir, distDir, buildId }
-  ) {
-    return {
-      '/': { page: '/' },
-      '/sobre': { page: '/sobre'},
-      '/contato': { page: '/contato'},
-      '/jogador': { page: '/jogador'},
-      '/criarSala': { page: '/criarSala'},
-      '/jogo': { page: '/jogo'},
-      '/termosPrivacidade': { page: '/termosPrivacidade'},
-      '/termosUso': { page: '/termosUso'},
-      
-      // '/p/deploy-nextjs': { page: '/post', query: { title: 'deploy-nextjs' } },
-    }
-  },
+  
 }
 
 module.exports = nextConfig
