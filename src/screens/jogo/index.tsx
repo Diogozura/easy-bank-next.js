@@ -57,7 +57,7 @@ export default function Jogo({ children, ...props }, ctx = null) {
     )
     
         if (!data) return "Loading...";
-        if (error) return router.push('/');
+        if (error) return "erro ";
         
 
 

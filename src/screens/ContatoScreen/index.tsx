@@ -84,7 +84,7 @@ export default function Contato() {
        
       </CardContent>
                     <CardActions >
-                    <Link href="https://2esestechnology.com.br/" passHref>
+                    <Link href="https://github.com/Diogozura/easy-bank-next.js" passHref>
                     <A><FontAwesomeIcon icon={faGithub} className="fa-2x"  color="black"/> </A>
                         </Link>
                       

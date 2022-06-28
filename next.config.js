@@ -26,9 +26,9 @@ const nextConfig = {
   ) {
     return {
       '/': { page: '/' },
-      '/sobre': { page: '/sobre', query: { title: 'Sobre' }},
+      '/sobre': { page: '/sobre'},
       '/contato': { page: '/contato'},
-      '/Jogador': { page: '/Jogador'},
+      '/jogador': { page: '/jogador'},
       '/criarSala': { page: '/criarSala'},
       '/jogo': { page: '/jogo'},
       '/termosPrivacidade': { page: '/termosPrivacidade'},

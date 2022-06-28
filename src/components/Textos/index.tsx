@@ -9,8 +9,7 @@ export const Titulo = styled.h1`
 `
 export const BoxTexto = styled.article`
     width: 700px;
-    margin-top: 2em;
-    background: whitesmoke;
+    margin: auto;
     text-align: center;
     border-radius: 20px;
     

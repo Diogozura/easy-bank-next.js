@@ -1,6 +1,5 @@
 import * as React from 'react';
 import NumberFormat, { InputAttributes } from 'react-number-format';
-import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
 import { Button, FormControlLabel, FormLabel, Input, Radio, RadioGroup } from '@mui/material';
@@ -9,19 +8,17 @@ import { Cores } from '../interface/Cores';
 import { InferGetStaticPropsType } from 'next';
 import Topo from '../src/components/Header';
 import { Titulo } from '../src/components/Titulo';
-import { AvatarCores, Coress, Form } from "./Jogador"
+import { AvatarCores, Coress, Form } from "./jogador"
 import { Text } from '../src/screens/HomeScreen';
 import { authService } from '../src/services/auth/authService';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Footer from '../src/components/Footer';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+import { BoxTexto, Texto } from '../src/components/Textos';
 
-const Formula = styled.form`
-  display: grid;
-  width: 600px;
-  margin: auto;
-  margin-top: 4em;
-`
+
 
 interface CustomProps {
   onChange: (event: { target: { name: string; value: string } }) => void;
@@ -63,33 +60,37 @@ export default function FormattedInputs({ items, ChaveValor }: InferGetStaticPro
     cor: '',
     chave:ChaveValor.keyRoom
   });
-    console.log()
-
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValues({
       ...values,
       [event.target.name]: event.target.value,
     });
   };
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleToggle = () => {
+    setOpen(!open);
+  };
   const router = useRouter()
     return (
       <>
          <Topo children={undefined}  />
          <Titulo>Hora de Criar Jogador e Sala</Titulo>
-      <div>
-        <Text>
+        <BoxTexto>
+        <Texto>
           Clique em criar sala e selecione o valor inicial para cada jogador.
           Em alguns jogos recomenda-se a quantia inicial de 2.558.000.
           Em seguida selecione seu nome e sua cor.
           Abaixo estará o código da sala para você compartilhar com seus amigos.
           Clique novamente em Começar Partida para ir para a sala do jogo
           (ao criar a sala você se tornará automaticamente o banco no jogo).
-        </Text>
-            </div>
+        </Texto>
+            </BoxTexto>
             
       <Form onSubmit={(event) => {
         event.preventDefault()
-        console.log(values.cor, values.nome, values.valor)
         authService.criarSala({
           keyRoom: values.chave,
           valorInicial: values.valor,
@@ -102,7 +103,6 @@ export default function FormattedInputs({ items, ChaveValor }: InferGetStaticPro
           
           })
           .catch((err) => {
-            console.log(err)
             alert("preencha todos os campos")
           })
 
@@ -141,7 +141,6 @@ export default function FormattedInputs({ items, ChaveValor }: InferGetStaticPro
         onChange={handleChange}
                 >
                     <AvatarCores>
-                    
             {items.cores.map((cor) => (
               <Coress>
                    
@@ -160,14 +159,24 @@ export default function FormattedInputs({ items, ChaveValor }: InferGetStaticPro
               </Coress>
               
          ))}
-          
                      </AvatarCores>
            
       </RadioGroup>
         <p>Código da Sala: {ChaveValor.keyRoom}</p>
-        <Button type="submit" onClick={() => {
-          console.log("fui")
-          }} variant="outlined">Criar Sala</Button>
+          <Button
+            onClick={handleToggle}
+            type="submit"
+            variant="outlined"
+          >Criar Sala
+          </Button>
+          <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={open}
+        onClick={handleClose}
+      >
+        <CircularProgress   />
+      </Backdrop>
+
             </Form>
             
       <Footer/>

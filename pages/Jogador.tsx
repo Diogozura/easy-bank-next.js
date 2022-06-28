@@ -7,11 +7,12 @@ import { Botao } from "../src/components/Botao";
 import { Titulo } from "../src/components/Titulo";
 import { Input } from "../src/components/Input";
 import { useRouter } from "next/router";
-import { tokenService } from "../src/services/auth/tokenService";
 import { authService } from "../src/services/auth/authService";
-import nookies from 'nookies'
 import useCores from "../src/services/auth/coresResta";
-
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+import { BoxTexto } from "../src/components/BoxTexto";
+import { Texto } from "../src/components/Textos";
 
 
 // estilo da pagina 
@@ -49,9 +50,12 @@ export const AvatarCores = styled.section`
 export const Coress = styled.aside`
     display: grid;
     justify-items: center;
-    margin: 0px 10px;
+    margin: 0px 1em;
 
     width: 95px;
+    @media only screen and (max-width: 600px){
+        margin: 0;
+    }
 `
 
 
@@ -77,13 +81,24 @@ export default function CriaPlayer(props) {
         })
     }
   
-
+    const [open, setOpen] = React.useState(false);
+    const handleClose = () => {
+      setOpen(false);
+    };
+    const handleToggle = () => {
+      setOpen(!open);
+    };
 
 
     return (
         <Body>
             <Topo children={undefined} />
             <Titulo>Hora de Criar Jogador</Titulo>
+            <BoxTexto>
+                <Texto>
+                selecione sua cor e seu nome e avance em iniciar game.
+                </Texto>
+            </BoxTexto>
             <Form onSubmit={(event) => {
                 event.preventDefault()
                 console.log(values.cores, values.usuario)
@@ -131,8 +146,14 @@ export default function CriaPlayer(props) {
                 </AvatarCores>
 
 
-                <Botao>Confirmar</Botao>
-
+                <Botao  onClick={handleToggle}>Confirmar</Botao>
+                <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={open}
+        onClick={handleClose}
+      >
+        <CircularProgress   />
+      </Backdrop>
             </Form>
 
             <Footer />

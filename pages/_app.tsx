@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Link from "next/link";
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { NextSeo, SocialProfileJsonLd } from 'next-seo';
 import { config } from '@fortawesome/fontawesome-svg-core'

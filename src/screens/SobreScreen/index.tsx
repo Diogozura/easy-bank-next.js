@@ -1,7 +1,6 @@
-import { faLinkedin } from "@fortawesome/free-brands-svg-icons"
+import { faBehance, faGithub, faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Image from "next/image"
-import Link from "next/link"
 import Footer from "../../components/Footer"
 import styled from 'styled-components'
 import Head from "next/head"
@@ -11,30 +10,35 @@ import Topo from "../../components/Header"
 const Dev = [{
     id:'1',
     nome: 'Diogo',
+    cor:'#22192C',
     funcao: 'Front-end',
     redes: [{
-        instagram: '',
-        linkldin: '',
-        github:'diogozura'
+        instagram: 'https://www.instagram.com/diogo__zura/',
+        linkldin: 'https://www.linkedin.com/in/diogo-silva-santos-251bb5192/',
+        github: 'https://github.com/diogozura',
+        be:'https://www.behance.net/diogozura'
     }]
 }, {
     id:'2',
-    nome: 'Iago',
-    funcao: 'Front-end',
+    nome: 'Danilo',
+    cor:"#E6332A",
+    funcao: 'Back-End',
     redes: [{
-        instagram: '',
-        linkldin: '',
+        instagram: 'https://www.instagram.com/filitecxz/',
+        linkldin: 'https://www.linkedin.com/in/danilo-silva-santos-555b5396/',
+        github:'https://github.com/dancxz'
        
     }]
     },
     {
         id:'3',
-        nome: 'Danilo',
-        funcao: 'Front-end',
+        nome: 'Iago',
+        cor:'#951B81',
+        funcao: 'Design',
         redes: [{
-            instagram: '',
-            linkldin: '',
-            github:'dancxz'
+            instagram: 'https://www.instagram.com/_inhagu/',
+            linkldin: 'https://www.linkedin.com/in/iago-de-sousa-santos-4502a2164/',
+            be:'https://www.behance.net/iagodesousa'
         }]
     }
 ]
@@ -48,9 +52,7 @@ export default function Sobre() {
         </Head>
         <Topo children={undefined} />
 
-        <Titulo style={{
-            marginTop: '3em',
-        }}>Quem Somos?</Titulo>
+        <Titulo >Quem Somos?</Titulo>
         
         <Texto style={{
             maxWidth: '600px',
@@ -60,73 +62,52 @@ export default function Sobre() {
         }}>
                Somos desenvolvedores da 2eSes tecnology , um projeto que temos como objetivo ajudar seu negocio alavancar, questões de automação e site é com a gente , se quer um projeto pessoa entre em contato 
             </Texto>
-            <ul>
+            <>
                 {Dev.map((user) => (
-                    <>
-                        <li>{user.nome}</li>
-                        <li>{user.redes.map((rede) => (
-                            <p>{rede.github}</p>
-                        ))}</li>
-        </>
+                    <Desenvolvedores key={user.id} style={{
+                        background:`${user.cor}`
+                    }}>
+                         <Image style={{
+                borderRadius: '50px'
+            }}
+                src={`/user/${user.nome}.png`}
+                alt="ad"
+                width={300}
+                height={360}
+
+                        />
+                        <aside>
+                            <h2>{user.nome}</h2> 
+                            <br/>
+                            <h3>{user.funcao}</h3>
+                            <br/>
+                            <div>
+                            <h3>Contato</h3>
+                         <Lista >{user.redes.map((rede) => (
+                          <>
+                              <Item><a href={`${rede.linkldin}`}><FontAwesomeIcon icon={faLinkedin} className="fa-3x" color="white" /></a></Item> 
+                              <Item><a href={`${rede.instagram}`}><FontAwesomeIcon icon={faInstagram} className="fa-3x" color="white" /></a></Item>
+                              <Item>{rede.github? <a href={`${rede.github}`}><FontAwesomeIcon icon={faGithub} className="fa-3x"  color="white"/></a> : null}</Item>
+                              <Item>{rede.be? <a href={`${rede.be}`}><FontAwesomeIcon icon={faBehance} className="fa-3x"  color="white"/></a> : null}</Item>
+
+                                  {/* <a href={`${rede.be}`}><FontAwesomeIcon icon={faBehance} className="fa-2x"  color="black"/></a> */}
+                          </>
+                       
+                      ))}</Lista>
+                            </div>
+                      
+                        </aside>
+                      
+        </Desenvolvedores>
                 ))}
-            </ul>
-
-            
-
-        <Devs
-            nome={"Diogo"}
-            cor={'#22192C'}
-            funcao={"Front-End "}
-            link={"https://www.linkedin.com/in/diogo-silva-santos-251bb5192/"} children={undefined} color={undefined} rede={undefined} rede2={undefined} link2={undefined} />
-
-        <Devs
-            nome={"Danilo"}
-            cor={'#E6332A'}
-            funcao={"Back-End "}
-            rede={'Github'}
-            link={"https://www.linkedin.com/in/danilo-silva-santos-555b5396/"} children={undefined} color={undefined} rede2={undefined} link2={undefined} />
-
-        <Devs
-            nome={"Iago"}
-            cor={'#951B81'}
-            funcao={"Design"}
-            rede={'Be'}
-            link={"https://www.linkedin.com/in/iago-de-sousa-santos-4502a2164/"} children={undefined} color={undefined} rede2={undefined} link2={undefined} />
+            </>
 
         <Footer />
     </>
     )
 }
 
-function Devs({ children, nome, cor,color, rede, rede2, link, link2, funcao,  ...props }) {
-    const userImage = `/user/${nome}.png`
 
-    return (
-        <Desenvolvedores style={{
-            background:`${cor}`
-        }}>
-            <Image style={{
-                borderRadius: '50px'
-            }}
-                src={userImage}
-                alt="ad"
-                width={300}
-                height={360}
-
-            />
-            <aside style={{
-                margin: '50px'
-            }}>
-                <h2>{nome}</h2>
-                <h2>{funcao}</h2>
-                <Link href={link}><a> <FontAwesomeIcon icon={faLinkedin} className="fa-3x fa-inverse" color={color} /> </a></Link>
-            </aside>
-
-
-        </Desenvolvedores>
-    )
-
-}
 const Desenvolvedores = styled.article`
 display: flex;
 justify-content: flex-start;
@@ -134,11 +115,20 @@ align-items: center;
 flex-Wrap: wrap;
 text-Align: center;
 margin: 2em;
-width: 600px;
+width: 645px;
 border-radius: 50px;
 color: white;
 @media only screen and (max-width: 850px){
     justify-content: space-around;
     width: 90%;
 }
+`
+const Lista = styled.ul`
+    display: flex;
+    flex-wrap: wrap;
+`
+const Item = styled.li`
+    text-decoration: none;
+    list-style: none;
+    margin: 0 1em;
 `

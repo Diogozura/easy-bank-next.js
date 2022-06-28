@@ -13,7 +13,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 
 
-export default function Home() {
+
+export default function Home({props}) {
   const [open, setOpen] = React.useState(false);
   const handleClose = () => {
     setOpen(false);
@@ -69,6 +70,7 @@ export default function Home() {
             <TokenExiste />
 
             <Link href="/criarSala" passHref prefetch={false}>
+            
               <Botao
                  onClick={handleToggle}
                 color="#737176"

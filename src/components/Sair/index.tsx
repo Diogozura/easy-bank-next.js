@@ -5,19 +5,23 @@ import { tokenService } from '../../services/auth/tokenService'
 import { authService } from "../../services/auth/authService";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import Image from "next/image";
-import { AvatarCores, Form } from '../../../pages/Jogador';
+import { AvatarCores, Form } from '../../../pages/jogador';
 import { Box, Button, Modal, Typography } from "@mui/material";
 
 const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
     left: '50%',
+    textAlign:'center',
     transform: 'translate(-50%, -50%)',
-    width: 400,
+    width: 600,
     bgcolor: 'background.paper',
-    border: '2px solid #000',
+    borderRadius: '20px',
     boxShadow: 24,
-    p: 4,
+  p: 4,
+  ['@media (max-width:600px)']: { // eslint-disable-line no-useless-computed-key
+    width: '80%',
+  }
   };
 
 export default function Sair({data}) {

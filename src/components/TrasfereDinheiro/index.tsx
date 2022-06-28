@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import { SaldoFlag, BoxTrasnfere } from '../BoxJogador';
 import { tokenService } from '../../services/auth/tokenService';
 import styleds from 'styled-components';
-import { AvatarCores, Coress, Form } from '../../../pages/Jogador';
+import { AvatarCores, Coress, Form } from '../../../pages/jogador';
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -16,22 +16,11 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal'
 import Switch from '@mui/material/Switch'
 import { styled } from '@mui/material/styles';
-import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import NumberFormat, { InputAttributes } from 'react-number-format';
 import { FormControl, FormLabel, Radio, RadioGroup, TextField } from '@mui/material';
 import { NumberFormatCustom } from '../../../pages/criarSala';
 import { toast } from 'react-toastify';
-const ToggleSwitchBanco = styleds.aside`
-    text-align: center;
-    display: flex;
-    justify-content: space-between;
-`
-const JogadoresTransfere = styleds.article`
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-`
+
 function success() {
   toast.success('🦄 transação Concluída!', {
     position: "bottom-left",
@@ -67,17 +56,17 @@ const Android12Switch = styled(Switch)(({ theme }) => ({
         width: 16,
         height: 16,
       },
-      '&:before': {
-        backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 24 24"><path fill="${encodeURIComponent(
-          theme.palette.getContrastText(theme.palette.primary.main),
-        )}" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"/></svg>')`,
-        left: 12,
-      },
       '&:after': {
         backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 24 24"><path fill="${encodeURIComponent(
           theme.palette.getContrastText(theme.palette.primary.main),
         )}" d="M19,13H5V11H19V13Z" /></svg>')`,
         right: 12,
+      },
+      '&:before': {
+        backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 24 24"><path fill="${encodeURIComponent(
+          theme.palette.getContrastText(theme.palette.primary.main),
+        )}" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"/></svg>')`,
+        left: 12,
       },
     },
     '& .MuiSwitch-thumb': {
@@ -89,8 +78,10 @@ const Android12Switch = styled(Switch)(({ theme }) => ({
   }));
   
 
+
+
 export default function TransfereDinheiro({ data }, ctx = null) {
-    const [isChecked, setChecked] = react.useState(true)
+    const [isChecked, setChecked] = react.useState(false)
     console.log(isChecked)
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);

@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const BoxTexto = styled.article`
     width: 700px;
-    margin-top: 2em;
-    background: whitesmoke;
+    margin-right: auto;
+    margin-left: auto;
     text-align: center;
     border-radius: 20px;
     
