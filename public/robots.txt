@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://easyimobiliario.com.br/api/my-sitemap

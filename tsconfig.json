@@ -23,7 +23,7 @@
       "next-env.d.ts",
       "**/*.ts",
       "**/*.tsx"
-, "next.config.js", "next-sitemap.js", "pages/server-sitemap.xml/index.tsx, "    ],
+, "next.config.js", "next-sitemap.js", "pages/server-sitemap.xml/index.js"    ],
     "exclude": [
       "node_modules"
     ]

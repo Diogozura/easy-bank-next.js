@@ -5,6 +5,7 @@ import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css'; 
+import Script from 'next/script';
 
 config.autoAddCss = false
 
@@ -102,12 +103,13 @@ export default function App({ Component, pageProps }) {
 
           }}
         />
+        <Script id="Adsense-id" data-ad-client="ca-pub-5434892248042693"
+  async strategy="afterInteractive"
+  onError={ (e) => { console.error('Script failed to load', e) }}
+src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+/>
 
-        {/* <script id="Adsense-id" data-ad-client="ca-pub-5434892248042693"
-          async strategy="afterInteractive"
-          onError={(e) => { console.error('Script failed to load', e) }}
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-        /> */}
+       
 
       </Head>
 
