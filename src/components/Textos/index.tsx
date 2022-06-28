@@ -14,7 +14,7 @@ export const BoxTexto = styled.article`
     border-radius: 20px;
     
     @media only screen and (max-width: 850px) {
-        width: 95%;
+        width: 80%;
         
     }
 `

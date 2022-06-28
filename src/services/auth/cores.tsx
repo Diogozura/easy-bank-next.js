@@ -1,22 +1,22 @@
 import { authService } from "./authService";
 import React from 'react';
-import { CoresRestantes } from "../../../interface/CoresRestantes";
+import { Cores } from "../../../interface/Cores";
 
 export default function useCores() {
-    const [session, setSession] = React.useState<CoresRestantes>();
+    const [session, setSession] = React.useState<Cores>();
     const [loading, setLoading] = React.useState(true);
     const [error, setError] = React.useState(null);
 
     React.useEffect(() => {
-        authService.coresRestantes()
+        authService.cores()
             .then((session) => {
                 const body = session
-               
+              
                 setSession(body)
             })
             .catch((session) => {
                 setError(session)
-                
+               
             })
             .finally(() => {
                 setLoading(false)

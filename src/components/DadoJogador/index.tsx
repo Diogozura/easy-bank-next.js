@@ -13,7 +13,7 @@ export const NomePlayer = styled.h2`
 `
 
 export function DadosJogador({ data }) {
-    console.log("sou dada" + JSON.stringify(data, null, 2) )
+   
     return (
         <BoxJogador>
             {/* parte onde fica o nome e ícone do usuário  */}

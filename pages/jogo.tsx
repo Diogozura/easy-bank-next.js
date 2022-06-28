@@ -1,3 +1,3 @@
-import Jogo from "../src/screens/jogo";
+import jogo from "../src/screens/jogo";
 
-export default Jogo
+export default jogo

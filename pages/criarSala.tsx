@@ -1,11 +1,8 @@
-import * as React from 'react';
+import react from 'react';
 import NumberFormat, { InputAttributes } from 'react-number-format';
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
 import { Button, FormControlLabel, FormLabel, Input, Radio, RadioGroup } from '@mui/material';
-import styled from 'styled-components';
-import { Cores } from '../interface/Cores';
-import { InferGetStaticPropsType } from 'next';
 import Topo from '../src/components/Header';
 import { Titulo } from '../src/components/Titulo';
 import { AvatarCores, Coress, Form } from "./Jogador"
@@ -17,6 +14,10 @@ import Footer from '../src/components/Footer';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import { BoxTexto, Texto } from '../src/components/Textos';
+import Head from 'next/head';
+import useCores from '../src/services/auth/cores';
+import useSWR from 'swr';
+import { useFetch } from '../src/services/auth/authGetService';
 
 
 
@@ -25,7 +26,7 @@ interface CustomProps {
   name: string;
 }
 
-export const NumberFormatCustom = React.forwardRef<
+export const NumberFormatCustom = react.forwardRef<
   NumberFormat<InputAttributes>,
   CustomProps
 >(function NumberFormatCustom(props, ref) {
@@ -53,29 +54,43 @@ export const NumberFormatCustom = React.forwardRef<
 
 
 
-export default function FormattedInputs({ items, ChaveValor }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const [values, setValues] = React.useState({
-    valor: '2558000',
+
+export default function FormattedInputs() {
+  const router = useRouter()
+  const { data: chave } = useFetch('https://ffgames134.herokuapp.com/createRoom/')
+  const { data: cor } = useFetch('https://ffgames134.herokuapp.com/api/cores')
+  
+
+   const [values, setValues] = react.useState({
     nome: '',
     cor: '',
-    chave:ChaveValor.keyRoom
-  });
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValues({
-      ...values,
-      [event.target.name]: event.target.value,
-    });
-  };
-  const [open, setOpen] = React.useState(false);
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const handleToggle = () => {
-    setOpen(!open);
-  };
-  const router = useRouter()
-    return (
+    token: '', 
+    valor:' 2558000'
+  })
+
+  
+  
+  if (!chave) return "Loading...";
+  if (!cor) return "Loading...";
+  const handlenChange = (event) => {
+    
+    const fieldValue = event.target.value;
+    const fieldName = event.target.name;
+
+
+    
+    setValues((currenetValues) => {
+      return {
+        ...currenetValues,
+        [fieldName]: fieldValue
+      }
+    })
+  
+  }
+  
+   return (
       <>
+         <Head> <title>Criar Sala - Easy Imobiliário game</title> </Head>
          <Topo children={undefined}  />
          <Titulo>Hora de Criar Jogador e Sala</Titulo>
         <BoxTexto>
@@ -92,7 +107,7 @@ export default function FormattedInputs({ items, ChaveValor }: InferGetStaticPro
       <Form onSubmit={(event) => {
         event.preventDefault()
         authService.criarSala({
-          keyRoom: values.chave,
+          keyRoom: chave.keyRoom,
           valorInicial: values.valor,
           identificador: values.cor,
           namePlayer: values.nome,
@@ -100,7 +115,6 @@ export default function FormattedInputs({ items, ChaveValor }: InferGetStaticPro
 
           .then(() => {
             router.push('/jogo')
-          
           })
           .catch((err) => {
             alert("preencha todos os campos")
@@ -114,7 +128,7 @@ export default function FormattedInputs({ items, ChaveValor }: InferGetStaticPro
           label="Valor inicial"
             value={values.valor} 
             required
-          onChange={handleChange}
+          onChange={handlenChange}
             name="valor"
             margin="normal"
           id="formatted-numberformat-input"
@@ -127,7 +141,7 @@ export default function FormattedInputs({ items, ChaveValor }: InferGetStaticPro
           id="standard-basic"
             value={values.nome}
             required
-          onChange={handleChange}
+          onChange={handlenChange}
           name="nome"
             label="Nome"
             margin="normal"
@@ -138,10 +152,10 @@ export default function FormattedInputs({ items, ChaveValor }: InferGetStaticPro
         aria-labelledby="demo-controlled-radio-buttons-group"
         name="controlled-radio-buttons-group"
         value={values.cor}
-        onChange={handleChange}
+        onChange={handlenChange}
                 >
                     <AvatarCores>
-            {items.cores.map((cor) => (
+            {cor.cores.map((cor) => (
               <Coress>
                    
                     <FormControlLabel
@@ -162,20 +176,20 @@ export default function FormattedInputs({ items, ChaveValor }: InferGetStaticPro
                      </AvatarCores>
            
       </RadioGroup>
-        <p>Código da Sala: {ChaveValor.keyRoom}</p>
+        <p>Código da Sala: {chave.keyRoom}</p>
           <Button
-            onClick={handleToggle}
+            // onClick={handleToggle}
             type="submit"
             variant="outlined"
           >Criar Sala
           </Button>
-          <Backdrop
+          {/* <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={open}
         onClick={handleClose}
       >
         <CircularProgress   />
-      </Backdrop>
+      </Backdrop> */}
 
             </Form>
             
@@ -183,20 +197,5 @@ export default function FormattedInputs({ items, ChaveValor }: InferGetStaticPro
       </>
 );
 }
-type Chave = {
-      keyRoom: string;
-};
 
-export const getStaticProps = async () => {
-  const res = await fetch('https://ffgames134.herokuapp.com/api/cores');
-  const items: Cores = await res.json();
-  const chave = await fetch('https://ffgames134.herokuapp.com/createRoom/');
-  
-  const ChaveValor:Chave = await chave.json()
-  return {
-    props: {
-      items,ChaveValor
-    },
-    revalidate: 10,
-  };
-};
+

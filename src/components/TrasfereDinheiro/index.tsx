@@ -106,7 +106,7 @@ export default function TransfereDinheiro({ data }, ctx = null) {
       };
 
     const cookie = nookies.get(ctx)
-    tokenService.save(cookie.chave, cookie.Player, isChecked ? data.idPlayer : 0)
+    tokenService.save(cookie.chave, cookie.Player, isChecked ? 0 : data.idPlayer)
 
 
 
@@ -191,7 +191,7 @@ export default function TransfereDinheiro({ data }, ctx = null) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-           Área PIX | user {isChecked ? data.namePlayer : "Banco"}
+           Área PIX | user {isChecked ?  "Banco" : data.namePlayer }
           </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                         
@@ -237,7 +237,7 @@ export default function TransfereDinheiro({ data }, ctx = null) {
         onChange={handlenChange}
                 >
                     <AvatarCores>
-                    {isChecked ? banco() : user()}
+                    {isChecked ? user() :  banco()}
             {data.players.map((cor) => (
               <Coress>
                    

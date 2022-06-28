@@ -26,9 +26,9 @@ export default function Home({props}) {
 
   return (
     <>
-      <head>
+      <Head>
         <title>Home - Easy Imobiliário game</title>
-      </head>
+      </Head>
       <Topo children={undefined} />
 
       <Conteudo>
@@ -69,7 +69,7 @@ export default function Home({props}) {
 
             <TokenExiste />
 
-            <Link href="/criarSala" passHref prefetch={false}>
+            <Link href="/criarSala" passHref >
             
               <Botao
                  onClick={handleToggle}

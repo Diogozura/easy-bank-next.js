@@ -3,7 +3,7 @@ import { tokenService } from "./tokenService";
 
 export const validaToken= {
     async validar(props) {
-        return HttpClient(`${process.env.NEXT_PUBLIC_BACKEND_URL}api/dadosSala/?keyRoom=${props.keyRoom}`, {
+        return HttpClient(`https://ffgames134.herokuapp.com/api/dadosSala/?keyRoom=${props.keyRoom}`, {
             method: 'GET',
         })
             

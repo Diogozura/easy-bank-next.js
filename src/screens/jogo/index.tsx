@@ -58,7 +58,7 @@ export default function Jogo({ children, ...props }, ctx = null) {
     
     if (error) return "An error has occurred.";
     if (!data) return "Loading...";
-    console.log(data)
+    
      { data.erro == 'chave invalida' ? router.push('/?error=401'): null }
         
 

@@ -1,6 +1,7 @@
 import { HttpClient } from "../../infra/HttpClient/HttpClient";
 import { tokenService } from "./tokenService";
 import nookies from 'nookies'
+import { Cores } from "../../../interface/Cores";
 
 export const authService = {
     async criarSala({ keyRoom, valorInicial, identificador, namePlayer }) {
@@ -27,6 +28,19 @@ export const authService = {
 
     },
 
+    async cores() {
+        return HttpClient(`https://ffgames134.herokuapp.com/api/cores`, {
+            method: 'GET',
+        })
+            .then((resposta) => {
+                const cor =  resposta.body
+                    
+               return cor
+            })
+
+
+    },
+
     async criarJogador({ identificador, namePlayer }, ctx = null) {
         const cookie = nookies.get(ctx)
         return HttpClient(`https://ffgames134.herokuapp.com/api/createPlayer?keyRoom=${cookie.chave}`, {
@@ -39,7 +53,7 @@ export const authService = {
             .then((res) => {
                 if (!res.ok) throw new Error(res.body.erro)
                 tokenService.save(cookie.chave, res.body.idPlayer, '' )
-                console.log(res.body.erro)
+                
             })
 
     },
@@ -48,7 +62,7 @@ export const authService = {
         const cookie = nookies.get(ctx)
         const userDe =  `${cookie.banco === '0' ? 0 : cookie.Player }`
         
-        console.log(userDe)
+        
         return HttpClient(`https://ffgames134.herokuapp.com/api/transferencia/?keyRoom=${cookie.chave}`, {
             method: 'POST',  
             body: {
@@ -59,7 +73,7 @@ export const authService = {
         })
         .then((res) => {
             if (!res.ok) throw new Error(res.body)
-            console.log(userDe)
+            
         })
        
     },
@@ -77,12 +91,12 @@ export const authService = {
     },
     async coresRestantes(ctx = null) {
         const cookie = nookies.get(ctx)
-        // console.log(cookie.Player)
+        
         return HttpClient(`https://ffgames134.herokuapp.com/api/coresRestantes?keyRoom=${cookie.chave}`, {
             method: 'GET',
         })
             .then((resposta) => {
-                // console.log(cookie)
+            
 
                 return resposta.body
             })
@@ -91,20 +105,20 @@ export const authService = {
     },
     async extrato(ctx = null) {
         const cookie = nookies.get(ctx)
-        return HttpClient(`https://ffgames134.herokuapp.com//api/extrato/?keyRoom=${cookie.chave}`, {
+        return HttpClient(`https://ffgames134.herokuapp.com/api/extrato/?keyRoom=${cookie.chave}`, {
             headers : { 
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
                }
         })
             .then((resposta) => {
-                console.log(resposta)
+                
             })
             .then((data) => {
-                console.log(data)
+                
             })
             .catch((error) => {
-            console.log(error)
+          
         })
 
 

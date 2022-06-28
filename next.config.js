@@ -3,7 +3,6 @@
 
 const nextConfig = {
   optimizeFonts: true,
-  compress:true,
   reactStrictMode: true,
   compiler: {
     styledComponents: true,
@@ -19,6 +18,25 @@ const nextConfig = {
   },
   'fontawesome-svg-core': {
     'license': 'free'
+  },
+  exportPathMap: async function (
+    defaultPathMap,
+    { dev, dir, outDir, distDir, buildId }
+  ) {
+    return {
+      '/': { page: '/' },
+      '/sobre': { page: '/sobre' },
+      '/contato': { page: '/contato' },
+      '/404': { page: '/404' },
+      '/Jogador': { page: '/Jogador' },
+      '/termosUso': { page: '/termosUso' },
+      '/jogo': { page: '/jogo' },
+      '/termosPrivacidade': { page: '/termosPrivacidade' },
+      '/criarSala': { page: '/criarSala' },
+    }
+  },
+  typescript: {
+    ignoreBuildErrors: true,
   },
   
 }

@@ -13,6 +13,7 @@ import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import { BoxTexto } from "../src/components/BoxTexto";
 import { Texto } from "../src/components/Textos";
+import Head from "next/head";
 
 
 // estilo da pagina 
@@ -92,6 +93,7 @@ export default function CriaPlayer(props) {
 
     return (
         <Body>
+            <Head><title>Criar Jogador - Easy Imobiliário game</title></Head>
             <Topo children={undefined} />
             <Titulo>Hora de Criar Jogador</Titulo>
             <BoxTexto>
@@ -121,7 +123,7 @@ export default function CriaPlayer(props) {
                     onChange={handlenChange}
                 />
                 <AvatarCores >
-                    {/* {content} */}
+                   
                     {cor?.map((post) => (
                         <Coress key={post.identificador}>
 
