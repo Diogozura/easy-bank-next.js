@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import api from '../../src/services/auth/api';
 import useCores from '../../src/services/auth/coresResta';
 import React from "react";
-import { AvatarCores, Body, Coress, Form } from '../jogador';
+import { AvatarCores, Body, Coress, Form } from '../Jogador';
 import Topo from '../../src/components/Header';
 import { Titulo } from '../../src/components/Titulo';
 import { authService } from '../../src/services/auth/authService';

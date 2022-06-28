@@ -5,7 +5,7 @@ import { tokenService } from '../../services/auth/tokenService'
 import { authService } from "../../services/auth/authService";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import Image from "next/image";
-import { AvatarCores, Form } from '../../../pages/jogador';
+import { AvatarCores, Form } from '../../../pages/Jogador';
 import { Box, Button, Modal, Typography } from "@mui/material";
 
 const style = {

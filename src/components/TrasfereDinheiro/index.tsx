@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import { SaldoFlag, BoxTrasnfere } from '../BoxJogador';
 import { tokenService } from '../../services/auth/tokenService';
 import styleds from 'styled-components';
-import { AvatarCores, Coress, Form } from '../../../pages/jogador';
+import { AvatarCores, Coress, Form } from '../../../pages/Jogador';
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';

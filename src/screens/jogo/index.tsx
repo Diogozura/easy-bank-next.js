@@ -56,8 +56,10 @@ export default function Jogo({ children, ...props }, ctx = null) {
         fetcher,{ refreshInterval: 3000 }
     )
     
-        if (!data) return "Loading...";
-        if (error) return "erro ";
+    if (error) return "An error has occurred.";
+    if (!data) return "Loading...";
+    console.log(data)
+     { data.erro == 'chave invalida' ? router.push('/?error=401'): null }
         
 
 

@@ -8,7 +8,7 @@ import { Cores } from '../interface/Cores';
 import { InferGetStaticPropsType } from 'next';
 import Topo from '../src/components/Header';
 import { Titulo } from '../src/components/Titulo';
-import { AvatarCores, Coress, Form } from "./jogador"
+import { AvatarCores, Coress, Form } from "./Jogador"
 import { Text } from '../src/screens/HomeScreen';
 import { authService } from '../src/services/auth/authService';
 import Image from 'next/image';

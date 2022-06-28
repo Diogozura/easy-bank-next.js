@@ -5,7 +5,7 @@ import nookies from 'nookies'
 export const authService = {
     async criarSala({ keyRoom, valorInicial, identificador, namePlayer }) {
         console.log(keyRoom, valorInicial, identificador, namePlayer)
-        return HttpClient(`${process.env.NEXT_PUBLIC_BACKEND_URL}SaveRoomPlayer/`, {
+        return HttpClient(`https://ffgames134.herokuapp.com/SaveRoomPlayer/`, {
             method: 'POST',
             body: {
                 keyRoom,
@@ -29,7 +29,7 @@ export const authService = {
 
     async criarJogador({ identificador, namePlayer }, ctx = null) {
         const cookie = nookies.get(ctx)
-        return HttpClient(`${process.env.NEXT_PUBLIC_BACKEND_URL}api/createPlayer?keyRoom=${cookie.chave}`, {
+        return HttpClient(`https://ffgames134.herokuapp.com/api/createPlayer?keyRoom=${cookie.chave}`, {
             method: 'POST',
             body: {
                 identificador,
@@ -49,7 +49,7 @@ export const authService = {
         const userDe =  `${cookie.banco === '0' ? 0 : cookie.Player }`
         
         console.log(userDe)
-        return HttpClient(`${process.env.NEXT_PUBLIC_BACKEND_URL}api/transferencia/?keyRoom=${cookie.chave}`, {
+        return HttpClient(`https://ffgames134.herokuapp.com/api/transferencia/?keyRoom=${cookie.chave}`, {
             method: 'POST',  
             body: {
                 idPlayerDe: JSON.parse(userDe),
@@ -67,7 +67,7 @@ export const authService = {
     async Sair({ idPlayerPara }, ctx = null) {
         const cookie = nookies.get(ctx)
 
-        return HttpClient(`${process.env.NEXT_PUBLIC_BACKEND_URL}api/troca_player_banc?keyRoom=${cookie.chave}`,{
+        return HttpClient(`https://ffgames134.herokuapp.com/api/troca_player_banc?keyRoom=${cookie.chave}`,{
             method: 'POST',
             body: {
                 idPlayerDe: cookie.Player,
@@ -78,7 +78,7 @@ export const authService = {
     async coresRestantes(ctx = null) {
         const cookie = nookies.get(ctx)
         // console.log(cookie.Player)
-        return HttpClient(`${process.env.NEXT_PUBLIC_BACKEND_URL}api/coresRestantes?keyRoom=${cookie.chave}`, {
+        return HttpClient(`https://ffgames134.herokuapp.com/api/coresRestantes?keyRoom=${cookie.chave}`, {
             method: 'GET',
         })
             .then((resposta) => {
