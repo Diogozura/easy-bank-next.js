@@ -78,7 +78,7 @@ export const authService = {
        
     },
     
-    async Sair({ idPlayerPara }, ctx = null) {
+    async TrocaPlayer({ idPlayerPara }, ctx = null) {
         const cookie = nookies.get(ctx)
 
         return HttpClient(`https://ffgames134.herokuapp.com/api/troca_player_banc?keyRoom=${cookie.chave}`,{
@@ -87,6 +87,14 @@ export const authService = {
                 idPlayerDe: cookie.Player,
                 idPlayerPara
             }
+        })
+    },
+    async Sair( ctx = null) {
+        const cookie = nookies.get(ctx)
+
+        return HttpClient(`https://ffgames134.herokuapp.com/api/quitPlayer?keyRoom=${cookie.chave}&idPlayer=${cookie.Player}`,{
+            method: 'DELETE',
+           
         })
     },
     async coresRestantes(ctx = null) {

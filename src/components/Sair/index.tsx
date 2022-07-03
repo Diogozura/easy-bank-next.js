@@ -26,8 +26,16 @@ const style = {
 
 export default function Sair({data}) {
     function handleClick() {
-        tokenService.delete()
-        router.push('/')
+        authService.Sair()
+            .then(() => {
+                                console.log('Player saiu')
+                                tokenService.delete()
+                                router.push('/')
+                            })
+                            .catch((error) => {
+                            console.log(error)
+                        })
+        
     }
   
 
@@ -80,16 +88,24 @@ export default function Sair({data}) {
                 
                 event.preventDefault();
                 console.log(values)
-                console.log()
-                authService.Sair({
+                authService.TrocaPlayer({
                     idPlayerPara: parseInt(values.user),
                 })
                     .then(() => {
-                        tokenService.delete()
-                        router.push('/')
+                        authService.Sair()
+                            .then(() => {
+                                console.log('deu certo')
+                                // tokenService.delete()
+                                // router.push('/')
+                            })
+                            .catch((error) => {
+                            console.log(error)
+                        })
+                        
+
+                        
                     })
                     .catch((err) => {
-                       
                         alert('algo não saiu como o previsto ')
                     })
 
@@ -139,11 +155,10 @@ export default function Sair({data}) {
            SAIR
           </Typography>
           <Typography id="keep-mounted-modal-description" sx={{ mt: 2 }}>
-                        {data.playerBank && data.players.length != 0 ? troca() : sair()}
+                        {data.playerBank == 1 && data.players.length > 0 ? troca() :   sair()}
                         <Button onClick={handleClose}>
                         Cancelar
-                    </Button>
-
+                        </Button>
           </Typography>
         </Box>
       </Modal>

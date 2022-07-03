@@ -53,7 +53,7 @@ export default function Jogo({ children, ...props }, ctx = null) {
    
     const { data, error } = useSWR(
         `https://ffgames134.herokuapp.com/api/dadosSala?keyRoom=${cookie.chave}&idPlayer=${cookie.Player}`,
-        fetcher,{ refreshInterval: 3000 }
+        fetcher,{ refreshInterval: 30000 }
     )
     
     if (error) return "An error has occurred.";

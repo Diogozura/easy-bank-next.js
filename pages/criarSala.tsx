@@ -65,7 +65,7 @@ export default function FormattedInputs() {
     nome: '',
     cor: '',
     token: '', 
-    valor:' 2558000'
+    valor:'2558000'
   })
 
   
@@ -178,18 +178,18 @@ export default function FormattedInputs() {
       </RadioGroup>
         <p>Código da Sala: {chave.keyRoom}</p>
           <Button
-            // onClick={handleToggle}
+            onClick={handleToggle}
             type="submit"
             variant="outlined"
           >Criar Sala
           </Button>
-          {/* <Backdrop
+          <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={open}
         onClick={handleClose}
       >
         <CircularProgress   />
-      </Backdrop> */}
+      </Backdrop>
 
             </Form>
             
