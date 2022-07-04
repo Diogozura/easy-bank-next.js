@@ -82,7 +82,7 @@ export default function Jogo({ children, ...props }, ctx = null) {
                         url={`https://easyimobiliario.com.br/jogador/${cookie.chave}`}
                         
   title={'Entre agora na Sala do Easy imobiliário game'}
-  separator=":: "
+  separator=" : "
 >
   <WhatsappIcon size={32} round />
                 </WhatsappShareButton>

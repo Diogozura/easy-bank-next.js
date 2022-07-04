@@ -111,7 +111,6 @@ export default function CriaPlayer(props, ctx= null) {
             </BoxTexto>
             <Form onSubmit={(event) => {
                 event.preventDefault()
-                console.log(values.cores, values.usuario)
                 authService.criarJogador({
                     identificador: values.cores,
                     namePlayer: values.usuario,
