@@ -207,6 +207,7 @@ export default function TransfereDinheiro({ data }, ctx = null) {
                       user: '',
                       valor:'',
                     })
+                    setChecked(false)
                     handleClose()
                   })
           .catch((err) => {
