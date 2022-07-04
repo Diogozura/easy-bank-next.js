@@ -59,8 +59,8 @@ export default function Jogo({ children, ...props }, ctx = null) {
     if (error) return "An error has occurred.";
     if (!data) return "Loading...";
     
-     { data.erro == 'chave invalida' ? router.push('/?error=401'): null }
-        
+     { data.erro == 'chave invalida' ? router.push('/?error=401') : null }
+         
 
 
     return (
@@ -79,7 +79,7 @@ export default function Jogo({ children, ...props }, ctx = null) {
                     <div>
                     <WhatsappShareButton
                         
-                        url={`https://easyimobiliario.com.br//Jogador?keyRoom=${cookie.chave}`}
+                        url={`https://easyimobiliario.com.br/jogador/${cookie.chave}`}
                         
   title={'Entre agora na Sala do Easy imobiliário game'}
   separator=":: "
@@ -87,7 +87,7 @@ export default function Jogo({ children, ...props }, ctx = null) {
   <WhatsappIcon size={32} round />
                 </WhatsappShareButton>
                 <TelegramShareButton
-  url={`https://easyimobiliario.com.br//Jogador?keyRoom=${cookie.chave}`}
+  url={`https://easyimobiliario.com.br/jogador/${cookie.chave}`}
   title={'Entre agora na Sala do Easy imobiliário game'}
 >
   <TelegramIcon size={32} round />

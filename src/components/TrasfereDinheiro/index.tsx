@@ -238,7 +238,7 @@ export default function TransfereDinheiro({ data }, ctx = null) {
                 >
                     <AvatarCores>
                     {isChecked ? user() :  banco()}
-            {data.players.map((cor) => (
+            {data.players?.map((cor) => (
               <Coress>
                    
                     <FormControlLabel

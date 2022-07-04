@@ -6,6 +6,7 @@ import nookies from 'nookies'
 import useSWR from "swr";
 import ListIcon from '@mui/icons-material/List';
 import FilterListOffIcon from '@mui/icons-material/FilterListOff';
+import { useRouter } from "next/router";
 
 const Extrator = styled.th`
  background: ${props => props.theme};
@@ -20,12 +21,13 @@ const Extrator = styled.th`
 const fetcher = (url) => fetch(url).then((res) => res.json());
 export default function History(ctx = null){
     const cookie = nookies.get(ctx)
+     const router = useRouter()
     const { data, error } = useSWR(
         `https://ffgames134.herokuapp.com//api/extrato/?keyRoom=${cookie.chave}`,
         fetcher, { refreshInterval: 15000 },
       );
       const [isChecked, setChecked] = react.useState(true)
-     
+      { error ? router.push('/?error=401') : null }
    
     // console.log(extrato.extrato.length)
     const conteudo = data?.extrato.map((dadosjogador) => (

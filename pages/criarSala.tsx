@@ -88,6 +88,8 @@ export default function FormattedInputs() {
   
   }
   
+ 
+  
    return (
       <>
          <Head> <title>Criar Sala - Easy Imobiliário game</title> </Head>
@@ -166,7 +168,6 @@ export default function FormattedInputs() {
                          width={150}
                         height={150}
                         src={`./avatar/${cor.identificador}.svg`}
-                        
                         />}
                         labelPlacement="top"
                     />
@@ -178,18 +179,10 @@ export default function FormattedInputs() {
       </RadioGroup>
         <p>Código da Sala: {chave.keyRoom}</p>
           <Button
-            onClick={handleToggle}
             type="submit"
             variant="outlined"
           >Criar Sala
           </Button>
-          <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={open}
-        onClick={handleClose}
-      >
-        <CircularProgress   />
-      </Backdrop>
 
             </Form>
             

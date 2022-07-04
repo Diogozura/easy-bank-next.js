@@ -22,12 +22,13 @@ type User = {
 
 type Props = {
   data: User;
+  id: string
 }
 
-export default function User({ data }: Props) {
+export default function User({id, data,  }: Props) {
     const router = useRouter()
     const restaCores = useCores()
-
+    console.log(id)
     const cor = restaCores.data?.coresRestante
 
     const [values, setValues] = React.useState({
@@ -117,9 +118,9 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const id = context.params?.id as string;
-
+ 
   const response = await api.get(`/api/coresRestantes?keyRoom=${id}`);
-
+  
   return {
     props: {
       id,
