@@ -58,6 +58,17 @@ export const authService = {
 
     },
 
+    async dadosPlayer(ctx = null) {
+        const cookie = nookies.get(ctx)
+        
+        return HttpClient(`https://ffgames134.herokuapp.com/api/dadosSala?keyRoom=${cookie.chave}&idPlayer=${cookie.Player}`, {
+            method: 'GET',
+        })
+            .then((resposta) => {
+                return resposta.body
+            })
+    },
+
     async transfereDinheiro({ idPlayerPara,valor}, ctx = null) {
         const cookie = nookies.get(ctx)
         const userDe =  `${cookie.banco === '0' ? 0 : cookie.Player }`

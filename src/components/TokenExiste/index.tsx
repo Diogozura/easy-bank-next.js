@@ -7,6 +7,7 @@ import { tokenService } from '../../services/auth/tokenService'
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import { TextField } from '@mui/material'
+import { authService } from '../../services/auth/authService'
 
 const Form = styled.form`
 display: grid;
@@ -62,12 +63,19 @@ export default function TokenExiste(ctx = null) {
                 keyRoom: values.token,
             })
                 .then((res) => {
-                    {
-                        cookie.chave && cookie.Player !=
-                            'undefined' ? router.push('/jogo')
-                            : router.push('/Jogador')
+                    authService.dadosPlayer()
+                        .then(() => {
+                            router.push('/jogo')
+                        })
+                        .catch(() => {
+                            router.push('/Jogador')
                             && tokenService.save(values.token, '', '')
-                    }   
+                })
+                    // {
+                    //     cookie.chave && cookie.Player !=
+                    //         'undefined' ? 
+                    //         : 
+                    // }   
                 })
                 .catch((res) => {
                     alert(res)

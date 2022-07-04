@@ -14,6 +14,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { BoxTexto } from "../src/components/BoxTexto";
 import { Texto } from "../src/components/Textos";
 import Head from "next/head";
+import { validaToken } from "../src/services/auth/validaToken";
+import nookies from 'nookies'
 
 
 // estilo da pagina 
@@ -60,8 +62,11 @@ export const Coress = styled.aside`
 `
 
 
-export default function CriaPlayer(props) {
+export default function CriaPlayer(props, ctx= null) {
     const router = useRouter()
+    const cookie = nookies.get(ctx)
+
+    
     const restaCores = useCores()
 
     const cor = restaCores.data?.coresRestante
@@ -90,6 +95,9 @@ export default function CriaPlayer(props) {
       setOpen(!open);
     };
 
+    
+
+   
 
     return (
         <Body>
