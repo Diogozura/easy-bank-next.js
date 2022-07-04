@@ -44,8 +44,9 @@ export const NumberFormatCustom = react.forwardRef<
           },
         });
       }}
-      thousandSeparator
       isNumericString
+      thousandSeparator={'.'}
+      decimalSeparator={','}
       prefix="R$"
    
     />
