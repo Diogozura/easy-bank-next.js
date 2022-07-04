@@ -28,9 +28,7 @@ export default function History(ctx = null){
       );
       const [isChecked, setChecked] = react.useState(true)
       { error ? router.push('/?error=401') : null }
-    // data.extrato.map((dados) => {
-    //         console.log(dados.dataTransacao)
-    //     })
+   
     // console.log(extrato.extrato.length)
     const conteudo = data?.extrato.map((dadosjogador) => (
             <Extrator theme={dadosjogador.idPlayerPara == cookie.Player ? "rgba(195, 255, 195, 0.75)" : null || dadosjogador.idPlayerDe == cookie.Player ? "rgba(255, 195, 195, 0.75) " : null}
@@ -38,8 +36,8 @@ export default function History(ctx = null){
             >
                 {/* {dadosjogador.idPlayerPara == cookie.Player ? <Postivo /> : null} */}
                 {/* {dadosjogador.idPlayerDe == cookie.Player ? <Negativo /> : null} */}
-                {dadosjogador.descricao }
-       
+                {dadosjogador.descricao}
+
             </Extrator>))
   
     const handleCheck = () => {

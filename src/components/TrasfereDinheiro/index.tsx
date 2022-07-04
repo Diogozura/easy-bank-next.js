@@ -129,23 +129,19 @@ export default function TransfereDinheiro({ data }, ctx = null) {
   
     const user = () => {
         return (
-          <AvatarCores key={data.idPlayer}>
+            <AvatarCores key={data.idPlayer}>
                 <FormControlLabel
                     name="user"
                     value={data.idPlayer}
                     control={
                         <Radio/>}
 
-              label={
-                <>
-                  {data.playerBank ? <Image src={`./avatar/B${data.identificador}.svg`} width="80" height="80" />
-                    : <Image src={`./avatar/${data.identificador}.svg`} width="60" height="60" />}
-                   <h5>{data.namePlayer}</h5>
-                </>
-               
-              
-              }
-                
+                    label={
+                        <Image
+                     width={60}
+                    height={60}
+                    src={`./avatar/${data.identificador}.svg`}
+                />}
                     labelPlacement="top"
                     />
                 
@@ -153,8 +149,7 @@ export default function TransfereDinheiro({ data }, ctx = null) {
 
         )
     }
-  const banco = () => {
-    
+    const banco = () => {
         return (
             <>
                 <FormControlLabel
@@ -163,15 +158,12 @@ export default function TransfereDinheiro({ data }, ctx = null) {
                     control={
                         <Radio/>}
 
-              label={<> 
-                        <Image 
+                    label={
+                        <Image
                      width={60}
                     height={60}
                     src={`./icon/Bancoicon.svg`}
-                />
-                <h5>Banco</h5>
-              </>}
-              
+                />}
                     labelPlacement="top"
                     />
             </>
@@ -247,22 +239,19 @@ export default function TransfereDinheiro({ data }, ctx = null) {
                 >
                     <AvatarCores>
                     {isChecked ? user() :  banco()}
-            {data.players?.map((dados) => (
+            {data.players?.map((cor) => (
               <Coress>
                    
                     <FormControlLabel
                         name="user"
-                        value={dados.idPlayer}
+                        value={cor.idPlayer}
                         control={<Radio/>}
-                  label={<>
-                    <Image
+                        label={ <Image
                         width={80}
                         height={80}
-                        src={`./avatar/${dados.identificador}.svg`}
+                        src={`./avatar/${cor.identificador}.svg`}
                         
-                    />
-                    <h5>{dados.namePlayer}</h5>
-                        </>   }
+                        /> }
                         labelPlacement="top"
                     />
               </Coress>

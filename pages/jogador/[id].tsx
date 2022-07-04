@@ -11,7 +11,7 @@ import { Input } from '@mui/material';
 import Image from 'next/image';
 import { Botao } from '../../src/components/Botao';
 import Footer from '../../src/components/Footer';
-
+import nookies from 'nookies'
 type User = {
     coresRestante: [{
         identificador: string;
@@ -116,10 +116,10 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
   }
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async (context , ctx = null) => {
   const id = context.params?.id as string;
- 
-  const response = await api.get(`/api/coresRestantes?keyRoom=${id}`);
+  const cookie = nookies.get(ctx)
+  const response = await api.get(`/api/coresRestantes?keyRoom=${id || cookie.keyRoom}`);
   
   return {
     props: {

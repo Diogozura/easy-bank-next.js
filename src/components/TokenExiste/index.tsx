@@ -62,20 +62,13 @@ export default function TokenExiste(ctx = null) {
             validaToken.validar({
                 keyRoom: values.token,
             })
-                .then((res) => {
-                    authService.dadosPlayer()
-                        .then(() => {
-                            router.push('/jogo')
-                        })
-                        .catch(() => {
-                            router.push('/Jogador')
-                            && tokenService.save(values.token, '', '')
-                })
-                    // {
-                    //     cookie.chave && cookie.Player !=
-                    //         'undefined' ? 
-                    //         : 
-                    // }   
+                .then((res) => { 
+                    {
+                        cookie.chave && cookie.Player !=
+                            'undefined' ? router.push('/jogo')
+                            : router.push('/Jogador') 
+                        tokenService.save(values.token, '', '')
+                    }   
                 })
                 .catch((res) => {
                     alert(res)
