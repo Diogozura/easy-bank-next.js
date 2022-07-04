@@ -121,7 +121,7 @@ export default function CriaPlayer(props, ctx= null) {
                     })
                     .catch((err) => {
                         console.log(err)
-                        alert("preencha todos os campos")
+                        alert(err)
                     })
             }}>
                 <Input

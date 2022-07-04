@@ -11,6 +11,8 @@ import useSWR from 'swr'
 import Head from "next/head";
 import { useRouter } from "next/router";
 import History from '../../components/Extrato'
+
+
 import {
     WhatsappShareButton,
     WhatsappIcon,
@@ -50,18 +52,20 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 export default function Jogo({ children, ...props }, ctx = null) {
     const router = useRouter()
     const cookie = nookies.get(ctx)
-   
+    
     const { data, error } = useSWR(
         `https://ffgames134.herokuapp.com/api/dadosSala?keyRoom=${cookie.chave}&idPlayer=${cookie.Player}`,
         fetcher,{ refreshInterval: 30000 }
     )
     
-    if (error) return "An error has occurred.";
+    if (error) return router.push('/?error=401');
     if (!data) return "Loading...";
     
-     { data.erro == 'chave invalida' ? router.push('/?error=401') : null }
-         
+    { data.erro == 'chave invalida' ? router.push('/?error=401') : null }
 
+   
+    
+     
 
     return (
         <>
@@ -79,21 +83,20 @@ export default function Jogo({ children, ...props }, ctx = null) {
                     <div>
                     <WhatsappShareButton
                         
-                        url={`https://easyimobiliario.com.br/jogador/${cookie.chave}`}
+                        url={`https://easyimobiliario.com.br/`}
                         
-  title={'Entre agora na Sala do Easy imobiliário game'}
+  title={`Entre agora na Sala ${cookie.chave} do Easy imobiliário game`}
   separator=" : "
 >
   <WhatsappIcon size={32} round />
                 </WhatsappShareButton>
                 <TelegramShareButton
-  url={`https://easyimobiliario.com.br/jogador/${cookie.chave}`}
-  title={'Entre agora na Sala do Easy imobiliário game'}
+  url={`https://easyimobiliario.com.br/}`}
+  title={`Entre agora na Sala ${cookie.chave} do Easy imobiliário game`}
 >
   <TelegramIcon size={32} round />
 </TelegramShareButton>
                     </div>
-
                    
                 </Contatos>
           
